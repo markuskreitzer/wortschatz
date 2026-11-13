@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>Wortschatz</string>
+	<key>CFBundleIdentifier</key>
+	<string>local.markus.wortschatz</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Wortschatz</string>
+	<key>CFBundleDisplayName</key>
+	<string>Wortschatz</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0</string>
+	<key>NSPrincipalClass</key>
+	<string>WortschatzView</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Code MIT. Lexicon CC BY-SA 4.0 (Wiktionary, FrequencyWords) and CC BY 4.0 (Open English WordNet). Fonts SIL OFL 1.1.</string>
+</dict>
+</plist>

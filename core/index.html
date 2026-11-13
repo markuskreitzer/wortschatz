@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' file: wortschatz:; script-src 'self' 'unsafe-inline' file: wortschatz:; style-src 'self' 'unsafe-inline' file: wortschatz:; font-src 'self' file: wortschatz:; img-src 'self' data:; connect-src 'none'">
+<title>Wortschatz</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="stage" aria-live="polite">
+  <article class="card" id="card" hidden>
+    <header class="meta">
+      <span class="pos" data-f="pos"></span>
+      <span class="rule"></span>
+      <span class="forms"><span class="forms-label" data-f="forms_label"></span> <span data-f="forms_line"></span></span>
+    </header>
+    <h1 class="headword">
+      <span class="article" data-f="article"></span>
+      <span class="word" data-f="word"></span>
+    </h1>
+    <p class="pron">
+      <span class="ipa" data-f="ipa"></span>
+      <span class="syllables" data-f="syllables"></span>
+    </p>
+    <p class="english" data-f="english"></p>
+    <section class="defs">
+      <div class="def def-en">
+        <h2>English</h2>
+        <p data-f="definition_en"></p>
+      </div>
+      <div class="def def-de" lang="de">
+        <h2>Deutsch</h2>
+        <p data-f="definition_de"></p>
+      </div>
+    </section>
+  </article>
+</main>
+<footer class="colophon">
+  <span class="brand">Wortschatz</span>
+  <span class="progress"><span id="progress-bar"></span></span>
+  <span class="credit">Wiktionary · Open English WordNet</span>
+</footer>
+<script src="data/lexicon.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

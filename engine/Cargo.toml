@@ -1,0 +1,28 @@
+[package]
+name = "wortschatz-core"
+version = "0.1.0"
+edition = "2021"
+description = "Platform-agnostic engine for the Wortschatz German vocabulary screensaver: lexicon model, validation, fair shuffle, card formatting, C ABI for native shells."
+license = "MIT"
+publish = false
+
+[lib]
+name = "wortschatz_core"
+crate-type = ["rlib", "staticlib"]
+
+[[bin]]
+name = "wortschatz"
+path = "src/bin/wortschatz.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+# strip = "none": on macOS 27, cargo's default debuginfo-stripping of proc-macro dylibs makes them
+# unloadable ("mis-aligned LINKEDIT string pool"). Keep it off.
+strip = "none"
