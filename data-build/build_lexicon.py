@@ -9,7 +9,8 @@ Sources (see DATA_SOURCES.md):
         and the per-sense English translations.
   2. English Wiktionary (en.wiktionary.org), German entries, via kaikki.org
        https://kaikki.org/dictionary/German/kaikki.org-dictionary-German.jsonl
-     -> English glosses of the German word (used to CROSS-CHECK the translation) and IPA fallback.
+     -> English glosses of the German word (used to CROSS-CHECK the translation), IPA fallback,
+        "no-plural" / "plural-only" noun tags and usage examples with English translations.
   3. English Wiktionary, English entries, via kaikki.org
        https://kaikki.org/dictionary/English/kaikki.org-dictionary-English.jsonl
      -> English definition of the English equivalent, choosing the sense whose
@@ -27,7 +28,7 @@ Usage:
   en_german.jsonl, en_english_de2.jsonl (filtered English extract), de_50k.txt.
   See fetch_sources.sh for how DIR is produced.
 """
-import argparse, json, re, sys, collections
+import argparse, json, os, re, sys, collections
 
 POS_OK = {"noun", "verb", "adj", "adv"}
 POS_TITLE_OK = {"Substantiv", "Verb", "Adjektiv", "Adverb"}
@@ -275,6 +276,65 @@ def main():
             return d
         return {}
 
+    def en_tagged(key, tag):
+        """True when English Wiktionary marks every non-form-of sense of this word with `tag`."""
+        ss = [s for x in en.get(key, []) for s in x.get("senses", [])
+              if not ({"form-of", "alt-of"} & tagset(s))]
+        return bool(ss) and all(tag in tagset(s) for s in ss)
+
+    def en_no_plural(key):
+        for x in en.get(key, []):
+            for h in x.get("head_templates") or []:
+                if re.search(r"\bno plural\b|uncountable", h.get("expansion") or ""): return True
+        return en_tagged(key, "no-plural") or en_tagged(key, "uncountable")
+
+    LITERALLY = re.compile(r"\s*\((?:lit(?:erally|\.)?|literal(?:ly)?)\b[^)]*\)", re.I)
+
+    # Usage examples rejected in manual review (wrong German, odd jokes, broken translations).
+    bad_examples = set()
+    bx = os.path.join(os.path.dirname(os.path.abspath(__file__)), "example_exclude.tsv")
+    if os.path.exists(bx):
+        bad_examples = {l.split("\t")[0].strip() for l in open(bx, encoding="utf-8") if l.strip() and not l.startswith("#")}
+
+    def example_for(key, equivalents):
+        """One short usage example with an English translation, from the English Wiktionary
+        sense that glosses the German word with one of `equivalents` (so the example illustrates
+        the meaning shown on the card). Quotations are skipped: they are long and often archaic."""
+        pats = [re.compile(r"(^|[^a-z])" + re.escape(x.lower()) + r"($|[^a-z])") for x in equivalents]
+        for x in en.get(key, []):
+            for s in x.get("senses", []):
+                if {"form-of", "alt-of"} & tagset(s) or tagset(s) & BAD_TAGS: continue
+                gl = " ; ".join(s.get("glosses") or []).lower()
+                if not any(p.search(gl) for p in pats): continue
+                for ex in s.get("examples") or []:
+                    if ex.get("type") != "example": continue
+                    de_t = clean(ex.get("text") or "")
+                    en_t = LITERALLY.sub("", ex.get("english") or ex.get("translation") or "").strip()
+                    if not de_t or not en_t: continue
+                    if len(de_t) > 90 or len(en_t) > 110 or len(de_t) < 8: continue
+                    if re.search(r"[\[\]|{}<>…]|\.\.\.", de_t + en_t): continue
+                    if de_t.count(" ") < 1: continue
+                    # A sentence, not a collocation ("deutsches Recht"), and no Bible/archaic English.
+                    if not re.match(r"[„\"A-ZÄÖÜ0-9]", de_t) or not re.search(r"[.!?…\"“”]$", de_t): continue
+                    if re.search(r"\b(unto|hath|thee|thou|thy|ye|verily|shalt|doth)\b|\w+eth\b", en_t, re.I) and \
+                       not re.search(r"\b(teeth|beneath|seventh|eighth|death|breath|both|forth)\b", en_t, re.I): continue
+                    if ex.get("ref"): continue
+                    en_t = re.sub(r"\s*\((?:spatially|temporally|figuratively|colloquially|informal)\)\s*$", "", en_t)
+                    if not re.match(r"[\"“'A-Z0-9]", en_t): continue      # "to soothe (sb's) anger."
+                    return {"de": de_t, "en": en_t}
+        return None
+
+    def en_aux(key):
+        """Perfect auxiliaries English Wiktionary gives without a qualifier, in its order:
+        "an.fangen<fängt#fing,gefangen.haben,sein[Northwest German colloquial]>" -> ["haben"]."""
+        for x in en.get(key, []):
+            for h in x.get("head_templates") or []:
+                spec = (h.get("args") or {}).get("1") or ""
+                m = re.search(r"(?:^<|\.)((?:haben|sein)(?:\[[^\]]*\])?(?:,(?:haben|sein)(?:\[[^\]]*\])?)*)>$", spec)
+                if m:
+                    return [a for a in m.group(1).split(",") if a in ("haben", "sein")]
+        return None
+
     def en_ipa(key):
         for e in en.get(key, []):
             for s in e.get("sounds", []):
@@ -301,11 +361,16 @@ def main():
                for x in de[key][0].get("senses", [])[:1]):
             reasons["register"] += 1; why[w] = "register"; continue
         e = de[key][0]
-        gender = None
+        gender, number = None, None
         if pos == "noun":
             g = [t for t in (e.get("tags") or []) if t in ("masculine", "feminine", "neuter")]
-            if len(g) != 1: reasons["gender"] += 1; why[w] = "gender"; continue
-            gender = g[0]
+            if len(g) == 1:
+                gender = g[0]
+            elif en_tagged(key, "plural-only") and not g:
+                # Pluralia tantum (die Eltern, die Leute): no gender, article "die".
+                number = "plural_only"
+            else:
+                reasons["gender"] += 1; why[w] = "gender"; continue
         ipa = None
         for s in e.get("sounds", []):
             if s.get("ipa"): ipa = s["ipa"]; break
@@ -354,28 +419,53 @@ def main():
         if e.get("hyphenations"):
             parts = e["hyphenations"][0].get("parts") or []
             if len(parts) > 1: hyph = "·".join(parts)
+        fm = forms(e, pos, gender)
+        extra = {}
+        if pos == "noun":
+            if number is None and "plural" not in fm and (en_no_plural(key) or any(
+                    x.get("form") in ("—", "-") and {"nominative", "plural"} <= set(x.get("tags") or [])
+                    for x in e.get("forms") or [])):
+                number = "singular_only"
+            if number: extra["number"] = number
+        if pos == "verb":
+            # German Wiktionary lists secondary/regional auxiliaries too (anfangen: haben, sein*).
+            # Keep the second one only when English Wiktionary gives both, unqualified, in the
+            # same order; otherwise show the primary auxiliary alone.
+            aux = [x.strip() for x in (fm.get("auxiliary") or "").split("/") if x.strip()]
+            if len(aux) > 1 and en_aux(key) != aux:
+                fm["auxiliary"] = aux[0]
+            p3 = (fm.get("present3") or "").split()
+            core = [t for t in p3 if t != "sich"]
+            if len(core) == 2 and w.startswith(core[1]) and len(core[1]) < len(w) - 2:
+                extra["separable"] = core[1]
+            stags = set(s.get("tags") or []) | set(s.get("raw_tags") or [])
+            if "sich" in p3 or ("reflexive" in stags and not stags & {"transitive", "intransitive"}):
+                extra["reflexive"] = True
+        ex = None if f"{w}#{pos}" in bad_examples else example_for(key, [x for x in agreed])
+        if ex: extra["example"] = ex
         entry = {
             "id": f"{w}#{pos}",
             "word": w,
             "pos": pos,
             "gender": gender,
-            "article": {"masculine": "der", "feminine": "die", "neuter": "das"}.get(gender),
+            "article": {"masculine": "der", "feminine": "die", "neuter": "das"}.get(gender) or ("die" if number == "plural_only" else None),
             "ipa": ipa,
             "syllables": hyph,
             "english": english,
             "definition_en": edef,
             "definition_de": gdef,
-            "forms": forms(e, pos, gender),
+            "forms": fm,
+            **{k: v for k, v in extra.items() if k != "example"},
             "freq_rank": freq[w.lower()],
             "source": {"de": f"https://de.wiktionary.org/wiki/{w}#{s.get('sense_index') or ''}",
                        "en": f"https://en.wiktionary.org/wiki/{w}#German",
                        "en_def": f"https://en-word.net/lemma/{primary.replace(' ', '%20')}"},
         }
+        if ex: entry["example"] = ex
         entries.append(entry)
-        if len(entries) >= a.limit: break
+        if sum(1 for x in entries if x.get("number") != "plural_only") >= a.limit: break
     # Post-selection curation: drop entries flagged in manual review (data-build/exclude.tsv)
     # and senses that are clearly specialised (games, slang street names).
-    import os
     excl = set()
     xp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "exclude.tsv")
     if os.path.exists(xp):

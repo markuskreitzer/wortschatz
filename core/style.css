@@ -17,6 +17,7 @@
   --fem:  #cf9a8e;
   --neut: #9fb894;
   --none: #c8b48a;          /* verbs, adjectives, adverbs: brass */
+  --plural: #d4a26a;        /* plural "die": ochre, so it never reads as feminine */
   --accent: var(--none);
   /* One unit scales the whole composition, so the System Settings thumbnail and a 6K display
      show the same layout. */
@@ -26,8 +27,10 @@
 .g-masculine { --accent: var(--masc); }
 .g-feminine  { --accent: var(--fem); }
 .g-neuter    { --accent: var(--neut); }
+.n-plural_only { --accent: var(--plural); }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
 html, body { height: 100%; background: var(--bg); color: var(--ink); overflow: hidden; cursor: none; }
 body {
   font-family: "Wz Text", "Iowan Old Style", Georgia, serif;
@@ -68,15 +71,13 @@ body::before {
 }
 .meta .pos { color: var(--accent); white-space: nowrap; }
 .meta .rule { flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent), var(--hair) 30%, transparent); opacity: .55; }
-.meta .forms { text-transform: none; letter-spacing: 0.02em; font-size: calc(var(--u) * 1.25); color: var(--ink-2); white-space: nowrap; font-family: "Wz Text", serif; font-style: italic; }
-.meta .forms-label { font-family: "Wz Sans", sans-serif; font-style: normal; text-transform: uppercase; letter-spacing: 0.18em; font-size: calc(var(--u) * 0.9); color: var(--ink-3); margin-right: .6em; }
 
 .headword {
   font-family: "Wz Display", "Cormorant Garamond", serif;
   font-weight: 400;
   line-height: 0.92;
   letter-spacing: -0.012em;
-  display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 0.28em;
+  display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 0.28em; row-gap: calc(var(--u) * 1.3);
   font-size: calc(var(--u) * var(--word-size, 10.5));
 }
 .headword .article {
@@ -86,6 +87,22 @@ body::before {
   transform: translateY(-0.08em);
 }
 .headword .word { color: var(--ink); font-weight: 400; }
+.headword .sep { color: var(--accent); margin: 0 0.04em; }
+.headword .sep[hidden] { display: none; }
+/* Plural / principal parts / comparison, after the headword at article size. Each part keeps
+   its words together (no-break spaces); the line breaks only between parts, and the whole
+   group drops below the word when it does not fit beside it. */
+.headword .inflection {
+  font-style: normal; font-weight: 400;
+  font-size: clamp(calc(var(--u) * 3.2), 0.42em, calc(var(--u) * 4.4));
+  line-height: 1.15; letter-spacing: 0;
+  color: var(--ink-2);
+  flex: 0 1 auto; min-width: 0;
+}
+.inflection .dot { color: var(--ink-3); }
+.inflection.wrapped .lead { display: none; }
+.inflection .pl-art { font-style: italic; color: var(--plural); }
+.inflection .note { font-style: italic; color: var(--ink-3); }
 
 .pron {
   margin-top: calc(var(--u) * 2.2);
@@ -101,6 +118,13 @@ body::before {
   font-size: calc(var(--u) * 4.2); line-height: 1.05;
   color: var(--ink);
 }
+.example {
+  margin-top: calc(var(--u) * 2.4);
+  padding-left: calc(var(--u) * 4.2);       /* hangs under the English text, past the dash */
+  max-width: calc(var(--u) * 74);
+}
+.example .ex-de { display: block; font-family: "Wz Text", serif; font-style: italic; font-size: calc(var(--u) * 1.9); line-height: 1.4; color: var(--ink); font-variation-settings: "opsz" 20; }
+.example .ex-en { display: block; font-family: "Wz Text", serif; font-size: calc(var(--u) * 1.5); line-height: 1.45; color: var(--ink-3); margin-top: calc(var(--u) * 0.4); font-variation-settings: "opsz" 16; }
 .english::before { content: ""; display: inline-block; width: calc(var(--u) * 2.8); height: 1px; background: var(--accent); vertical-align: middle; margin-right: calc(var(--u) * 1.4); opacity: .8; transform: translateY(-0.1em); }
 
 .defs {

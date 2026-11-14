@@ -34,6 +34,8 @@ final class WortschatzView: ScreenSaverView {
         var layoutSize: CGSize
         var image: CGImage? = nil           // the card rendered once, then faded/drifted as a bitmap
         var imagePad: CGFloat = 0
+        var cardW: CGFloat = 0
+        var unit: CGFloat = 0               // u for this card (smaller when it had to be fitted)
         let enteredAt: Double
         let from: CGPoint      // start offset (in u) of the entrance drift
         let to: CGPoint        // resting offset (in u)
@@ -178,13 +180,23 @@ final class WortschatzView: ScreenSaverView {
             renderer.drawColophon(in: ctx, size: size, u: u, progress: progress(t))
         }
 
-        let cardW = min(82 * u, size.width - 16 * u)
         let scale = window?.backingScaleFactor ?? NSScreen.main?.backingScaleFactor ?? 2
         if c.layoutSize != size || c.image == nil {
-            c.layout = renderer.layout(c.card, width: cardW, u: u)
+            // Same as core/app.js fit(): a card taller than the stage gets a smaller unit.
+            var uc = u
+            var cw = min(82 * uc, size.width - 16 * u)
+            c.layout = renderer.layout(c.card, width: cw, u: uc)
+            let avail = size.height - 12 * u
+            for _ in 0..<3 where c.layout.height > avail {
+                uc *= avail / c.layout.height
+                cw = min(82 * uc, size.width - 16 * u)
+                c.layout = renderer.layout(c.card, width: cw, u: uc)
+            }
+            c.cardW = cw
+            c.unit = uc
             c.layoutSize = size
             c.imagePad = ceil(3 * u)
-            c.image = renderCard(c.layout, width: cardW, pad: c.imagePad, scale: scale)
+            c.image = renderCard(c.layout, width: c.cardW, pad: c.imagePad, scale: scale)
             current = c
         }
 
@@ -201,8 +213,9 @@ final class WortschatzView: ScreenSaverView {
         }
         guard opacity > 0.001, let image = c.image else { return }
 
-        let x = (size.width - cardW) / 2 + off.x * u
-        let y = max(6 * u, (size.height - c.layout.height) / 2) + off.y * u
+        let cardW = c.cardW, cu = c.unit
+        let x = (size.width - cardW) / 2 + off.x * cu
+        let y = max(6 * u, (size.height - c.layout.height) / 2) + off.y * cu
         let dst = CGRect(x: x - c.imagePad, y: y - c.imagePad,
                          width: cardW + 2 * c.imagePad, height: c.layout.height + 2 * c.imagePad)
         guard rect.intersects(dst) else { return }

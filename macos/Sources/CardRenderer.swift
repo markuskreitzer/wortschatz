@@ -23,6 +23,16 @@ struct Card: Decodable {
     let definition_de: String?
     let forms_label: String?
     let forms_line: String?
+    // Grammar (engine::Card): plural / number for nouns, principal parts for verbs.
+    let number: String?
+    let plural_article: String?
+    let plural: String?
+    let plural_note: String?
+    let reflexive: Bool?
+    let separable_prefix: String?
+    let principal_parts: String?
+    let example_de: String?
+    let example_en: String?
 }
 
 // MARK: - Palette (core/style.css :root)
@@ -37,7 +47,9 @@ enum Palette {
     static let ink2 = rgb(0xb9b1a4)
     static let ink3 = rgb(0x7d766c)
     static let hair = rgb(0xece6dc, 0.14)
-    static func accent(_ gender: String?) -> NSColor {
+    static let plural = rgb(0xd4a26a)       // plural "die": ochre, never read as feminine
+    static func accent(_ gender: String?, number: String? = nil) -> NSColor {
+        if gender == nil && number == "plural_only" { return plural }
         switch gender {
         case "masculine": return rgb(0x8fa9c9)
         case "feminine": return rgb(0xcf9a8e)
@@ -179,8 +191,18 @@ final class CardRenderer {
     private func width(_ s: NSAttributedString) -> CGFloat { ceil(s.size().width) }
     private func lineBox(_ f: NSFont) -> CGFloat { f.ascender - f.descender + f.leading }
 
+    private static func lead(_ c: Card) -> String? {
+        if let a = c.article, !a.isEmpty { return a }
+        return c.reflexive == true ? "sich" : nil
+    }
+
+    private static func prefix(_ c: Card) -> String? {
+        guard let p = c.separable_prefix, !p.isEmpty, c.word.hasPrefix(p), p.count < c.word.count else { return nil }
+        return p
+    }
+
     private static func wordSize(_ c: Card) -> CGFloat {
-        let len = c.word.count + (c.article != nil ? 2 : 0)
+        let len = c.word.count + (lead(c) != nil ? 2 : 0) + (prefix(c) != nil ? 1 : 0)
         return len <= 7 ? 11.5 : len <= 10 ? 10 : len <= 13 ? 8.4 : len <= 16 ? 7 : 6
     }
 
@@ -189,55 +211,43 @@ final class CardRenderer {
     /// Lay out a card at origin (0,0) with width `w` (flipped coordinates, y grows downwards).
     func layout(_ c: Card, width w: CGFloat, u: CGFloat) -> CardLayout {
         var L = CardLayout()
-        let accent = Palette.accent(c.gender)
+        let accent = Palette.accent(c.gender, number: c.number)
         var y: CGFloat = 0
 
-        // Meta row: part of speech, gradient rule, forms.
+        // Meta row: part of speech, then a gradient rule to the right edge.
         let genderDe = ["masculine": "maskulin", "feminine": "feminin", "neuter": "neutrum"]
         let posText: String
         if let g = c.gender, let gd = genderDe[g] { posText = "\(c.pos_de) · \(gd)" }
+        else if c.number == "plural_only" { posText = "\(c.pos_de) · nur Plural" }
         else if c.pos_de.lowercased() == c.pos_en.lowercased() { posText = c.pos_de }
         else { posText = "\(c.pos_de) · \(c.pos_en)" }
         let posFont = fonts.font(.sans, 1.05 * u)
         let pos = attr(posText.uppercased(), posFont, accent, trackingEm: 0.18)
-        var rowH = lineBox(posFont)
-        var formsW: CGFloat = 0
-        var formsItems: [(NSAttributedString, CGFloat)] = []     // (string, x offset from forms start)
-        if let line = nonEmpty(c.forms_line) {
-            let lf = fonts.font(.sans, 0.9 * u)
-            let ff = fonts.font(.textItalic, 1.25 * u)
-            var x: CGFloat = 0
-            if let label = nonEmpty(c.forms_label) {
-                let ls = attr(label.uppercased(), lf, Palette.ink3, trackingEm: 0.18)
-                formsItems.append((ls, x)); x += width(ls) + 0.6 * lf.pointSize
-                x += width(attr(" ", ff, Palette.ink2))
-            }
-            let fs = attr(line, ff, Palette.ink2, trackingEm: 0.02)
-            formsItems.append((fs, x)); x += width(fs)
-            formsW = x
-            rowH = max(rowH, lineBox(ff))
-        }
+        let rowH = lineBox(posFont)
         let rowMid = y + rowH / 2
-        func centredBaseline(_ s: NSAttributedString) -> CGFloat {
-            let f = s.attribute(.font, at: 0, effectiveRange: nil) as! NSFont
-            return rowMid - (f.ascender + f.descender) / 2
-        }
-        L.texts.append(TextItem(string: pos, origin: CGPoint(x: 0, y: centredBaseline(pos)), width: nil))
+        L.texts.append(TextItem(string: pos, origin: CGPoint(x: 0, y: rowMid - (posFont.ascender + posFont.descender) / 2), width: nil))
         let ruleStart = width(pos) + 1.6 * u
-        let ruleEnd = w - formsW - 1.6 * u
-        if ruleEnd > ruleStart { L.gradientRule = (CGRect(x: ruleStart, y: rowMid - 0.5, width: ruleEnd - ruleStart, height: 1), accent) }
-        for (s, dx) in formsItems {
-            L.texts.append(TextItem(string: s, origin: CGPoint(x: w - formsW + dx, y: centredBaseline(s)), width: nil))
-        }
+        if w > ruleStart { L.gradientRule = (CGRect(x: ruleStart, y: rowMid - 0.5, width: w - ruleStart, height: 1), accent) }
         y += rowH + 2.2 * u
 
-        // Headword: article (italic, accent, 0.42em, raised 0.08em) + word, baseline-aligned.
+        // Headword: article (or "sich"; italic, accent, 0.42em, raised 0.08em) + word, with the
+        // separable particle marked "an·rufen"; then the inflection line at article size.
         var size = CardRenderer.wordSize(c) * u
         let gap = { (s: CGFloat) in 0.28 * s }
+        let pre = CardRenderer.prefix(c)
         func headParts(_ s: CGFloat) -> (NSAttributedString?, NSAttributedString) {
             let wf = fonts.font(.display, s)
-            let word = attr(c.word, wf, Palette.ink, trackingEm: -0.012)
-            let art = nonEmpty(c.article).map { attr($0, fonts.font(.displayItalic, 0.42 * s), accent, trackingEm: -0.012) }
+            let word = NSMutableAttributedString()
+            if let pre {
+                // CSS .sep { margin: 0 0.04em }: extra space after the particle and after the dot.
+                word.append(attr(String(pre.dropLast()), wf, Palette.ink, trackingEm: -0.012))
+                word.append(attr(String(pre.suffix(1)), wf, Palette.ink, trackingEm: -0.012 + 0.04))
+                word.append(attr("·", wf, accent, trackingEm: -0.012 + 0.04))
+                word.append(attr(String(c.word.dropFirst(pre.count)), wf, Palette.ink, trackingEm: -0.012))
+            } else {
+                word.append(attr(c.word, wf, Palette.ink, trackingEm: -0.012))
+            }
+            let art = CardRenderer.lead(c).map { attr($0, fonts.font(.displayItalic, 0.42 * s), accent, trackingEm: -0.012) }
             return (art, word)
         }
         var (art, word) = headParts(size)
@@ -253,7 +263,38 @@ final class CardRenderer {
             x = width(art) + gap(size)
         }
         L.texts.append(TextItem(string: word, origin: CGPoint(x: x, y: baseline), width: nil))
+        x += width(word)
         y += lh
+        if let parts = inflection(c), !parts.isEmpty {
+            let fs = min(4.4 * u, max(3.2 * u, 0.42 * size))
+            let roman = fonts.font(.display, fs), italic = fonts.font(.displayItalic, fs)
+            func build(lead: Bool, lineHeight: CGFloat?) -> NSAttributedString {
+                let m = NSMutableAttributedString()
+                let a = { (t: String, f: NSFont, col: NSColor) in m.append(self.attr(t, f, col, lineHeight: lineHeight)) }
+                for (i, part) in parts.enumerated() {
+                    if i == 0 { if lead { a("·\u{00a0}", roman, Palette.ink3) } } else { a(" · ", roman, Palette.ink3) }
+                    for (t, kind) in part {
+                        switch kind {
+                        case .pluralArticle: a(t, italic, Palette.plural)
+                        case .note: a(t, italic, Palette.ink3)
+                        case .text: a(t, roman, Palette.ink2)
+                        }
+                    }
+                }
+                return m
+            }
+            let inline = build(lead: true, lineHeight: nil)
+            if x + gap(size) + width(inline) <= w {
+                L.texts.append(TextItem(string: inline, origin: CGPoint(x: x + gap(size), y: baseline), width: nil))
+            } else {
+                // Drops below the word (CSS flex-wrap, row-gap 1.3u), without the leading dot.
+                y += 1.3 * u
+                let s = build(lead: false, lineHeight: 1.15 * fs)
+                let h = ceil(s.boundingRect(with: CGSize(width: w, height: 10_000), options: [.usesLineFragmentOrigin, .usesFontLeading]).height)
+                L.texts.append(TextItem(string: s, origin: CGPoint(x: 0, y: y), width: w))
+                y += h
+            }
+        }
 
         // Pronunciation: IPA + syllables, baseline-aligned.
         y += 2.2 * u
@@ -287,6 +328,25 @@ final class CardRenderer {
             y += h
         }
 
+        // Usage example: German (italic) over its English translation, hanging past the dash.
+        if let de = nonEmpty(c.example_de) {
+            y += 2.4 * u
+            let ex = 4.2 * u, exW = min(w, 74 * u) - ex
+            let df = fonts.font(.textItalic, 1.9 * u, opsz: 20)
+            let ds = attr(de, df, Palette.ink, lineHeight: 1.4 * df.pointSize, lang: "de")
+            let dh = ceil(ds.boundingRect(with: CGSize(width: exW, height: 10_000), options: [.usesLineFragmentOrigin, .usesFontLeading]).height)
+            L.texts.append(TextItem(string: ds, origin: CGPoint(x: ex, y: y), width: exW))
+            y += dh
+            if let en = nonEmpty(c.example_en) {
+                y += 0.4 * u
+                let ef2 = fonts.font(.text, 1.5 * u, opsz: 16)
+                let es = attr(en, ef2, Palette.ink3, lineHeight: 1.45 * ef2.pointSize, lang: "en")
+                let eh = ceil(es.boundingRect(with: CGSize(width: exW, height: 10_000), options: [.usesLineFragmentOrigin, .usesFontLeading]).height)
+                L.texts.append(TextItem(string: es, origin: CGPoint(x: ex, y: y), width: exW))
+                y += eh
+            }
+        }
+
         // Definitions: hairline, then two columns.
         y += 4.2 * u
         L.lines.append((CGRect(x: 0, y: y, width: w, height: 1), Palette.hair))
@@ -311,6 +371,23 @@ final class CardRenderer {
         y += colH
         L.height = y
         return L
+    }
+
+    enum InflectionKind { case text, pluralArticle, note }
+
+    /// The parts after the headword, as core/app.js builds them: "die Häuser", "kein Plural",
+    /// "fährt" · "fuhr" · "ist gefahren", "besser" · "am besten". Words inside a part are joined
+    /// with no-break spaces so lines only break between parts.
+    func inflection(_ c: Card) -> [[(String, InflectionKind)]]? {
+        let nb = "\u{00a0}"
+        if c.pos == "noun" {
+            if let p = nonEmpty(c.plural) { return [[(c.plural_article ?? "die", .pluralArticle), (nb + p, .text)]] }
+            if let n = nonEmpty(c.plural_note), c.number != "plural_only" { return [[(n, .note)]] }
+            return nil
+        }
+        let line = c.pos == "verb" ? c.principal_parts : c.pos == "adj" ? c.forms_line : nil
+        guard let line = nonEmpty(line) else { return nil }
+        return line.components(separatedBy: " · ").map { [($0.replacingOccurrences(of: " ", with: nb), .text)] }
     }
 
     // MARK: Drawing

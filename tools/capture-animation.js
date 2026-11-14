@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const path = require('path');
 const [out, W, H, FPS, DPR, FMT] = [process.argv[2], +process.argv[3], +process.argv[4], +process.argv[5], +(process.argv[6] || 1), process.argv[7] || 'png'];
-const SEED = 236; // deck order after the pinned first card: lernen, knapp, Prozess
+const SEED = 155338; // deck order after the pinned first card: einladen, gut, Kleidung
 const URL = 'file://' + path.resolve(__dirname, '../core/index.html') + '?id=Haus%23noun&still&hold=7';
 (async () => {
   fs.mkdirSync(out, { recursive: true });

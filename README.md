@@ -2,11 +2,12 @@
 
 <p align="center">
   <em>A quiet, typographic screen saver for learning German vocabulary.</em><br>
-  One word at a time: article, pronunciation, meaning, and definitions in English <strong>and</strong> German.
+  One word at a time: article and plural, verb forms, pronunciation, meaning, an example sentence,<br>
+  and definitions in English <strong>and</strong> German.
 </p>
 
 <p align="center">
-  <img src="docs/images/wortschatz.gif" width="860" alt="Wortschatz cycling through cards: das Haus, lernen, knapp, with slow cross-fades">
+  <img src="docs/images/wortschatz.gif" width="860" alt="Wortschatz cycling through cards: das Haus · die Häuser, ein·laden, gut, with slow cross-fades">
 </p>
 <p align="center"><sub>The real renderer, captured frame by frame (sped up: on screen each card stays for about 30 seconds).
 <a href="docs/images/wortschatz.mp4">Higher-quality MP4</a></sub></p>
@@ -18,17 +19,27 @@ That is lovely if you already speak German and not much help if you are still le
 **Wortschatz** ("vocabulary") shows each word together with everything a learner needs to remember it.
 
 <p align="center">
-  <img src="docs/images/card-kopf.png" width="860" alt="Full-screen card: der Kopf, [kɔp͡f], head, with English and German definitions">
+  <img src="docs/images/card-kopf.png" width="860" alt="Full-screen card: der Kopf · die Köpfe, [kɔp͡f], head, an example sentence, English and German definitions">
 </p>
 
 ## Features
 
-- **1,113 common words.** Nouns, verbs, adjectives and adverbs, chosen by frequency from real
+- **1,114 common words.** Nouns, verbs, adjectives and adverbs, chosen by frequency from real
   spoken German (film subtitles), so you meet the words you will actually hear.
 - **Everything on one card.** Each card shows the article, IPA, syllables, the English equivalent,
-  an English definition, a German definition, and key forms.
+  an English definition, a German definition, and the grammar you need to use the word.
 - **Gender at a glance.** *der*, *die* and *das* each get their own muted colour (blue, rose, sage),
-  so gender sinks in without flashcard drilling.
+  so gender sinks in without flashcard drilling. The plural *die* has its own ochre, so it never
+  reads as feminine.
+- **Plurals.** Nouns show singular and plural side by side (*das Haus · die Häuser*). Nouns
+  without a plural say *kein Plural*; plural-only nouns (*die Daten*) are marked *nur Plural*.
+- **Verb principal parts.** *fährt · fuhr · ist gefahren*: the present is listed only when it is
+  irregular, then the simple past and the perfect with *ist* or *hat*. Separable verbs show their
+  particle (*an·fangen · fängt an · fing an · hat angefangen*) and reflexive verbs their *sich*
+  (*sich benehmen · benimmt sich · benahm sich · hat sich benommen*).
+- **Example sentences.** About a third of the cards add one short German sentence (90 characters
+  at most) with its English translation, taken from English Wiktionary's usage examples for that
+  sense. Cards without a good example simply leave the line out.
 - **Real data, nothing invented.** Everything comes from Wiktionary and Open English WordNet.
   There is no machine translation, and mismatched senses were reviewed by hand and dropped.
 - **Calm by design.** Each card holds for about 32 seconds and cross-fades slowly with a gentle drift.
@@ -45,22 +56,23 @@ That is lovely if you already speak German and not much help if you are still le
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/images/card-vermoegen.png" alt="das Vermögen: fortune"></td>
-    <td width="50%"><img src="docs/images/card-versteckt.png" alt="versteckt: hidden"></td>
+    <td width="50%"><img src="docs/images/card-haus.png" alt="das Haus · die Häuser: house, with an example sentence"></td>
+    <td width="50%"><img src="docs/images/card-einladen.png" alt="ein·laden · lädt ein · lud ein · hat eingeladen: to invite"></td>
   </tr>
   <tr>
-    <td align="center"><sub>Noun: article in the gender colour, plural, IPA, syllables</sub></td>
-    <td align="center"><sub>Adjective: part of speech in German and English</sub></td>
+    <td align="center"><sub>Noun: article in the gender colour, plural with its own <em>die</em>, example sentence</sub></td>
+    <td align="center"><sub>Separable verb: particle marked, principal parts with the auxiliary</sub></td>
   </tr>
 </table>
 
 | | |
 |---|---|
-| **Word** | with *der / die / das* for nouns |
+| **Word** | with *der / die / das* for nouns, *sich* for reflexive verbs, *an·fangen* for separable verbs |
 | **Pronunciation** | IPA (rendered in Gentium Plus) and syllable breaks |
 | **English** | the English equivalent(s) for that sense |
 | **Definitions** | English (Open English WordNet) beside German (Wiktionary) |
-| **Forms** | noun plural · verb *er/sie/es* form, simple past, participle with *haben/sein* · comparative and superlative |
+| **Forms** | noun plural (or *kein Plural*) · verb principal parts: irregular present, simple past, perfect with *ist/hat* · comparative and superlative |
+| **Example** | one short German sentence with its English translation, when Wiktionary has a good one |
 
 The preview in System Settings uses a compact layout that shows a real card, not a blank tile:
 
@@ -132,12 +144,12 @@ or allow it under **System Settings → Privacy & Security → Open Anyway**.
 ```
 core/        web renderer (index.html + style.css + app.js), bundled fonts, data/lexicon.{json,js}
 engine/      Rust crate wortschatz-core: lexicon, fair shuffle with saved progress, card formatting
-             C ABI (wortschatz.h) + CLI: wortschatz validate | next | stats
+             C ABI (wortschatz.h) + CLI: wortschatz validate | next | stats | card
 macos/       Swift ScreenSaverView + native CoreText card renderer, driven by the Rust engine
 linux/       Omarchy / Hyprland plan + stub
 data-build/  reproducible lexicon build (Wiktionary + Open English WordNet + frequency list)
 scripts/     build-macos.sh, install-macos.sh, select-macos.sh
-tools/       snapshot.swift (renders the built .saver to PNG), README media capture
+tools/       snapshot.swift (renders the built .saver to PNG), render-card (one card, native, to PNG), README media capture
 ```
 
 ```
@@ -172,7 +184,9 @@ Engine checks:
 ```sh
 cd engine
 cargo test
-cargo run --release --bin wortschatz -- validate ../core/data/lexicon.json   # 1113 entries, 0 problems
+cargo run --release --bin wortschatz -- validate ../core/data/lexicon.json   # 1114 entries, 0 problems
+cargo run --release --bin wortschatz -- stats ../core/data/lexicon.json      # grammar/example coverage
+cargo run --release --bin wortschatz -- card ../core/data/lexicon.json einladen   # one card's JSON
 ```
 
 ## Linux (Omarchy / Hyprland)
@@ -190,12 +204,17 @@ The port is **documented but not built yet**. [`linux/README.md`](linux/README.m
 Building the lexicon is reproducible; see [`data-build/README.md`](data-build/README.md).
 
 1. **Candidates.** The most frequent words in German subtitles become candidates.
-2. **German side.** For each candidate, the German Wiktionary entry supplies article, IPA, forms,
-   the German definition, and the English translations *for that specific sense*.
+2. **German side.** For each candidate, the German Wiktionary entry supplies article, IPA, forms
+   (plural, present, past, participle, auxiliary), the German definition, and the English
+   translations *for that specific sense*.
 3. **Cross-check.** Those translations are checked against English Wiktionary.
 4. **English definition.** The English definition comes from Open English WordNet, matched by sense.
-5. **Review.** Every remaining pairing where the English and German senses disagreed was reviewed
-   by hand. 187 were dropped and are listed in `data-build/exclude.tsv`.
+5. **Grammar and examples.** English Wiktionary adds the *no plural* / *plural only* marks, confirms
+   a second perfect auxiliary (*ist / hat gestanden*), and supplies the usage example for the
+   card's sense. Separable particles and *sich* come from the German forms (*ruft an*, *benimmt sich*).
+6. **Review.** Every remaining pairing where the English and German senses disagreed was reviewed
+   by hand. 188 were dropped and are listed in `data-build/exclude.tsv`; four example sentences
+   were dropped in `data-build/example_exclude.tsv`.
 
 No CEFR levels are shown, because none of the sources provides them and they are not guessed.
 
@@ -204,7 +223,7 @@ No CEFR levels are shown, because none of the sources provides them and they are
 | | Source | Licence |
 |---|---|---|
 | German entries, IPA, forms, German definitions, English translations | [German Wiktionary](https://de.wiktionary.org) via [kaikki.org / wiktextract](https://kaikki.org) | CC BY-SA 4.0 / GFDL |
-| Cross-check and sense alignment | [English Wiktionary](https://en.wiktionary.org) via kaikki.org | CC BY-SA 4.0 / GFDL |
+| Cross-check, sense alignment, number marks, usage examples | [English Wiktionary](https://en.wiktionary.org) via kaikki.org | CC BY-SA 4.0 / GFDL |
 | English definitions | [Open English WordNet 2024](https://en-word.net) | CC BY 4.0 |
 | Word frequency | [hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords) | CC BY-SA 4.0 |
 | Fonts | Cormorant Garamond, Source Serif 4, Inter, Gentium Plus | SIL OFL 1.1 |

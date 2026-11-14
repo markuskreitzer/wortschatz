@@ -32,11 +32,32 @@ pub struct Entry {
     pub definition_de: String,
     #[serde(default)]
     pub forms: BTreeMap<String, String>,
+    /// Nouns: "singular_only" (kein Plural) or "plural_only" (Pluraletantum); absent otherwise.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub number: Option<String>,
+    /// Verbs: the separable particle ("an" for anrufen).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub separable: Option<String>,
+    /// Verbs: used with "sich" in the sense shown on the card.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub reflexive: bool,
+    /// One short usage example from English Wiktionary, with its English translation.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub example: Option<Example>,
     #[serde(default)]
     pub freq_rank: Option<u32>,
     #[serde(default)]
     pub source: BTreeMap<String, String>,
 }
+
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq)]
+pub struct Example {
+    pub de: String,
+    pub en: String,
+}
+
+/// Longest German example sentence a card will show (characters).
+pub const EXAMPLE_MAX_CHARS: usize = 90;
 
 /// What a renderer needs to draw one card. Serialized to JSON for the WebView.
 #[derive(Debug, Clone, Serialize, PartialEq)]
@@ -56,6 +77,20 @@ pub struct Card {
     pub definition_de: String,
     pub forms_label: Option<String>,
     pub forms_line: Option<String>,
+    /// Nouns: "singular_only" | "plural_only" | null.
+    pub number: Option<String>,
+    /// Nouns: the plural, split so renderers can colour the article ("die", "Häuser").
+    pub plural_article: Option<String>,
+    pub plural: Option<String>,
+    /// Nouns without a plural form: "kein Plural" / "nur Plural".
+    pub plural_note: Option<String>,
+    /// Verbs.
+    pub reflexive: bool,
+    pub separable_prefix: Option<String>,
+    /// Verbs: "fährt · fuhr · ist gefahren" (the present is only listed when it is irregular).
+    pub principal_parts: Option<String>,
+    pub example_de: Option<String>,
+    pub example_en: Option<String>,
     pub source: BTreeMap<String, String>,
 }
 
@@ -98,11 +133,53 @@ impl Lexicon {
             }
             if e.pos == "noun" {
                 let ok = matches!(
-                    (e.gender.as_deref(), e.article.as_deref()),
-                    (Some("masculine"), Some("der")) | (Some("feminine"), Some("die")) | (Some("neuter"), Some("das"))
+                    (e.gender.as_deref(), e.article.as_deref(), e.number.as_deref()),
+                    (Some("masculine"), Some("der"), _) | (Some("feminine"), Some("die"), _) | (Some("neuter"), Some("das"), _)
+                        | (None, Some("die"), Some("plural_only"))
                 );
                 if !ok {
                     problems.push(format!("{at}: noun without consistent gender/article"));
+                }
+                match e.number.as_deref() {
+                    None | Some("plural_only") => {}
+                    Some("singular_only") if e.forms.contains_key("plural") => {
+                        problems.push(format!("{at}: singular_only noun has a plural"))
+                    }
+                    Some("singular_only") => {}
+                    Some(other) => problems.push(format!("{at}: unexpected number {other}")),
+                }
+            } else if e.number.is_some() {
+                problems.push(format!("{at}: number on a non-noun"));
+            }
+            if e.pos == "verb" {
+                for k in ["present3", "past", "participle", "auxiliary"] {
+                    if e.forms.get(k).map_or(true, |v| v.trim().is_empty()) {
+                        problems.push(format!("{at}: verb missing {k}"));
+                    }
+                }
+                if let Some(aux) = e.forms.get("auxiliary") {
+                    if aux.split('/').any(|a| !matches!(a.trim(), "haben" | "sein")) {
+                        problems.push(format!("{at}: unexpected auxiliary {aux}"));
+                    }
+                }
+                if let Some(p) = &e.separable {
+                    let p3 = e.forms.get("present3").map(String::as_str).unwrap_or("");
+                    if !e.word.starts_with(p.as_str()) || p.len() >= e.word.len() || !p3.ends_with(&format!(" {p}")) {
+                        problems.push(format!("{at}: separable prefix {p} does not match word/forms"));
+                    }
+                }
+            } else if e.separable.is_some() || e.reflexive {
+                problems.push(format!("{at}: separable/reflexive on a non-verb"));
+            }
+            if let Some(x) = &e.example {
+                if x.de.trim().is_empty() || x.en.trim().is_empty() {
+                    problems.push(format!("{at}: example without text or translation"));
+                }
+                if x.de.chars().count() > EXAMPLE_MAX_CHARS {
+                    problems.push(format!("{at}: example longer than {EXAMPLE_MAX_CHARS} characters"));
+                }
+                if x.de.contains('\n') || x.en.contains('\n') {
+                    problems.push(format!("{at}: example has a line break"));
                 }
             }
             if !(e.ipa.starts_with('[') || e.ipa.starts_with('/')) {
@@ -123,35 +200,22 @@ pub fn card_for(e: &Entry, serial: u64) -> Card {
         other => (other, other),
     };
     let f = |k: &str| e.forms.get(k).filter(|v| !v.trim().is_empty()).cloned();
+    let plural = if e.pos == "noun" && e.number.as_deref() != Some("plural_only") { f("plural") } else { None };
+    let plural_note = match (e.pos.as_str(), e.number.as_deref(), &plural) {
+        ("noun", Some("plural_only"), _) => Some("nur Plural".to_string()),
+        ("noun", Some("singular_only"), None) => Some("kein Plural".to_string()),
+        _ => None,
+    };
+    let principal_parts = if e.pos == "verb" { principal_parts(e) } else { None };
     let (forms_label, forms_line) = match e.pos.as_str() {
-        "noun" => match f("plural") {
+        "noun" => match &plural {
             Some(p) => (Some("Plural".to_string()), Some(format!("die {p}"))),
             None => (None, None),
         },
-        "verb" => {
-            let mut parts = Vec::new();
-            if let Some(p3) = f("present3") {
-                parts.push(format!("er {p3}"));
-            }
-            if let Some(past) = f("past") {
-                parts.push(past);
-            }
-            if let Some(pp) = f("participle") {
-                let aux = f("auxiliary").unwrap_or_default();
-                let aux = aux
-                    .split('/')
-                    .map(|a| match a.trim() {
-                        "haben" => "hat",
-                        "sein" => "ist",
-                        _ => "",
-                    })
-                    .filter(|a| !a.is_empty())
-                    .collect::<Vec<_>>()
-                    .join("/");
-                parts.push(if aux.is_empty() { pp } else { format!("{aux} {pp}") });
-            }
-            if parts.is_empty() { (None, None) } else { (Some("Konjugation".into()), Some(parts.join(" · "))) }
-        }
+        "verb" => match &principal_parts {
+            Some(pp) => (Some("Stammformen".to_string()), Some(pp.clone())),
+            None => (None, None),
+        },
         "adj" => match (f("comparative"), f("superlative")) {
             (Some(c), Some(s)) => (Some("Steigerung".into()), Some(format!("{c} · {s}"))),
             _ => (None, None),
@@ -174,8 +238,96 @@ pub fn card_for(e: &Entry, serial: u64) -> Card {
         definition_de: e.definition_de.clone(),
         forms_label,
         forms_line,
+        number: e.number.clone(),
+        plural_article: plural.as_ref().map(|_| "die".to_string()),
+        plural,
+        plural_note,
+        reflexive: e.pos == "verb" && e.reflexive,
+        separable_prefix: if e.pos == "verb" { e.separable.clone() } else { None },
+        principal_parts,
+        example_de: e.example.as_ref().map(|x| x.de.clone()),
+        example_en: e.example.as_ref().map(|x| x.en.clone()),
         source: e.source.clone(),
     }
+}
+
+/// The 3rd person singular present a regular verb would have (`machen` -> `macht`,
+/// `arbeiten` -> `arbeitet`, `sammeln` -> `sammelt`). Used only to decide whether the present
+/// is worth showing; the forms themselves always come from Wiktionary.
+pub fn regular_present3(infinitive: &str) -> String {
+    let w = infinitive;
+    let stem = if w.ends_with("eln") || w.ends_with("ern") {
+        &w[..w.len() - 1]
+    } else if let Some(s) = w.strip_suffix("en") {
+        s
+    } else if let Some(s) = w.strip_suffix('n') {
+        s
+    } else {
+        w
+    };
+    let cs: Vec<char> = stem.chars().collect();
+    let n = cs.len();
+    let needs_e = match cs.last() {
+        Some('t') | Some('d') => true,
+        // atmen -> atmet, öffnen -> öffnet, rechnen -> rechnet; but lernt, kommt, wohnt.
+        Some('m') | Some('n') if n >= 2 => {
+            let p = cs[n - 2];
+            let vowel = "aeiouäöüy".contains(p);
+            !vowel && !matches!(p, 'l' | 'r' | 'm' | 'n' | 'h') || (p == 'h' && n >= 3 && cs[n - 3] == 'c')
+        }
+        _ => false,
+    };
+    format!("{stem}{}", if needs_e { "et" } else { "t" })
+}
+
+/// "fährt · fuhr · ist gefahren", "rief an · hat angerufen", "benimmt sich · benahm sich ·
+/// hat sich benommen". Wiktionary lists the finite forms with the particle (and sometimes
+/// "sich") already split off; they are normalised so every part reads the same way.
+pub fn principal_parts(e: &Entry) -> Option<String> {
+    let get = |k: &str| e.forms.get(k).map(|v| v.trim().to_string()).filter(|v| !v.is_empty());
+    let (past, participle) = (get("past")?, get("participle")?);
+    let particle = e.separable.as_deref();
+    let finite = |form: &str| -> String {
+        let mut core: Vec<&str> = form.split_whitespace().filter(|t| *t != "sich").collect();
+        if let (Some(p), Some(last)) = (particle, core.last()) {
+            if core.len() > 1 && *last == p {
+                core.pop();
+            }
+        }
+        let mut out = core.join(" ");
+        if e.reflexive {
+            out.push_str(" sich");
+        }
+        if let Some(p) = particle {
+            out.push(' ');
+            out.push_str(p);
+        }
+        out
+    };
+    let mut parts = Vec::new();
+    if let Some(p3) = get("present3") {
+        let base = particle.and_then(|p| e.word.strip_prefix(p)).unwrap_or(&e.word);
+        let shown = finite(&p3);
+        let core = shown.split_whitespace().next().unwrap_or("");
+        if core != regular_present3(base) {
+            parts.push(shown);
+        }
+    }
+    parts.push(finite(&past));
+    let aux: Vec<&str> = get("auxiliary")
+        .as_deref()
+        .unwrap_or("")
+        .split('/')
+        .filter_map(|a| match a.trim() {
+            "sein" => Some("ist"),
+            "haben" => Some("hat"),
+            _ => None,
+        })
+        .collect::<Vec<_>>();
+    let aux = aux.join(" / ");
+    let refl = if e.reflexive { "sich " } else { "" };
+    parts.push(if aux.is_empty() { format!("{refl}{participle}") } else { format!("{aux} {refl}{participle}") });
+    Some(parts.join(" · "))
 }
 
 /// Small, dependency-free PRNG (xorshift64*). Quality is plenty for shuffling flashcards.
@@ -335,6 +487,10 @@ mod tests {
             definition_en: "x".into(),
             definition_de: "x".into(),
             forms: BTreeMap::new(),
+            number: None,
+            separable: None,
+            reflexive: false,
+            example: None,
             freq_rank: None,
             source: BTreeMap::new(),
         }
@@ -371,24 +527,66 @@ mod tests {
         assert_ne!(a, b);
     }
 
-    #[test]
-    fn verb_forms_line() {
-        let mut e = entry("gehen", "verb");
-        e.forms.insert("present3".into(), "geht".into());
-        e.forms.insert("past".into(), "ging".into());
-        e.forms.insert("participle".into(), "gegangen".into());
-        e.forms.insert("auxiliary".into(), "sein".into());
-        let c = card_for(&e, 1);
-        assert_eq!(c.forms_line.as_deref(), Some("er geht · ging · ist gegangen"));
-        e.forms.insert("auxiliary".into(), "haben / sein".into());
-        assert_eq!(card_for(&e, 1).forms_line.as_deref(), Some("er geht · ging · hat/ist gegangen"));
+    fn verb(word: &str, p3: &str, past: &str, pp: &str, aux: &str) -> Entry {
+        let mut e = entry(word, "verb");
+        for (k, v) in [("present3", p3), ("past", past), ("participle", pp), ("auxiliary", aux)] {
+            e.forms.insert(k.into(), v.into());
+        }
+        e
     }
 
     #[test]
-    fn noun_plural_and_validation() {
+    fn principal_parts_show_irregular_present_aux_particle_and_sich() {
+        let pp = |e: &Entry| card_for(e, 1).principal_parts.unwrap();
+        assert_eq!(pp(&verb("gehen", "geht", "ging", "gegangen", "sein")), "ging · ist gegangen");
+        assert_eq!(pp(&verb("fahren", "fährt", "fuhr", "gefahren", "sein / haben")), "fährt · fuhr · ist / hat gefahren");
+        assert_eq!(pp(&verb("arbeiten", "arbeitet", "arbeitete", "gearbeitet", "haben")), "arbeitete · hat gearbeitet");
+        assert_eq!(pp(&verb("sammeln", "sammelt", "sammelte", "gesammelt", "haben")), "sammelte · hat gesammelt");
+        assert_eq!(pp(&verb("wissen", "weiß", "wusste", "gewusst", "haben")), "weiß · wusste · hat gewusst");
+        let mut e = verb("anrufen", "ruft an", "rief an", "angerufen", "haben");
+        e.separable = Some("an".into());
+        let c = card_for(&e, 1);
+        assert_eq!(c.principal_parts.as_deref(), Some("rief an · hat angerufen"));
+        assert_eq!(c.separable_prefix.as_deref(), Some("an"));
+        let mut e = verb("benehmen", "benimmt sich", "benahm", "benommen", "haben");
+        e.reflexive = true;
+        let c = card_for(&e, 1);
+        assert_eq!(c.principal_parts.as_deref(), Some("benimmt sich · benahm sich · hat sich benommen"));
+        assert!(c.reflexive);
+        let mut e = verb("vorstellen", "stellt sich vor", "stellte vor", "vorgestellt", "haben");
+        e.reflexive = true;
+        e.separable = Some("vor".into());
+        assert_eq!(pp(&e), "stellte sich vor · hat sich vorgestellt");
+        assert_eq!(regular_present3("öffnen"), "öffnet");
+        assert_eq!(regular_present3("rechnen"), "rechnet");
+        assert_eq!(regular_present3("lernen"), "lernt");
+        assert_eq!(regular_present3("tun"), "tut");
+    }
+
+    #[test]
+    fn noun_plural_number_and_validation() {
         let mut e = entry("Haus", "noun");
         e.forms.insert("plural".into(), "Häuser".into());
-        assert_eq!(card_for(&e, 1).forms_line.as_deref(), Some("die Häuser"));
+        let c = card_for(&e, 1);
+        assert_eq!(c.forms_line.as_deref(), Some("die Häuser"));
+        assert_eq!((c.plural_article.as_deref(), c.plural.as_deref(), c.plural_note.as_deref()), (Some("die"), Some("Häuser"), None));
+        let mut durst = entry("Durst", "noun");
+        durst.number = Some("singular_only".into());
+        let c = card_for(&durst, 1);
+        assert_eq!((c.plural.as_deref(), c.plural_note.as_deref()), (None, Some("kein Plural")));
+        let mut leute = entry("Leute", "noun");
+        leute.gender = None;
+        leute.article = Some("die".into());
+        leute.number = Some("plural_only".into());
+        leute.forms.insert("plural".into(), "Leute".into());
+        let c = card_for(&leute, 1);
+        assert_eq!((c.plural.as_deref(), c.plural_note.as_deref()), (None, Some("nur Plural")));
+        let mut long = entry("Tag", "noun");
+        long.example = Some(Example { de: "x".repeat(91), en: "y".into() });
+        let lex = Lexicon { meta: serde_json::Value::Null, entries: vec![e.clone(), durst, leute, long] };
+        let problems = lex.validate();
+        assert_eq!(problems.len(), 1, "{problems:?}");
+        assert!(problems[0].contains("example longer"));
         let lex = Lexicon { meta: serde_json::Value::Null, entries: vec![e.clone(), e] };
         assert!(lex.validate().iter().any(|p| p.contains("duplicate")));
     }

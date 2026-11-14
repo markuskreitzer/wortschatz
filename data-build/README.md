@@ -26,7 +26,18 @@ cargo run --release --manifest-path ../engine/Cargo.toml -- validate ../core/dat
    which English sense the German word translates) move the choice to a later sense when needed.
    If neither signal supports a sense, the word is dropped.
 5. The **German definition** is the German-Wiktionary gloss of the chosen sense.
-6. **Manual review**: every built entry was read; entries whose English and German senses
+6. **Grammar.** Nouns: the plural comes from German Wiktionary; `number` is `singular_only` when
+   it has no plural and English Wiktionary marks the noun *no plural*/*uncountable* (or German
+   Wiktionary gives "—"), and `plural_only` for pluralia tantum (*die Daten*, article "die", no
+   gender). Verbs: `separable` is the particle split off in the present (*ruft an*), `reflexive`
+   is set when the present reads *… sich* or the chosen German sense is tagged reflexive only.
+   A second perfect auxiliary is kept only when English Wiktionary lists both, unqualified, in
+   the same order (so *anfangen* is *hat angefangen*, not the regional *ist angefangen*).
+7. **Example.** The first English-Wiktionary usage example (not a quotation) of the sense whose
+   gloss contains the card's English equivalent: a full sentence of at most 90 characters, with
+   a modern English translation (no "literally" notes, no fragments like *to accept an apology*).
+   `example_exclude.tsv` drops individual examples found wrong in review.
+8. **Manual review**: every built entry was read; entries whose English and German senses
    disagree (or are too specialised, e.g. card-game senses) are listed in `exclude.tsv` and
    removed. Nothing is rewritten by hand.
 

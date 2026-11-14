@@ -1,8 +1,8 @@
 {
  "meta": {
   "name": "Wortschatz lexicon",
-  "count": 1113,
-  "built": "2026-11-11",
+  "count": 1114,
+  "built": "2026-11-14",
   "review": "first 1300 candidates manually reviewed; mismatches listed in data-build/exclude.tsv",
   "license": "CC BY-SA 4.0 (derived from Wiktionary, CC BY-SA 4.0 / GFDL; frequency ranks from hermitdave/FrequencyWords, CC BY-SA 4.0)",
   "sources": [
@@ -52,6 +52,10 @@
     "de": "https://de.wiktionary.org/wiki/gut#1a",
     "en": "https://en.wiktionary.org/wiki/gut#German",
     "en_def": "https://en-word.net/lemma/good"
+   },
+   "example": {
+    "de": "Wir müssen gut sein, um uns gut zu fühlen.",
+    "en": "We must be good to feel good."
    }
   },
   {
@@ -114,6 +118,10 @@
     "de": "https://de.wiktionary.org/wiki/mehr#1",
     "en": "https://en.wiktionary.org/wiki/mehr#German",
     "en_def": "https://en-word.net/lemma/more"
+   },
+   "example": {
+    "de": "Ich mag dich nicht mehr.",
+    "en": "I don't like you anymore."
    }
   },
   {
@@ -159,6 +167,10 @@
     "de": "https://de.wiktionary.org/wiki/sagen#1",
     "en": "https://en.wiktionary.org/wiki/sagen#German",
     "en_def": "https://en-word.net/lemma/say"
+   },
+   "example": {
+    "de": "Ich habe nicht verstanden, was sie gesagt hat.",
+    "en": "I didn't understand what she said."
    }
   },
   {
@@ -183,6 +195,10 @@
     "de": "https://de.wiktionary.org/wiki/machen#1",
     "en": "https://en.wiktionary.org/wiki/machen#German",
     "en_def": "https://en-word.net/lemma/make"
+   },
+   "example": {
+    "de": "Ich hab dir einen Kuchen gemacht!",
+    "en": "I made you a pie!"
    }
   },
   {
@@ -228,6 +244,10 @@
     "de": "https://de.wiktionary.org/wiki/tun#1",
     "en": "https://en.wiktionary.org/wiki/tun#German",
     "en_def": "https://en-word.net/lemma/do"
+   },
+   "example": {
+    "de": "Man tut, was man kann.",
+    "en": "One does what one can."
    }
   },
   {
@@ -252,6 +272,10 @@
     "de": "https://de.wiktionary.org/wiki/gehen#1",
     "en": "https://en.wiktionary.org/wiki/gehen#German",
     "en_def": "https://en-word.net/lemma/walk"
+   },
+   "example": {
+    "de": "Lass uns beide mit dem Hund gehen.",
+    "en": "Let's both walk the dog together."
    }
   },
   {
@@ -276,6 +300,10 @@
     "de": "https://de.wiktionary.org/wiki/sehen#1",
     "en": "https://en.wiktionary.org/wiki/sehen#German",
     "en_def": "https://en-word.net/lemma/see"
+   },
+   "example": {
+    "de": "Er sieht nicht gut.",
+    "en": "He doesn’t see well."
    }
   },
   {
@@ -290,6 +318,7 @@
    "definition_en": "The psychological result of perception and learning and reasoning.",
    "definition_de": "Kenntnis und Verständnis von Fakten, Wahrheiten und Informationen",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 119,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Wissen#1",
@@ -319,6 +348,10 @@
     "de": "https://de.wiktionary.org/wiki/wissen#1",
     "en": "https://en.wiktionary.org/wiki/wissen#German",
     "en_def": "https://en-word.net/lemma/know"
+   },
+   "example": {
+    "de": "Ich weiß, wo du bist.",
+    "en": "I know where you are."
    }
   },
   {
@@ -338,6 +371,10 @@
     "de": "https://de.wiktionary.org/wiki/nie#1",
     "en": "https://en.wiktionary.org/wiki/nie#German",
     "en_def": "https://en-word.net/lemma/never"
+   },
+   "example": {
+    "de": "Das ist nie passiert!",
+    "en": "That has never happened!"
    }
   },
   {
@@ -398,6 +435,10 @@
     "de": "https://de.wiktionary.org/wiki/viel#1",
     "en": "https://en.wiktionary.org/wiki/viel#German",
     "en_def": "https://en-word.net/lemma/a%20lot"
+   },
+   "example": {
+    "de": "Wir haben viel gelacht.",
+    "en": "We laughed a lot."
    }
   },
   {
@@ -417,6 +458,10 @@
     "de": "https://de.wiktionary.org/wiki/weg#1",
     "en": "https://en.wiktionary.org/wiki/weg#German",
     "en_def": "https://en-word.net/lemma/away"
+   },
+   "example": {
+    "de": "Geh weg!",
+    "en": "Go away!"
    }
   },
   {
@@ -438,6 +483,10 @@
     "de": "https://de.wiktionary.org/wiki/Weg#1",
     "en": "https://en.wiktionary.org/wiki/Weg#German",
     "en_def": "https://en-word.net/lemma/route"
+   },
+   "example": {
+    "de": "Der Wald kann gefährlich sein, also bleib auf dem Weg.",
+    "en": "The forest can be dangerous, so stay on the path."
    }
   },
   {
@@ -460,6 +509,10 @@
     "de": "https://de.wiktionary.org/wiki/einfach#1",
     "en": "https://en.wiktionary.org/wiki/einfach#German",
     "en_def": "https://en-word.net/lemma/simple"
+   },
+   "example": {
+    "de": "Die Hausaufgabe war sehr einfach.",
+    "en": "The homework was very easy."
    }
   },
   {
@@ -481,6 +534,10 @@
     "de": "https://de.wiktionary.org/wiki/Leben#1",
     "en": "https://en.wiktionary.org/wiki/Leben#German",
     "en_def": "https://en-word.net/lemma/life"
+   },
+   "example": {
+    "de": "Das Leben ist nicht an das geistige Bewusstsein gebunden.",
+    "en": "Life is not dependent on mental consciousness."
    }
   },
   {
@@ -505,6 +562,10 @@
     "de": "https://de.wiktionary.org/wiki/leben#1",
     "en": "https://en.wiktionary.org/wiki/leben#German",
     "en_def": "https://en-word.net/lemma/live"
+   },
+   "example": {
+    "de": "Lebt dein Uropa noch?",
+    "en": "Is your great-grandpa still alive?"
    }
   },
   {
@@ -540,6 +601,7 @@
    "definition_en": "The present time or age.",
    "definition_de": "Gegenwart, die heutige Zeit (Zeit in der wir leben)",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 142,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Heute#1",
@@ -569,6 +631,10 @@
     "de": "https://de.wiktionary.org/wiki/wollen#2",
     "en": "https://en.wiktionary.org/wiki/wollen#German",
     "en_def": "https://en-word.net/lemma/want"
+   },
+   "example": {
+    "de": "Ich will doch nur das Beste.",
+    "en": "I want only the best."
    }
   },
   {
@@ -612,6 +678,10 @@
     "de": "https://de.wiktionary.org/wiki/Frau#1",
     "en": "https://en.wiktionary.org/wiki/Frau#German",
     "en_def": "https://en-word.net/lemma/woman"
+   },
+   "example": {
+    "de": "Maria ist meine Frau.",
+    "en": "Mary is my wife."
    }
   },
   {
@@ -652,6 +722,10 @@
     "de": "https://de.wiktionary.org/wiki/Zwei#1",
     "en": "https://en.wiktionary.org/wiki/Zwei#German",
     "en_def": "https://en-word.net/lemma/two"
+   },
+   "example": {
+    "de": "Die Zwei ist die einzige gerade Primzahl.",
+    "en": "Two is the only even prime number."
    }
   },
   {
@@ -674,6 +748,10 @@
     "de": "https://de.wiktionary.org/wiki/klar#1",
     "en": "https://en.wiktionary.org/wiki/klar#German",
     "en_def": "https://en-word.net/lemma/clear"
+   },
+   "example": {
+    "de": "War meine Frage nicht klar genug?",
+    "en": "Was my question not clear enough?"
    }
   },
   {
@@ -735,6 +813,10 @@
     "de": "https://de.wiktionary.org/wiki/Vater#1",
     "en": "https://en.wiktionary.org/wiki/Vater#German",
     "en_def": "https://en-word.net/lemma/father"
+   },
+   "example": {
+    "de": "Mein Vater erklärt mir jeden Sonntag unsere neun Planeten.",
+    "en": "My father explains to me our nine planets every Sunday."
    }
   },
   {
@@ -757,6 +839,10 @@
     "de": "https://de.wiktionary.org/wiki/schön#1",
     "en": "https://en.wiktionary.org/wiki/schön#German",
     "en_def": "https://en-word.net/lemma/beautiful"
+   },
+   "example": {
+    "de": "Der Sonnenuntergang am Strand war wirklich schön.",
+    "en": "The sunset on the beach was really beautiful."
    }
   },
   {
@@ -778,6 +864,10 @@
     "de": "https://de.wiktionary.org/wiki/Tag#1",
     "en": "https://en.wiktionary.org/wiki/Tag#German",
     "en_def": "https://en-word.net/lemma/day"
+   },
+   "example": {
+    "de": "Der Tag fängt um Mitternacht an.",
+    "en": "The day begins at midnight."
    }
   },
   {
@@ -802,6 +892,10 @@
     "de": "https://de.wiktionary.org/wiki/reden#1",
     "en": "https://en.wiktionary.org/wiki/reden#German",
     "en_def": "https://en-word.net/lemma/speak"
+   },
+   "example": {
+    "de": "Der Präsident wird in seiner Ansprache über die Wirtschaft reden.",
+    "en": "The President will talk about the economy in his address."
    }
   },
   {
@@ -868,6 +962,10 @@
     "de": "https://de.wiktionary.org/wiki/helfen#1",
     "en": "https://en.wiktionary.org/wiki/helfen#German",
     "en_def": "https://en-word.net/lemma/help"
+   },
+   "example": {
+    "de": "Ich habe ihnen bei der Reparatur des Wagens geholfen.",
+    "en": "I helped them with the repair of the car."
    }
   },
   {
@@ -889,6 +987,10 @@
     "de": "https://de.wiktionary.org/wiki/Nacht#1",
     "en": "https://en.wiktionary.org/wiki/Nacht#German",
     "en_def": "https://en-word.net/lemma/night"
+   },
+   "example": {
+    "de": "Die Nacht war lang und frostig.",
+    "en": "The night was long and chilly."
    }
   },
   {
@@ -913,6 +1015,10 @@
     "de": "https://de.wiktionary.org/wiki/finden#1",
     "en": "https://en.wiktionary.org/wiki/finden#German",
     "en_def": "https://en-word.net/lemma/find"
+   },
+   "example": {
+    "de": "Ich habe deine Schlüssel gefunden.",
+    "en": "I found your keys."
    }
   },
   {
@@ -959,6 +1065,10 @@
     "de": "https://de.wiktionary.org/wiki/geben#1",
     "en": "https://en.wiktionary.org/wiki/geben#German",
     "en_def": "https://en-word.net/lemma/give"
+   },
+   "example": {
+    "de": "Meine Frau hat mir eine neue Uhr gegeben.",
+    "en": "My wife gave me a new watch."
    }
   },
   {
@@ -1026,6 +1136,10 @@
     "de": "https://de.wiktionary.org/wiki/hören#1",
     "en": "https://en.wiktionary.org/wiki/hören#German",
     "en_def": "https://en-word.net/lemma/hear"
+   },
+   "example": {
+    "de": "Ich hörte ihn rufen.",
+    "en": "I heard him call."
    }
   },
   {
@@ -1089,6 +1203,10 @@
     "de": "https://de.wiktionary.org/wiki/Haus#1",
     "en": "https://en.wiktionary.org/wiki/Haus#German",
     "en_def": "https://en-word.net/lemma/house"
+   },
+   "example": {
+    "de": "In dem Haus haben wir mal gewohnt.",
+    "en": "We used to live in that house."
    }
   },
   {
@@ -1131,6 +1249,10 @@
     "de": "https://de.wiktionary.org/wiki/Freund#1",
     "en": "https://en.wiktionary.org/wiki/Freund#German",
     "en_def": "https://en-word.net/lemma/friend"
+   },
+   "example": {
+    "de": "Lass uns Freunde bleiben.",
+    "en": "Let’s stay friends."
    }
   },
   {
@@ -1155,6 +1277,10 @@
     "de": "https://de.wiktionary.org/wiki/essen#1",
     "en": "https://en.wiktionary.org/wiki/essen#German",
     "en_def": "https://en-word.net/lemma/eat"
+   },
+   "example": {
+    "de": "Er isst gern Schokolade.",
+    "en": "He likes eating chocolate."
    }
   },
   {
@@ -1200,6 +1326,10 @@
     "de": "https://de.wiktionary.org/wiki/bleiben#1",
     "en": "https://en.wiktionary.org/wiki/bleiben#German",
     "en_def": "https://en-word.net/lemma/stay"
+   },
+   "example": {
+    "de": "Du kannst ja schon fahren, aber ich bleibe noch.",
+    "en": "Feel free to leave, but I'm staying some more."
    }
   },
   {
@@ -1243,6 +1373,10 @@
     "de": "https://de.wiktionary.org/wiki/schnell#1",
     "en": "https://en.wiktionary.org/wiki/schnell#German",
     "en_def": "https://en-word.net/lemma/fast"
+   },
+   "example": {
+    "de": "Er fährt ein schnelles Auto.",
+    "en": "He is driving a fast car."
    }
   },
   {
@@ -1289,6 +1423,10 @@
     "de": "https://de.wiktionary.org/wiki/glauben#1",
     "en": "https://en.wiktionary.org/wiki/glauben#German",
     "en_def": "https://en-word.net/lemma/believe%20in"
+   },
+   "example": {
+    "de": "Glaubst du an Engel?",
+    "en": "Do you believe in angels?"
    }
   },
   {
@@ -1313,6 +1451,10 @@
     "de": "https://de.wiktionary.org/wiki/bringen#1",
     "en": "https://en.wiktionary.org/wiki/bringen#German",
     "en_def": "https://en-word.net/lemma/bring"
+   },
+   "example": {
+    "de": "Ich bringe die Katze ins Haus.",
+    "en": "I'm bringing the cat into the house."
    }
   },
   {
@@ -1337,6 +1479,10 @@
     "de": "https://de.wiktionary.org/wiki/brauchen#1",
     "en": "https://en.wiktionary.org/wiki/brauchen#German",
     "en_def": "https://en-word.net/lemma/need"
+   },
+   "example": {
+    "de": "Ich brauche deine Hilfe.",
+    "en": "I need your help."
    }
   },
   {
@@ -1398,6 +1544,10 @@
     "de": "https://de.wiktionary.org/wiki/sonst#1",
     "en": "https://en.wiktionary.org/wiki/sonst#German",
     "en_def": "https://en-word.net/lemma/usually"
+   },
+   "example": {
+    "de": "Ich trinke sonst nicht so viel.",
+    "en": "I don't normally drink so much."
    }
   },
   {
@@ -1419,6 +1569,10 @@
     "de": "https://de.wiktionary.org/wiki/Musik#1",
     "en": "https://en.wiktionary.org/wiki/Musik#German",
     "en_def": "https://en-word.net/lemma/music"
+   },
+   "example": {
+    "de": "Was hörst du für Musik?",
+    "en": "What kind of music do you listen to?"
    }
   },
   {
@@ -1475,6 +1629,7 @@
    "definition_en": "The act of waiting (remaining inactive in one place while expecting something)",
    "definition_de": "Zustand der Untätigkeit, bis ein bestimmter Zustand trifft",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 304,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Warten#1",
@@ -1523,6 +1678,10 @@
     "de": "https://de.wiktionary.org/wiki/einmal#1",
     "en": "https://en.wiktionary.org/wiki/einmal#German",
     "en_def": "https://en-word.net/lemma/once"
+   },
+   "example": {
+    "de": "Ich werde das nur einmal sagen.",
+    "en": "I'm only going to say it once."
    }
   },
   {
@@ -1544,6 +1703,10 @@
     "de": "https://de.wiktionary.org/wiki/Problem#1",
     "en": "https://en.wiktionary.org/wiki/Problem#German",
     "en_def": "https://en-word.net/lemma/problem"
+   },
+   "example": {
+    "de": "Das Problem tritt auf, wenn wir viele Mails haben.",
+    "en": "The problem arises when we have lots of mails."
    }
   },
   {
@@ -1587,6 +1750,10 @@
     "de": "https://de.wiktionary.org/wiki/fertig#1",
     "en": "https://en.wiktionary.org/wiki/fertig#German",
     "en_def": "https://en-word.net/lemma/done"
+   },
+   "example": {
+    "de": "Der Kaffee ist fertig.",
+    "en": "The coffee’s ready."
    }
   },
   {
@@ -1606,6 +1773,10 @@
     "de": "https://de.wiktionary.org/wiki/allein#1",
     "en": "https://en.wiktionary.org/wiki/allein#German",
     "en_def": "https://en-word.net/lemma/alone"
+   },
+   "example": {
+    "de": "Er ist ganz allein.",
+    "en": "He is all alone."
    }
   },
   {
@@ -1630,6 +1801,10 @@
     "de": "https://de.wiktionary.org/wiki/sprechen#1",
     "en": "https://en.wiktionary.org/wiki/sprechen#German",
     "en_def": "https://en-word.net/lemma/speak"
+   },
+   "example": {
+    "de": "Ich spreche Deutsch.",
+    "en": "I speak German."
    }
   },
   {
@@ -1649,6 +1824,10 @@
     "de": "https://de.wiktionary.org/wiki/gern#1",
     "en": "https://en.wiktionary.org/wiki/gern#German",
     "en_def": "https://en-word.net/lemma/willingly"
+   },
+   "example": {
+    "de": "Markus fährt gern Fahrrad.",
+    "en": "Markus enjoys biking."
    }
   },
   {
@@ -1673,6 +1852,10 @@
     "de": "https://de.wiktionary.org/wiki/halten#1",
     "en": "https://en.wiktionary.org/wiki/halten#German",
     "en_def": "https://en-word.net/lemma/hold"
+   },
+   "example": {
+    "de": "Haltet den Dieb!",
+    "en": "Stop the thief!"
    }
   },
   {
@@ -1694,6 +1877,10 @@
     "de": "https://de.wiktionary.org/wiki/Kind#1",
     "en": "https://en.wiktionary.org/wiki/Kind#German",
     "en_def": "https://en-word.net/lemma/child"
+   },
+   "example": {
+    "de": "Er war das zweitgeborene Kind in der Familie.",
+    "en": "He was the second-born child in the family."
    }
   },
   {
@@ -1716,6 +1903,10 @@
     "de": "https://de.wiktionary.org/wiki/wahr#1",
     "en": "https://en.wiktionary.org/wiki/wahr#German",
     "en_def": "https://en-word.net/lemma/true"
+   },
+   "example": {
+    "de": "Das ist wahre Liebe.",
+    "en": "This is true love."
    }
   },
   {
@@ -1737,6 +1928,10 @@
     "de": "https://de.wiktionary.org/wiki/Bruder#1",
     "en": "https://en.wiktionary.org/wiki/Bruder#German",
     "en_def": "https://en-word.net/lemma/brother"
+   },
+   "example": {
+    "de": "Mein Bruder hat zwei Katzen.",
+    "en": "My brother has two cats."
    }
   },
   {
@@ -1761,6 +1956,10 @@
     "de": "https://de.wiktionary.org/wiki/denken#1",
     "en": "https://en.wiktionary.org/wiki/denken#German",
     "en_def": "https://en-word.net/lemma/think"
+   },
+   "example": {
+    "de": "Ja, das dachte ich mir.",
+    "en": "Yes, I thought so."
    }
   },
   {
@@ -1775,6 +1974,7 @@
    "definition_en": "A feeling of thankfulness and appreciation.",
    "definition_de": "ein Gefühl der Verpflichtung für eine erhaltene Wohltat",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 346,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Dank#1",
@@ -1848,6 +2048,10 @@
     "de": "https://de.wiktionary.org/wiki/echt#1",
     "en": "https://en.wiktionary.org/wiki/echt#German",
     "en_def": "https://en-word.net/lemma/real"
+   },
+   "example": {
+    "de": "Die Jacke ist aus echtem Leder.",
+    "en": "The jacket is made of genuine leather."
    }
   },
   {
@@ -1869,6 +2073,10 @@
     "de": "https://de.wiktionary.org/wiki/Uhr#1",
     "en": "https://en.wiktionary.org/wiki/Uhr#German",
     "en_def": "https://en-word.net/lemma/watch"
+   },
+   "example": {
+    "de": "Es ist vier Uhr.",
+    "en": "It is four o'clock."
    }
   },
   {
@@ -1932,6 +2140,10 @@
     "de": "https://de.wiktionary.org/wiki/Kopf#1",
     "en": "https://en.wiktionary.org/wiki/Kopf#German",
     "en_def": "https://en-word.net/lemma/head"
+   },
+   "example": {
+    "de": "Er fiel die Treppe hinunter, als sie ihm ein Buch an den Kopf warf.",
+    "en": "He fell down the stairs when she threw a book at his head."
    }
   },
   {
@@ -1965,11 +2177,16 @@
    "definition_en": "Your overall circumstances or condition in life (including everything that happens to you)",
    "definition_de": "sich positiv auswirkender Zufall",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 380,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Glück#1",
     "en": "https://en.wiktionary.org/wiki/Glück#German",
     "en_def": "https://en-word.net/lemma/luck"
+   },
+   "example": {
+    "de": "Er hatte immer schon viel Glück bei den Frauen.",
+    "en": "He’s always had a lot of luck with the ladies."
    }
   },
   {
@@ -1989,6 +2206,10 @@
     "de": "https://de.wiktionary.org/wiki/letzte#1",
     "en": "https://en.wiktionary.org/wiki/letzte#German",
     "en_def": "https://en-word.net/lemma/last"
+   },
+   "example": {
+    "de": "Das war der letzte Zug.",
+    "en": "That was the last train."
    }
   },
   {
@@ -2013,6 +2234,10 @@
     "de": "https://de.wiktionary.org/wiki/töten#1",
     "en": "https://en.wiktionary.org/wiki/töten#German",
     "en_def": "https://en-word.net/lemma/kill"
+   },
+   "example": {
+    "de": "Zehn Menschen wurden bei dem Anschlag getötet.",
+    "en": "Ten people were killed in the attack."
    }
   },
   {
@@ -2077,6 +2302,10 @@
     "de": "https://de.wiktionary.org/wiki/Tür#1",
     "en": "https://en.wiktionary.org/wiki/Tür#German",
     "en_def": "https://en-word.net/lemma/door"
+   },
+   "example": {
+    "de": "Die Tür ist aus Eichenholz.",
+    "en": "The door is made of oak wood."
    }
   },
   {
@@ -2098,6 +2327,10 @@
     "de": "https://de.wiktionary.org/wiki/Auto#1",
     "en": "https://en.wiktionary.org/wiki/Auto#German",
     "en_def": "https://en-word.net/lemma/car"
+   },
+   "example": {
+    "de": "Das ist das Auto meines Vaters.",
+    "en": "That is my father’s car."
    }
   },
   {
@@ -2119,6 +2352,10 @@
     "de": "https://de.wiktionary.org/wiki/Polizei#1",
     "en": "https://en.wiktionary.org/wiki/Polizei#German",
     "en_def": "https://en-word.net/lemma/police"
+   },
+   "example": {
+    "de": "Die Polizei erwischte den Taschendieb auf frischer Tat.",
+    "en": "The police caught the pickpocket in the act."
    }
   },
   {
@@ -2143,6 +2380,10 @@
     "de": "https://de.wiktionary.org/wiki/stehen#1",
     "en": "https://en.wiktionary.org/wiki/stehen#German",
     "en_def": "https://en-word.net/lemma/stand"
+   },
+   "example": {
+    "de": "Das Haus ist abgebrannt, aber die Wände stehen noch.",
+    "en": "The house burned down, but the walls are still standing."
    }
   },
   {
@@ -2167,6 +2408,10 @@
     "de": "https://de.wiktionary.org/wiki/sterben#1",
     "en": "https://en.wiktionary.org/wiki/sterben#German",
     "en_def": "https://en-word.net/lemma/die"
+   },
+   "example": {
+    "de": "Mein Hund ist gestorben.",
+    "en": "My dog has died."
    }
   },
   {
@@ -2210,6 +2455,10 @@
     "de": "https://de.wiktionary.org/wiki/treffen#1",
     "en": "https://en.wiktionary.org/wiki/treffen#German",
     "en_def": "https://en-word.net/lemma/meet"
+   },
+   "example": {
+    "de": "Wir treffen uns morgen.",
+    "en": "See you tomorrow."
    }
   },
   {
@@ -2234,6 +2483,10 @@
     "de": "https://de.wiktionary.org/wiki/arbeiten#1",
     "en": "https://en.wiktionary.org/wiki/arbeiten#German",
     "en_def": "https://en-word.net/lemma/work"
+   },
+   "example": {
+    "de": "Wir arbeiten an der Wiederherstellung des Service.",
+    "en": "We are working on resuming service."
    }
   },
   {
@@ -2275,11 +2528,16 @@
     "participle": "gesorgt",
     "auxiliary": "haben"
    },
+   "reflexive": true,
    "freq_rank": 425,
    "source": {
     "de": "https://de.wiktionary.org/wiki/sorgen#1",
     "en": "https://en.wiktionary.org/wiki/sorgen#German",
     "en_def": "https://en-word.net/lemma/care"
+   },
+   "example": {
+    "de": "Er sorgt für den Haushalt.",
+    "en": "He takes care of the household."
    }
   },
   {
@@ -2322,6 +2580,10 @@
     "de": "https://de.wiktionary.org/wiki/Schwester#1",
     "en": "https://en.wiktionary.org/wiki/Schwester#German",
     "en_def": "https://en-word.net/lemma/sister"
+   },
+   "example": {
+    "de": "Meine Schwester kommt morgen.",
+    "en": "My sister is coming tomorrow."
    }
   },
   {
@@ -2432,6 +2694,10 @@
     "de": "https://de.wiktionary.org/wiki/suchen#1",
     "en": "https://en.wiktionary.org/wiki/suchen#German",
     "en_def": "https://en-word.net/lemma/search"
+   },
+   "example": {
+    "de": "Ich suche meinen Schlüssel. / Ich suche nach meinem Schlüssel.",
+    "en": "I’m looking for my key."
    }
   },
   {
@@ -2478,6 +2744,10 @@
     "de": "https://de.wiktionary.org/wiki/spielen#1",
     "en": "https://en.wiktionary.org/wiki/spielen#German",
     "en_def": "https://en-word.net/lemma/play"
+   },
+   "example": {
+    "de": "Die Kinder spielen draußen.",
+    "en": "The children are playing outside."
    }
   },
   {
@@ -2581,6 +2851,10 @@
     "de": "https://de.wiktionary.org/wiki/Tod#1",
     "en": "https://en.wiktionary.org/wiki/Tod#German",
     "en_def": "https://en-word.net/lemma/death"
+   },
+   "example": {
+    "de": "Der Tod kam endlich zu ihm her.",
+    "en": "Death finally came to him."
    }
   },
   {
@@ -2638,6 +2912,7 @@
    "definition_en": "The day immediately before today.",
    "definition_de": "die Vergangenheit",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 475,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Gestern#1",
@@ -2667,6 +2942,10 @@
     "de": "https://de.wiktionary.org/wiki/versuchen#1",
     "en": "https://en.wiktionary.org/wiki/versuchen#German",
     "en_def": "https://en-word.net/lemma/try"
+   },
+   "example": {
+    "de": "Bitte sei still, ich versuche zu schlafen.",
+    "en": "Please be quiet, I'm trying to sleep."
    }
   },
   {
@@ -2814,6 +3093,10 @@
     "de": "https://de.wiktionary.org/wiki/holen#1",
     "en": "https://en.wiktionary.org/wiki/holen#German",
     "en_def": "https://en-word.net/lemma/fetch"
+   },
+   "example": {
+    "de": "Hol noch einen Stuhl!",
+    "en": "Go get another chair!"
    }
   },
   {
@@ -3005,6 +3288,10 @@
     "de": "https://de.wiktionary.org/wiki/wagen#1",
     "en": "https://en.wiktionary.org/wiki/wagen#German",
     "en_def": "https://en-word.net/lemma/dare"
+   },
+   "example": {
+    "de": "Wie können Sie es wagen, so etwas zu tun?",
+    "en": "How dare you do something like this?"
    }
   },
   {
@@ -3050,6 +3337,10 @@
     "de": "https://de.wiktionary.org/wiki/gefallen#1",
     "en": "https://en.wiktionary.org/wiki/gefallen#German",
     "en_def": "https://en-word.net/lemma/please"
+   },
+   "example": {
+    "de": "Diese Hose gefällt mir.",
+    "en": "I like these trousers."
    }
   },
   {
@@ -3115,6 +3406,10 @@
     "de": "https://de.wiktionary.org/wiki/verlassen#1",
     "en": "https://en.wiktionary.org/wiki/verlassen#German",
     "en_def": "https://en-word.net/lemma/abandon"
+   },
+   "example": {
+    "de": "Die Ratten verlassen das sinkende Schiff.",
+    "en": "The rats are abandoning the sinking ship."
    }
   },
   {
@@ -3139,6 +3434,10 @@
     "de": "https://de.wiktionary.org/wiki/zeigen#1",
     "en": "https://en.wiktionary.org/wiki/zeigen#German",
     "en_def": "https://en-word.net/lemma/show"
+   },
+   "example": {
+    "de": "Man zeigt nicht mit dem Finger auf die Leute!",
+    "en": "You don’t point your finger at people!"
    }
   },
   {
@@ -3194,6 +3493,7 @@
    "definition_en": "An earnest and sincere feeling.",
    "definition_de": "scherzlose, überlegte und entschiedene Gesinnung; sachlich, aufrichtige Haltung",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 525,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Ernst#1",
@@ -3260,6 +3560,10 @@
     "de": "https://de.wiktionary.org/wiki/Krieg#1",
     "en": "https://en.wiktionary.org/wiki/Krieg#German",
     "en_def": "https://en-word.net/lemma/war"
+   },
+   "example": {
+    "de": "Erwähnt bloß nicht den Krieg!",
+    "en": "Just don’t mention the war!"
    }
   },
   {
@@ -3282,6 +3586,10 @@
     "de": "https://de.wiktionary.org/wiki/wichtig#1",
     "en": "https://en.wiktionary.org/wiki/wichtig#German",
     "en_def": "https://en-word.net/lemma/important"
+   },
+   "example": {
+    "de": "Sport ist wichtig für die Gesundheit.",
+    "en": "Exercising is important for your health."
    }
   },
   {
@@ -3325,6 +3633,10 @@
     "de": "https://de.wiktionary.org/wiki/schlecht#1",
     "en": "https://en.wiktionary.org/wiki/schlecht#German",
     "en_def": "https://en-word.net/lemma/bad"
+   },
+   "example": {
+    "de": "Das Brot ist schlecht geworden und grüne Pilze wuchsen auf ihm.",
+    "en": "The bread went bad and green fungi grew on it."
    }
   },
   {
@@ -3346,6 +3658,10 @@
     "de": "https://de.wiktionary.org/wiki/Schule#1",
     "en": "https://en.wiktionary.org/wiki/Schule#German",
     "en_def": "https://en-word.net/lemma/school"
+   },
+   "example": {
+    "de": "Ab Morgen haben wir wieder Schule.",
+    "en": "Starting tomorrow/from tomorrow onwards we will have school again."
    }
   },
   {
@@ -3388,6 +3704,10 @@
     "de": "https://de.wiktionary.org/wiki/Wort#1",
     "en": "https://en.wiktionary.org/wiki/Wort#German",
     "en_def": "https://en-word.net/lemma/word"
+   },
+   "example": {
+    "de": "Im Deutschen gibt es wenig Wörter, die mit y geschrieben werden.",
+    "en": "In German there are few words spelt with y."
    }
   },
   {
@@ -3412,6 +3732,10 @@
     "de": "https://de.wiktionary.org/wiki/schlafen#1",
     "en": "https://en.wiktionary.org/wiki/schlafen#German",
     "en_def": "https://en-word.net/lemma/sleep"
+   },
+   "example": {
+    "de": "Ich habe diese Nacht gut geschlafen.",
+    "en": "I slept well last night."
    }
   },
   {
@@ -3478,6 +3802,10 @@
     "de": "https://de.wiktionary.org/wiki/stellen#1",
     "en": "https://en.wiktionary.org/wiki/stellen#German",
     "en_def": "https://en-word.net/lemma/place"
+   },
+   "example": {
+    "de": "Die Schutzbekleidung muss vom Arbeitgeber gestellt werden.",
+    "en": "The protective gear must be provided by the employer."
    }
   },
   {
@@ -3516,6 +3844,10 @@
     "de": "https://de.wiktionary.org/wiki/Trinken#1",
     "en": "https://en.wiktionary.org/wiki/Trinken#German",
     "en_def": "https://en-word.net/lemma/drinking"
+   },
+   "example": {
+    "de": "Während körperlicher Arbeit ist ausreichendes Trinken sehr wichtig.",
+    "en": "During physical work, sufficient drinking is very important."
    }
   },
   {
@@ -3583,6 +3915,10 @@
     "de": "https://de.wiktionary.org/wiki/ehrlich#2",
     "en": "https://en.wiktionary.org/wiki/ehrlich#German",
     "en_def": "https://en-word.net/lemma/honest"
+   },
+   "example": {
+    "de": "Um ehrlich zu sein, mag ich dieses Gericht nicht.",
+    "en": "To be honest, I don't like this dish."
    }
   },
   {
@@ -3669,6 +4005,10 @@
     "de": "https://de.wiktionary.org/wiki/möglich#1",
     "en": "https://en.wiktionary.org/wiki/möglich#German",
     "en_def": "https://en-word.net/lemma/possible"
+   },
+   "example": {
+    "de": "Es ist möglich, ungesund zu essen und trotzdem gesund zu bleiben.",
+    "en": "It is possible to eat unhealthily and stay healthy nonetheless."
    }
   },
   {
@@ -3688,6 +4028,10 @@
     "de": "https://de.wiktionary.org/wiki/irgendwie#1",
     "en": "https://en.wiktionary.org/wiki/irgendwie#German",
     "en_def": "https://en-word.net/lemma/somehow"
+   },
+   "example": {
+    "de": "Der Dieb muss irgendwie über diese Mauer gekommen sein.",
+    "en": "The thief must have managed to get over this wall somehow."
    }
   },
   {
@@ -3770,6 +4114,10 @@
     "de": "https://de.wiktionary.org/wiki/falsch#1",
     "en": "https://en.wiktionary.org/wiki/falsch#German",
     "en_def": "https://en-word.net/lemma/wrong"
+   },
+   "example": {
+    "de": "Es ist falsch, sowas zu tun.",
+    "en": "It is wrong to do such a thing."
    }
   },
   {
@@ -3808,6 +4156,10 @@
     "de": "https://de.wiktionary.org/wiki/früher#2",
     "en": "https://en.wiktionary.org/wiki/früher#German",
     "en_def": "https://en-word.net/lemma/formerly"
+   },
+   "example": {
+    "de": "Das Museumsgebäude diente früher als Postamt.",
+    "en": "The museum building formerly functioned as a post office."
    }
   },
   {
@@ -3849,6 +4201,10 @@
     "de": "https://de.wiktionary.org/wiki/früh#1",
     "en": "https://en.wiktionary.org/wiki/früh#German",
     "en_def": "https://en-word.net/lemma/early"
+   },
+   "example": {
+    "de": "Er geht früh ins Bett.",
+    "en": "He goes to bed early."
    }
   },
   {
@@ -3868,6 +4224,10 @@
     "de": "https://de.wiktionary.org/wiki/zuerst#1",
     "en": "https://en.wiktionary.org/wiki/zuerst#German",
     "en_def": "https://en-word.net/lemma/first"
+   },
+   "example": {
+    "de": "Reinigen Sie immer zuerst die Räder.",
+    "en": "Always clean the wheels first."
    }
   },
   {
@@ -3890,6 +4250,10 @@
     "de": "https://de.wiktionary.org/wiki/wahrscheinlich#1",
     "en": "https://en.wiktionary.org/wiki/wahrscheinlich#German",
     "en_def": "https://en-word.net/lemma/likely"
+   },
+   "example": {
+    "de": "Die wahrscheinliche Ursache des Fehlers wurde heute ermittelt.",
+    "en": "The probable cause of the failure was determined today."
    }
   },
   {
@@ -3909,6 +4273,10 @@
     "de": "https://de.wiktionary.org/wiki/wahrscheinlich#1",
     "en": "https://en.wiktionary.org/wiki/wahrscheinlich#German",
     "en_def": "https://en-word.net/lemma/probably"
+   },
+   "example": {
+    "de": "Wahrscheinlich regnet es heute Nachmittag.",
+    "en": "It will probably rain this afternoon."
    }
   },
   {
@@ -3952,6 +4320,10 @@
     "de": "https://de.wiktionary.org/wiki/willkommen#1",
     "en": "https://en.wiktionary.org/wiki/willkommen#German",
     "en_def": "https://en-word.net/lemma/welcome"
+   },
+   "example": {
+    "de": "Du bist mir immer willkommen.",
+    "en": "You’re always welcome to my house."
    }
   },
   {
@@ -3997,6 +4369,10 @@
     "de": "https://de.wiktionary.org/wiki/retten#1",
     "en": "https://en.wiktionary.org/wiki/retten#German",
     "en_def": "https://en-word.net/lemma/save"
+   },
+   "example": {
+    "de": "Diese Katze war ein Streuner, der aus einem Tierheim gerettet wurde.",
+    "en": "This cat was a stray that was rescued from an animal shelter."
    }
   },
   {
@@ -4100,6 +4476,10 @@
     "de": "https://de.wiktionary.org/wiki/Stunde#1",
     "en": "https://en.wiktionary.org/wiki/Stunde#German",
     "en_def": "https://en-word.net/lemma/hour"
+   },
+   "example": {
+    "de": "Der Film dauert drei Stunden.",
+    "en": "The movie lasts three hours."
    }
   },
   {
@@ -4143,6 +4523,10 @@
     "de": "https://de.wiktionary.org/wiki/langsam#1",
     "en": "https://en.wiktionary.org/wiki/langsam#German",
     "en_def": "https://en-word.net/lemma/slow"
+   },
+   "example": {
+    "de": "Schnecken sind sehr langsam.",
+    "en": "Snails are very slow."
    }
   },
   {
@@ -4162,6 +4546,10 @@
     "de": "https://de.wiktionary.org/wiki/bereits#1",
     "en": "https://en.wiktionary.org/wiki/bereits#German",
     "en_def": "https://en-word.net/lemma/already"
+   },
+   "example": {
+    "de": "Ich weiß das bereits.",
+    "en": "I already know that."
    }
   },
   {
@@ -4186,6 +4574,10 @@
     "de": "https://de.wiktionary.org/wiki/lieben#1",
     "en": "https://en.wiktionary.org/wiki/lieben#German",
     "en_def": "https://en-word.net/lemma/love"
+   },
+   "example": {
+    "de": "Ich liebe dich.",
+    "en": "I love you."
    }
   },
   {
@@ -4231,6 +4623,10 @@
     "de": "https://de.wiktionary.org/wiki/schaffen#1",
     "en": "https://en.wiktionary.org/wiki/schaffen#German",
     "en_def": "https://en-word.net/lemma/create"
+   },
+   "example": {
+    "de": "Warum hat Gott die Welt geschaffen?",
+    "en": "Why did God create the world?"
    }
   },
   {
@@ -4252,6 +4648,10 @@
     "de": "https://de.wiktionary.org/wiki/Hölle#1",
     "en": "https://en.wiktionary.org/wiki/Hölle#German",
     "en_def": "https://en-word.net/lemma/hell"
+   },
+   "example": {
+    "de": "Der Weg zur Hölle ist mit guten Vorsätzen gepflastert.",
+    "en": "The road to hell is paved with good intentions."
    }
   },
   {
@@ -4293,6 +4693,10 @@
     "de": "https://de.wiktionary.org/wiki/überall#1",
     "en": "https://en.wiktionary.org/wiki/überall#German",
     "en_def": "https://en-word.net/lemma/anywhere"
+   },
+   "example": {
+    "de": "Wir haben überall nach dem Ball gesucht.",
+    "en": "We've looked for the ball everywhere."
    }
   },
   {
@@ -4360,6 +4764,10 @@
     "de": "https://de.wiktionary.org/wiki/lernen#1",
     "en": "https://en.wiktionary.org/wiki/lernen#German",
     "en_def": "https://en-word.net/lemma/learn"
+   },
+   "example": {
+    "de": "Ich lerne noch.",
+    "en": "I’m still learning."
    }
   },
   {
@@ -4384,6 +4792,10 @@
     "de": "https://de.wiktionary.org/wiki/nennen#1",
     "en": "https://en.wiktionary.org/wiki/nennen#German",
     "en_def": "https://en-word.net/lemma/name"
+   },
+   "example": {
+    "de": "Kannst du deinen Namen nennen?",
+    "en": "Can you say your name?"
    }
   },
   {
@@ -4401,13 +4813,17 @@
     "present3": "läuft",
     "past": "lief",
     "participle": "gelaufen",
-    "auxiliary": "sein / haben"
+    "auxiliary": "sein"
    },
    "freq_rank": 695,
    "source": {
     "de": "https://de.wiktionary.org/wiki/laufen#2",
     "en": "https://en.wiktionary.org/wiki/laufen#German",
     "en_def": "https://en-word.net/lemma/walk"
+   },
+   "example": {
+    "de": "Wir können mit dem Bus fahren oder laufen.",
+    "en": "We could take the bus or walk."
    }
   },
   {
@@ -4453,6 +4869,10 @@
     "de": "https://de.wiktionary.org/wiki/verlieren#1",
     "en": "https://en.wiktionary.org/wiki/verlieren#German",
     "en_def": "https://en-word.net/lemma/lose"
+   },
+   "example": {
+    "de": "Ich hab' meinen Pass wieder verloren. Weißt du, wo er ist?",
+    "en": "I lost my passport again. Do you know where it is?"
    }
   },
   {
@@ -4512,6 +4932,7 @@
    "definition_en": "The act of leaving secretly or without explanation.",
    "definition_de": "der Vorgang, wenn etwas oder jemand sich unbemerkt entfernt oder unsichtbar wird",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 712,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Verschwinden#1",
@@ -4541,6 +4962,10 @@
     "de": "https://de.wiktionary.org/wiki/verschwinden#1",
     "en": "https://en.wiktionary.org/wiki/verschwinden#German",
     "en_def": "https://en-word.net/lemma/disappear"
+   },
+   "example": {
+    "de": "Die Sonne verschwindet hinter Wolken.",
+    "en": "The sun is disappearing behind clouds."
    }
   },
   {
@@ -4560,11 +4985,16 @@
     "participle": "aufgehört",
     "auxiliary": "haben"
    },
+   "separable": "auf",
    "freq_rank": 715,
    "source": {
     "de": "https://de.wiktionary.org/wiki/aufhören#1",
     "en": "https://en.wiktionary.org/wiki/aufhören#German",
     "en_def": "https://en-word.net/lemma/cease"
+   },
+   "example": {
+    "de": "Der Regen hört bestimmt gleich auf.",
+    "en": "Surely the rain will stop soon."
    }
   },
   {
@@ -4608,6 +5038,10 @@
     "de": "https://de.wiktionary.org/wiki/groß#1",
     "en": "https://en.wiktionary.org/wiki/groß#German",
     "en_def": "https://en-word.net/lemma/big"
+   },
+   "example": {
+    "de": "Das ist ein großes Problem.",
+    "en": "That is a big problem."
    }
   },
   {
@@ -4672,6 +5106,10 @@
     "de": "https://de.wiktionary.org/wiki/Wert#1",
     "en": "https://en.wiktionary.org/wiki/Wert#German",
     "en_def": "https://en-word.net/lemma/value"
+   },
+   "example": {
+    "de": "Dieser Wert schwankt normalerweise zwischen 95 und 99%.",
+    "en": "This value usually ranges between 95 and 99%."
    }
   },
   {
@@ -4694,6 +5132,10 @@
     "de": "https://de.wiktionary.org/wiki/froh#1",
     "en": "https://en.wiktionary.org/wiki/froh#German",
     "en_def": "https://en-word.net/lemma/happy"
+   },
+   "example": {
+    "de": "Ich bin froh über alles, was ich erreicht habe.",
+    "en": "I am happy about everything I've achieved."
    }
   },
   {
@@ -4715,6 +5157,10 @@
     "de": "https://de.wiktionary.org/wiki/Straße#1",
     "en": "https://en.wiktionary.org/wiki/Straße#German",
     "en_def": "https://en-word.net/lemma/street"
+   },
+   "example": {
+    "de": "Das Kind überquerte die Straße.",
+    "en": "The child crossed the street."
    }
   },
   {
@@ -4739,6 +5185,10 @@
     "de": "https://de.wiktionary.org/wiki/rufen#1",
     "en": "https://en.wiktionary.org/wiki/rufen#German",
     "en_def": "https://en-word.net/lemma/call"
+   },
+   "example": {
+    "de": "Das Küken ruft nach seiner Mutter.",
+    "en": "The chick is calling for its mother."
    }
   },
   {
@@ -4763,6 +5213,10 @@
     "de": "https://de.wiktionary.org/wiki/heiraten#1",
     "en": "https://en.wiktionary.org/wiki/heiraten#German",
     "en_def": "https://en-word.net/lemma/marry"
+   },
+   "example": {
+    "de": "Wer würde solche Leute heiraten wollen?",
+    "en": "Who would want to marry such people?"
    }
   },
   {
@@ -4803,6 +5257,10 @@
     "de": "https://de.wiktionary.org/wiki/total#1",
     "en": "https://en.wiktionary.org/wiki/total#German",
     "en_def": "https://en-word.net/lemma/total"
+   },
+   "example": {
+    "de": "Es ist kein totales, sondern nur ein partielles Verbot.",
+    "en": "It is not an absolute ban, but merely a partial one."
    }
   },
   {
@@ -4848,6 +5306,10 @@
     "de": "https://de.wiktionary.org/wiki/erklären#1",
     "en": "https://en.wiktionary.org/wiki/erklären#German",
     "en_def": "https://en-word.net/lemma/explain"
+   },
+   "example": {
+    "de": "Der Lehrer erklärte (mir) die quadratische Gleichung sehr gut.",
+    "en": "The teacher explained the quadratic equation (to me) very well."
    }
   },
   {
@@ -4872,6 +5334,10 @@
     "de": "https://de.wiktionary.org/wiki/vertrauen#1",
     "en": "https://en.wiktionary.org/wiki/vertrauen#German",
     "en_def": "https://en-word.net/lemma/trust"
+   },
+   "example": {
+    "de": "Ich vertraue deinem Instinkt.",
+    "en": "I trust your instinct."
    }
   },
   {
@@ -4913,6 +5379,10 @@
     "de": "https://de.wiktionary.org/wiki/leicht#1",
     "en": "https://en.wiktionary.org/wiki/leicht#German",
     "en_def": "https://en-word.net/lemma/light"
+   },
+   "example": {
+    "de": "Nur leichte Autos sollten diese Brücke befahren.",
+    "en": "Only light cars should drive on this bridge."
    }
   },
   {
@@ -4934,6 +5404,10 @@
     "de": "https://de.wiktionary.org/wiki/Gefühl#1",
     "en": "https://en.wiktionary.org/wiki/Gefühl#German",
     "en_def": "https://en-word.net/lemma/feeling"
+   },
+   "example": {
+    "de": "Ein wohltuendes Gefühl kommt auf.",
+    "en": "A soothing feeling arises."
    }
   },
   {
@@ -4958,6 +5432,10 @@
     "de": "https://de.wiktionary.org/wiki/kaufen#1",
     "en": "https://en.wiktionary.org/wiki/kaufen#German",
     "en_def": "https://en-word.net/lemma/buy"
+   },
+   "example": {
+    "de": "Sie kauft ein Auto.",
+    "en": "She is buying a car."
    }
   },
   {
@@ -4980,6 +5458,10 @@
     "de": "https://de.wiktionary.org/wiki/interessiert#1",
     "en": "https://en.wiktionary.org/wiki/interessiert#German",
     "en_def": "https://en-word.net/lemma/interested"
+   },
+   "example": {
+    "de": "Er ist an dir interessiert.",
+    "en": "He's interested in you."
    }
   },
   {
@@ -5020,6 +5502,10 @@
     "de": "https://de.wiktionary.org/wiki/Zukunft#1",
     "en": "https://en.wiktionary.org/wiki/Zukunft#German",
     "en_def": "https://en-word.net/lemma/future"
+   },
+   "example": {
+    "de": "Aufgrund der Krise stehen viele vor einer ungewissen Zukunft.",
+    "en": "Because of the crisis, many face an uncertain future."
    }
   },
   {
@@ -5042,6 +5528,10 @@
     "de": "https://de.wiktionary.org/wiki/cool#1",
     "en": "https://en.wiktionary.org/wiki/cool#German",
     "en_def": "https://en-word.net/lemma/cool"
+   },
+   "example": {
+    "de": "Die Musik war echt cool.",
+    "en": "The music was very cool."
    }
   },
   {
@@ -5151,6 +5641,10 @@
     "de": "https://de.wiktionary.org/wiki/Schlüssel#1",
     "en": "https://en.wiktionary.org/wiki/Schlüssel#German",
     "en_def": "https://en-word.net/lemma/key"
+   },
+   "example": {
+    "de": "Der Schlüssel passt nicht.",
+    "en": "The key doesn't fit."
    }
   },
   {
@@ -5196,6 +5690,10 @@
     "de": "https://de.wiktionary.org/wiki/passieren#1",
     "en": "https://en.wiktionary.org/wiki/passieren#German",
     "en_def": "https://en-word.net/lemma/pass"
+   },
+   "example": {
+    "de": "Die Gruppe hat soeben die Grenze passiert.",
+    "en": "The group has just passed the border."
    }
   },
   {
@@ -5215,6 +5713,10 @@
     "de": "https://de.wiktionary.org/wiki/eher#1",
     "en": "https://en.wiktionary.org/wiki/eher#German",
     "en_def": "https://en-word.net/lemma/sooner"
+   },
+   "example": {
+    "de": "Wenn ich wählen muss, würde ich eher ins Kino gehen.",
+    "en": "If I have to choose, I’d rather go to the cinema."
    }
   },
   {
@@ -5301,6 +5803,10 @@
     "de": "https://de.wiktionary.org/wiki/böse#1",
     "en": "https://en.wiktionary.org/wiki/böse#German",
     "en_def": "https://en-word.net/lemma/bad"
+   },
+   "example": {
+    "de": "Unsere Taten können schlimme Folgen haben, selbst wenn wir keine bösen Absichten hatten.",
+    "en": "Our actions can have terrible consequences even if we didn’t have any evil intentions."
    }
   },
   {
@@ -5384,6 +5890,10 @@
     "de": "https://de.wiktionary.org/wiki/klasse#1",
     "en": "https://en.wiktionary.org/wiki/klasse#German",
     "en_def": "https://en-word.net/lemma/awesome"
+   },
+   "example": {
+    "de": "Ich fand das Spiel klasse.",
+    "en": "I thought the game was great."
    }
   },
   {
@@ -5492,6 +6002,10 @@
     "de": "https://de.wiktionary.org/wiki/ändern#1",
     "en": "https://en.wiktionary.org/wiki/ändern#German",
     "en_def": "https://en-word.net/lemma/alter"
+   },
+   "example": {
+    "de": "Früher dachte ich, Botanik sei langweilig, aber ich habe meine Meinung geändert.",
+    "en": "I used to think Botany was boring, but I've changed my opinion."
    }
   },
   {
@@ -5538,6 +6052,10 @@
     "de": "https://de.wiktionary.org/wiki/erfahren#1",
     "en": "https://en.wiktionary.org/wiki/erfahren#German",
     "en_def": "https://en-word.net/lemma/experience"
+   },
+   "example": {
+    "de": "Er hat im Leben viel Gutes und Böses erfahren.",
+    "en": "He has experienced a lot of good and bad things in life."
    }
   },
   {
@@ -5562,6 +6080,10 @@
     "de": "https://de.wiktionary.org/wiki/tragen#1",
     "en": "https://en.wiktionary.org/wiki/tragen#German",
     "en_def": "https://en-word.net/lemma/carry"
+   },
+   "example": {
+    "de": "Sie konnten die Kiste nicht mehr tragen und mussten sie abstellen.",
+    "en": "They couldn't carry the box any longer and had to put it down."
    }
   },
   {
@@ -5581,6 +6103,10 @@
     "de": "https://de.wiktionary.org/wiki/wenigstens#1",
     "en": "https://en.wiktionary.org/wiki/wenigstens#German",
     "en_def": "https://en-word.net/lemma/at%20least"
+   },
+   "example": {
+    "de": "Wenigstens war es nicht langweilig.",
+    "en": "At least it wasn't boring."
    }
   },
   {
@@ -5625,6 +6151,10 @@
     "de": "https://de.wiktionary.org/wiki/stolz#1",
     "en": "https://en.wiktionary.org/wiki/stolz#German",
     "en_def": "https://en-word.net/lemma/proud"
+   },
+   "example": {
+    "de": "Ich bin stolz auf dich.",
+    "en": "I am proud of you."
    }
   },
   {
@@ -5639,6 +6169,7 @@
    "definition_en": "A feeling of self-respect and personal worth.",
    "definition_de": "Selbstwertgefühl, Selbstbewusstsein",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 827,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Stolz#1",
@@ -5668,6 +6199,10 @@
     "de": "https://de.wiktionary.org/wiki/schicken#1",
     "en": "https://en.wiktionary.org/wiki/schicken#German",
     "en_def": "https://en-word.net/lemma/send"
+   },
+   "example": {
+    "de": "Sie hat mir einen Liebesbrief geschickt.",
+    "en": "She sent me a love letter."
    }
   },
   {
@@ -5778,6 +6313,10 @@
     "de": "https://de.wiktionary.org/wiki/lustig#1",
     "en": "https://en.wiktionary.org/wiki/lustig#German",
     "en_def": "https://en-word.net/lemma/funny"
+   },
+   "example": {
+    "de": "Der Film war lustig.",
+    "en": "The film was funny."
    }
   },
   {
@@ -5797,6 +6336,7 @@
     "participle": "umgebracht",
     "auxiliary": "haben"
    },
+   "separable": "um",
    "freq_rank": 861,
    "source": {
     "de": "https://de.wiktionary.org/wiki/umbringen#1",
@@ -5867,6 +6407,10 @@
     "de": "https://de.wiktionary.org/wiki/Laden#1",
     "en": "https://en.wiktionary.org/wiki/Laden#German",
     "en_def": "https://en-word.net/lemma/shop"
+   },
+   "example": {
+    "de": "Wann schließen hier die Läden?",
+    "en": "When do the shops close around here?"
    }
   },
   {
@@ -5936,6 +6480,10 @@
     "de": "https://de.wiktionary.org/wiki/lesen#1",
     "en": "https://en.wiktionary.org/wiki/lesen#German",
     "en_def": "https://en-word.net/lemma/read"
+   },
+   "example": {
+    "de": "Er kann nicht lesen.",
+    "en": "He doesn't know how to read."
    }
   },
   {
@@ -5997,6 +6545,10 @@
     "de": "https://de.wiktionary.org/wiki/Geschehen#1",
     "en": "https://en.wiktionary.org/wiki/Geschehen#German",
     "en_def": "https://en-word.net/lemma/happening"
+   },
+   "example": {
+    "de": "Nach dem Sturz konnte sie sich an das Geschehen nicht mehr erinnern.",
+    "en": "After the fall, she couldn't remember what had happened."
    }
   },
   {
@@ -6021,6 +6573,10 @@
     "de": "https://de.wiktionary.org/wiki/geschehen#1",
     "en": "https://en.wiktionary.org/wiki/geschehen#German",
     "en_def": "https://en-word.net/lemma/happen"
+   },
+   "example": {
+    "de": "Wie konnte das nur geschehen?",
+    "en": "How could that have happened?"
    }
   },
   {
@@ -6056,6 +6612,7 @@
    "definition_en": "Compassionate feelings that support a willingness to forgive.",
    "definition_de": "das Vergeben eines Fehlverhaltens, die Annahme einer Entschuldigung",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 880,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Verzeihung#1",
@@ -6078,13 +6635,17 @@
     "present3": "fliegt",
     "past": "flog",
     "participle": "geflogen",
-    "auxiliary": "sein / haben"
+    "auxiliary": "sein"
    },
    "freq_rank": 881,
    "source": {
     "de": "https://de.wiktionary.org/wiki/fliegen#1",
     "en": "https://en.wiktionary.org/wiki/fliegen#German",
     "en_def": "https://en-word.net/lemma/fly"
+   },
+   "example": {
+    "de": "Ich fliege morgen in die Vereinigten Staaten.",
+    "en": "I'm flying to the United States tomorrow."
    }
   },
   {
@@ -6213,6 +6774,10 @@
     "de": "https://de.wiktionary.org/wiki/fallen#1",
     "en": "https://en.wiktionary.org/wiki/fallen#German",
     "en_def": "https://en-word.net/lemma/fall"
+   },
+   "example": {
+    "de": "Der Regen fiel wie aus Eimern.",
+    "en": "It rained cats and dogs."
    }
   },
   {
@@ -6335,13 +6900,17 @@
     "present3": "folgt",
     "past": "folgte",
     "participle": "gefolgt",
-    "auxiliary": "sein / haben"
+    "auxiliary": "sein"
    },
    "freq_rank": 916,
    "source": {
     "de": "https://de.wiktionary.org/wiki/folgen#1",
     "en": "https://en.wiktionary.org/wiki/folgen#German",
     "en_def": "https://en-word.net/lemma/follow"
+   },
+   "example": {
+    "de": "Der Held folgte dem Drachen zu seiner Höhle.",
+    "en": "The hero followed the dragon to its cave."
    }
   },
   {
@@ -6390,6 +6959,10 @@
     "de": "https://de.wiktionary.org/wiki/behalten#1",
     "en": "https://en.wiktionary.org/wiki/behalten#German",
     "en_def": "https://en-word.net/lemma/keep"
+   },
+   "example": {
+    "de": "Ich behalte es für mich.",
+    "en": "I'm keeping it secret."
    }
   },
   {
@@ -6404,11 +6977,16 @@
    "definition_en": "A surrounding or nearby region.",
    "definition_de": "geringe räumliche Entfernung, von einem bestimmten Punkt aus gesehen",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 919,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Nähe#1",
     "en": "https://en.wiktionary.org/wiki/Nähe#German",
     "en_def": "https://en-word.net/lemma/vicinity"
+   },
+   "example": {
+    "de": "Ich habe ihn nie aus der Nähe gesehen.",
+    "en": "I've never seen him up close."
    }
   },
   {
@@ -6430,6 +7008,10 @@
     "de": "https://de.wiktionary.org/wiki/Tisch#1",
     "en": "https://en.wiktionary.org/wiki/Tisch#German",
     "en_def": "https://en-word.net/lemma/table"
+   },
+   "example": {
+    "de": "Kommt, der Tisch ist gedeckt!",
+    "en": "Come, the table is set!"
    }
   },
   {
@@ -6473,6 +7055,10 @@
     "de": "https://de.wiktionary.org/wiki/liegen#2",
     "en": "https://en.wiktionary.org/wiki/liegen#German",
     "en_def": "https://en-word.net/lemma/lie"
+   },
+   "example": {
+    "de": "Woran liegt es, dass er immer wieder scheitert?",
+    "en": "Why does he fail time and time again?"
    }
   },
   {
@@ -6497,6 +7083,10 @@
     "de": "https://de.wiktionary.org/wiki/verkaufen#1",
     "en": "https://en.wiktionary.org/wiki/verkaufen#German",
     "en_def": "https://en-word.net/lemma/sell"
+   },
+   "example": {
+    "de": "Ich möchte mein Auto verkaufen, willst du es kaufen?",
+    "en": "I want to sell my car, do you want to buy it?"
    }
   },
   {
@@ -6536,13 +7126,18 @@
     "present3": "fängt an",
     "past": "fing an",
     "participle": "angefangen",
-    "auxiliary": "haben / sein"
+    "auxiliary": "haben"
    },
+   "separable": "an",
    "freq_rank": 933,
    "source": {
     "de": "https://de.wiktionary.org/wiki/anfangen#1",
     "en": "https://en.wiktionary.org/wiki/anfangen#German",
     "en_def": "https://en-word.net/lemma/begin"
+   },
+   "example": {
+    "de": "Das Konzert fängt gleich an.",
+    "en": "The concert is beginning shortly."
    }
   },
   {
@@ -6607,6 +7202,10 @@
     "de": "https://de.wiktionary.org/wiki/geschickt#1",
     "en": "https://en.wiktionary.org/wiki/geschickt#German",
     "en_def": "https://en-word.net/lemma/skillful"
+   },
+   "example": {
+    "de": "Mit Hilfe eines geschickten Marketings wuchs das Unternehmen schnell.",
+    "en": "The company grew rapidly with the help of some clever marketing."
    }
   },
   {
@@ -6674,6 +7273,10 @@
     "de": "https://de.wiktionary.org/wiki/komisch#1",
     "en": "https://en.wiktionary.org/wiki/komisch#German",
     "en_def": "https://en-word.net/lemma/comic"
+   },
+   "example": {
+    "de": "Sie spielt selten komische Rollen.",
+    "en": "She rarely plays comedic roles."
    }
   },
   {
@@ -6787,6 +7390,10 @@
     "de": "https://de.wiktionary.org/wiki/bezahlen#1",
     "en": "https://en.wiktionary.org/wiki/bezahlen#German",
     "en_def": "https://en-word.net/lemma/pay"
+   },
+   "example": {
+    "de": "Ich möchte bitte bezahlen.",
+    "en": "I want to pay please."
    }
   },
   {
@@ -7039,6 +7646,10 @@
     "de": "https://de.wiktionary.org/wiki/zahlen#1",
     "en": "https://en.wiktionary.org/wiki/zahlen#German",
     "en_def": "https://en-word.net/lemma/pay"
+   },
+   "example": {
+    "de": "Ich muss meine Steuern zahlen.",
+    "en": "I have to pay my taxes."
    }
   },
   {
@@ -7060,6 +7671,10 @@
     "de": "https://de.wiktionary.org/wiki/Anfang#1",
     "en": "https://en.wiktionary.org/wiki/Anfang#German",
     "en_def": "https://en-word.net/lemma/beginning"
+   },
+   "example": {
+    "de": "Es ist ein guter Anfang.",
+    "en": "It's a good place to start."
    }
   },
   {
@@ -7210,6 +7825,10 @@
     "de": "https://de.wiktionary.org/wiki/Hochzeit#1",
     "en": "https://en.wiktionary.org/wiki/Hochzeit#German",
     "en_def": "https://en-word.net/lemma/marriage"
+   },
+   "example": {
+    "de": "Die Hochzeit der Oscar-Preisträgerin war tagelang Hauptthema in der Klatschpresse.",
+    "en": "The Oscar award winner’s wedding was the main topic of the yellow press for days."
    }
   },
   {
@@ -7320,6 +7939,10 @@
     "de": "https://de.wiktionary.org/wiki/benutzen#1",
     "en": "https://en.wiktionary.org/wiki/benutzen#German",
     "en_def": "https://en-word.net/lemma/use"
+   },
+   "example": {
+    "de": "Ich benutze soziale Medien, um Nachrichten zu folgen.",
+    "en": "I use social media to follow news."
    }
   },
   {
@@ -7396,6 +8019,7 @@
    "definition_en": "A high standing achieved through success or influence or wealth etc.",
    "definition_de": "Achtung, die Anerkennung und Ehrerbietung durch jemanden betreffend.",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1044,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Ansehen#6",
@@ -7415,6 +8039,7 @@
    "definition_en": "Housing that someone is living in.",
    "definition_de": "die Räumlichkeiten, in denen man wohnt",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1046,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Zuhause#1",
@@ -7545,6 +8170,10 @@
     "de": "https://de.wiktionary.org/wiki/Weile#1",
     "en": "https://en.wiktionary.org/wiki/Weile#German",
     "en_def": "https://en-word.net/lemma/while"
+   },
+   "example": {
+    "de": "Darf ich auch mal eine Weile damit fahren?",
+    "en": "Would you let me ride it for a while?"
    }
   },
   {
@@ -7564,6 +8193,10 @@
     "de": "https://de.wiktionary.org/wiki/bisher#1",
     "en": "https://en.wiktionary.org/wiki/bisher#German",
     "en_def": "https://en-word.net/lemma/until%20now"
+   },
+   "example": {
+    "de": "Wir wissen bisher noch nichts.",
+    "en": "As yet, we still don't know anything."
    }
   },
   {
@@ -7673,6 +8306,10 @@
     "de": "https://de.wiktionary.org/wiki/müde#1",
     "en": "https://en.wiktionary.org/wiki/müde#German",
     "en_def": "https://en-word.net/lemma/tired"
+   },
+   "example": {
+    "de": "Die müden Kinder gingen ins Bett.",
+    "en": "The tired children went to bed."
    }
   },
   {
@@ -7876,6 +8513,7 @@
    "definition_en": "The trait of being cautious; being attentive to possible danger.",
    "definition_de": "Verhalten, bei dem man versucht, durch Wachsamkeit und/oder Zurückhaltung negative Folgen oder Schäden zu vermeiden",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1107,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Vorsicht#1",
@@ -7924,6 +8562,10 @@
     "de": "https://de.wiktionary.org/wiki/zumindest#1",
     "en": "https://en.wiktionary.org/wiki/zumindest#German",
     "en_def": "https://en-word.net/lemma/at%20least"
+   },
+   "example": {
+    "de": "Du brauchst zumindest einen Führerschein, um Auto zu fahren.",
+    "en": "You need at least a driving license to drive a car."
    }
   },
   {
@@ -7989,6 +8631,10 @@
     "de": "https://de.wiktionary.org/wiki/tief#1",
     "en": "https://en.wiktionary.org/wiki/tief#German",
     "en_def": "https://en-word.net/lemma/deep"
+   },
+   "example": {
+    "de": "Wie tief ist das Wasser?",
+    "en": "How deep is the water?"
    }
   },
   {
@@ -8010,6 +8656,10 @@
     "de": "https://de.wiktionary.org/wiki/Richtung#1",
     "en": "https://en.wiktionary.org/wiki/Richtung#German",
     "en_def": "https://en-word.net/lemma/direction"
+   },
+   "example": {
+    "de": "Aus welcher Richtung?",
+    "en": "From which direction?"
    }
   },
   {
@@ -8053,6 +8703,10 @@
     "de": "https://de.wiktionary.org/wiki/Lauf#1",
     "en": "https://en.wiktionary.org/wiki/Lauf#German",
     "en_def": "https://en-word.net/lemma/run"
+   },
+   "example": {
+    "de": "Sie wurde Erste beim Lauf um den See.",
+    "en": "She became a winner at the race around the lake."
    }
   },
   {
@@ -8107,6 +8761,7 @@
    "definition_en": "A physiological need for food; the consequence of food deprivation.",
    "definition_de": "Verlangen nach Essen",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1132,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Hunger#1",
@@ -8239,6 +8894,10 @@
     "de": "https://de.wiktionary.org/wiki/Rücken#1",
     "en": "https://en.wiktionary.org/wiki/Rücken#German",
     "en_def": "https://en-word.net/lemma/back"
+   },
+   "example": {
+    "de": "Mir tut der Rücken weh.",
+    "en": "My back hurts."
    }
   },
   {
@@ -8307,6 +8966,10 @@
     "de": "https://de.wiktionary.org/wiki/öffnen#1",
     "en": "https://en.wiktionary.org/wiki/öffnen#German",
     "en_def": "https://en-word.net/lemma/open"
+   },
+   "example": {
+    "de": "Das Kind öffnete die Fenster.",
+    "en": "The child opened the windows."
    }
   },
   {
@@ -8433,6 +9096,10 @@
     "de": "https://de.wiktionary.org/wiki/erwarten#1",
     "en": "https://en.wiktionary.org/wiki/erwarten#German",
     "en_def": "https://en-word.net/lemma/await"
+   },
+   "example": {
+    "de": "Keine Sorge, ich erwarte, dass bald Hilfe kommt.",
+    "en": "Don't worry, I'm expecting help to arrive soon."
    }
   },
   {
@@ -8536,11 +9203,16 @@
     "participle": "ausgesehen",
     "auxiliary": "haben"
    },
+   "separable": "aus",
    "freq_rank": 1173,
    "source": {
     "de": "https://de.wiktionary.org/wiki/aussehen#1",
     "en": "https://en.wiktionary.org/wiki/aussehen#German",
     "en_def": "https://en-word.net/lemma/look"
+   },
+   "example": {
+    "de": "Du siehst müde aus.",
+    "en": "You look tired."
    }
   },
   {
@@ -8589,6 +9261,10 @@
     "de": "https://de.wiktionary.org/wiki/erreichen#1",
     "en": "https://en.wiktionary.org/wiki/erreichen#German",
     "en_def": "https://en-word.net/lemma/reach"
+   },
+   "example": {
+    "de": "Sie kann das Regal nicht erreichen.",
+    "en": "She can't reach the shelf."
    }
   },
   {
@@ -8632,6 +9308,10 @@
     "de": "https://de.wiktionary.org/wiki/reich#1",
     "en": "https://en.wiktionary.org/wiki/reich#German",
     "en_def": "https://en-word.net/lemma/rich"
+   },
+   "example": {
+    "de": "Sie ist sehr reich.",
+    "en": "She’s very rich."
    }
   },
   {
@@ -8823,6 +9503,10 @@
     "de": "https://de.wiktionary.org/wiki/Sonne#1",
     "en": "https://en.wiktionary.org/wiki/Sonne#German",
     "en_def": "https://en-word.net/lemma/sun"
+   },
+   "example": {
+    "de": "Wir hatten den ganzen Tag Sonne.",
+    "en": "We had sunshine all day."
    }
   },
   {
@@ -8845,6 +9529,10 @@
     "de": "https://de.wiktionary.org/wiki/lieb#2",
     "en": "https://en.wiktionary.org/wiki/lieb#German",
     "en_def": "https://en-word.net/lemma/dear"
+   },
+   "example": {
+    "de": "Danke! Das ist sehr lieb von dir.",
+    "en": "Thank you! That's very sweet of you."
    }
   },
   {
@@ -9266,6 +9954,10 @@
     "de": "https://de.wiktionary.org/wiki/Heim#1",
     "en": "https://en.wiktionary.org/wiki/Heim#German",
     "en_def": "https://en-word.net/lemma/home"
+   },
+   "example": {
+    "de": "Am wohlsten fühlt er sich im trauten Heim.",
+    "en": "He feels most comfortable in his sweet home."
    }
   },
   {
@@ -9290,6 +9982,10 @@
     "de": "https://de.wiktionary.org/wiki/antworten#1",
     "en": "https://en.wiktionary.org/wiki/antworten#German",
     "en_def": "https://en-word.net/lemma/answer"
+   },
+   "example": {
+    "de": "Der König antwortete: „Wenn es einen solchen Menschen gibt, dann muss er verrückt sein.”",
+    "en": "The King answered, \"If such a man exists, he must be mad.\""
    }
   },
   {
@@ -9311,6 +10007,10 @@
     "de": "https://de.wiktionary.org/wiki/Hoffnung#1",
     "en": "https://en.wiktionary.org/wiki/Hoffnung#German",
     "en_def": "https://en-word.net/lemma/hope"
+   },
+   "example": {
+    "de": "Ich habe immer noch die Hoffnung diesen Arbeitsplatz zu bekommen.",
+    "en": "I still have hope that I can get this job."
    }
   },
   {
@@ -9335,6 +10035,10 @@
     "de": "https://de.wiktionary.org/wiki/stecken#1",
     "en": "https://en.wiktionary.org/wiki/stecken#German",
     "en_def": "https://en-word.net/lemma/stick"
+   },
+   "example": {
+    "de": "Die Katze steckt im Baum.",
+    "en": "The cat is stuck in the tree."
    }
   },
   {
@@ -9381,6 +10085,10 @@
     "de": "https://de.wiktionary.org/wiki/entscheiden#1",
     "en": "https://en.wiktionary.org/wiki/entscheiden#German",
     "en_def": "https://en-word.net/lemma/decide"
+   },
+   "example": {
+    "de": "Ich habe mich für den Deutschkurs entschieden.",
+    "en": "I have decided to take the German course."
    }
   },
   {
@@ -9395,6 +10103,7 @@
    "definition_en": "Affectionate closeness.",
    "definition_de": "kooperatives Zusammenleben, -sein",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1289,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Miteinander#1",
@@ -9424,6 +10133,10 @@
     "de": "https://de.wiktionary.org/wiki/wohnen#1",
     "en": "https://en.wiktionary.org/wiki/wohnen#German",
     "en_def": "https://en-word.net/lemma/reside"
+   },
+   "example": {
+    "de": "Ich wohne in Berlin.",
+    "en": "I live in Berlin."
    }
   },
   {
@@ -9445,6 +10158,10 @@
     "de": "https://de.wiktionary.org/wiki/Möglichkeit#1",
     "en": "https://en.wiktionary.org/wiki/Möglichkeit#German",
     "en_def": "https://en-word.net/lemma/option"
+   },
+   "example": {
+    "de": "Das wäre bestimmt eine Möglichkeit.",
+    "en": "That would definitely be a possibility."
    }
   },
   {
@@ -9467,6 +10184,10 @@
     "de": "https://de.wiktionary.org/wiki/kaputt#1",
     "en": "https://en.wiktionary.org/wiki/kaputt#German",
     "en_def": "https://en-word.net/lemma/broken"
+   },
+   "example": {
+    "de": "Das Auto ist kaputt.",
+    "en": "The car is broken."
    }
   },
   {
@@ -9638,6 +10359,10 @@
     "de": "https://de.wiktionary.org/wiki/Gesellschaft#1",
     "en": "https://en.wiktionary.org/wiki/Gesellschaft#German",
     "en_def": "https://en-word.net/lemma/society"
+   },
+   "example": {
+    "de": "Die Goethe-Gesellschaft lädt zur Lesung.",
+    "en": "The Goethe Society invites you to a reading."
    }
   },
   {
@@ -9662,6 +10387,10 @@
     "de": "https://de.wiktionary.org/wiki/verstecken#1",
     "en": "https://en.wiktionary.org/wiki/verstecken#German",
     "en_def": "https://en-word.net/lemma/hide"
+   },
+   "example": {
+    "de": "Wo versteckst du dich?",
+    "en": "Where are you hiding?"
    }
   },
   {
@@ -9684,6 +10413,10 @@
     "de": "https://de.wiktionary.org/wiki/schuldig#1",
     "en": "https://en.wiktionary.org/wiki/schuldig#German",
     "en_def": "https://en-word.net/lemma/guilty"
+   },
+   "example": {
+    "de": "Er wurde des Mordes schuldig befunden und zum Tode verurteilt.",
+    "en": "He was found guilty of murder and sentenced to death."
    }
   },
   {
@@ -9729,6 +10462,10 @@
     "de": "https://de.wiktionary.org/wiki/schützen#1",
     "en": "https://en.wiktionary.org/wiki/schützen#German",
     "en_def": "https://en-word.net/lemma/protect"
+   },
+   "example": {
+    "de": "Die Götter schützen die guten Leute.",
+    "en": "Gods protect good people."
    }
   },
   {
@@ -9753,6 +10490,10 @@
     "de": "https://de.wiktionary.org/wiki/passen#1",
     "en": "https://en.wiktionary.org/wiki/passen#German",
     "en_def": "https://en-word.net/lemma/fit"
+   },
+   "example": {
+    "de": "Diese Schuhe passen mir nicht.",
+    "en": "Those shoes don't fit me."
    }
   },
   {
@@ -9801,6 +10542,10 @@
     "de": "https://de.wiktionary.org/wiki/erhalten#1",
     "en": "https://en.wiktionary.org/wiki/erhalten#German",
     "en_def": "https://en-word.net/lemma/receive"
+   },
+   "example": {
+    "de": "Ich habe diese Kaffeemaschine als Geschenk erhalten.",
+    "en": "I received this coffeemaker as a gift."
    }
   },
   {
@@ -9888,6 +10633,10 @@
     "de": "https://de.wiktionary.org/wiki/Zeichen#1",
     "en": "https://en.wiktionary.org/wiki/Zeichen#German",
     "en_def": "https://en-word.net/lemma/sign"
+   },
+   "example": {
+    "de": "Sie gab mir ihr Taschentuch als Zeichen ihrer Liebe.",
+    "en": "She gave me her handkerchief as a token of her love."
    }
   },
   {
@@ -9973,6 +10722,10 @@
     "de": "https://de.wiktionary.org/wiki/Vergnügen#1",
     "en": "https://en.wiktionary.org/wiki/Vergnügen#German",
     "en_def": "https://en-word.net/lemma/pleasure"
+   },
+   "example": {
+    "de": "Es ist ein Vergnügen, Sie kennenzulernen.",
+    "en": "It's a pleasure to meet you."
    }
   },
   {
@@ -10013,6 +10766,7 @@
     "participle": "herausgefunden",
     "auxiliary": "haben"
    },
+   "separable": "heraus",
    "freq_rank": 1347,
    "source": {
     "de": "https://de.wiktionary.org/wiki/herausfinden#1",
@@ -10042,6 +10796,10 @@
     "de": "https://de.wiktionary.org/wiki/feiern#1",
     "en": "https://en.wiktionary.org/wiki/feiern#German",
     "en_def": "https://en-word.net/lemma/celebrate"
+   },
+   "example": {
+    "de": "In dieser Kirche wird jeden Abend die Heilige Messe gefeiert.",
+    "en": "In this church, Holy Mass is celebrated every evening."
    }
   },
   {
@@ -10063,6 +10821,10 @@
     "de": "https://de.wiktionary.org/wiki/Situation#1",
     "en": "https://en.wiktionary.org/wiki/Situation#German",
     "en_def": "https://en-word.net/lemma/situation"
+   },
+   "example": {
+    "de": "Schade, dass diese Situation eingetreten ist.",
+    "en": "It is a pity that such a situation has occurred."
    }
   },
   {
@@ -10162,6 +10924,7 @@
    "definition_en": "The condition of being honored (esteemed or respected or well regarded)",
    "definition_de": "Respekt, Ehrfurcht und/oder Wertschätzung vor jemandem oder etwas",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1372,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Achtung#1",
@@ -10297,6 +11060,10 @@
     "de": "https://de.wiktionary.org/wiki/verantwortlich#1",
     "en": "https://en.wiktionary.org/wiki/verantwortlich#German",
     "en_def": "https://en-word.net/lemma/responsible"
+   },
+   "example": {
+    "de": "Ich bin dafür verantwortlich, den Fortschritt zu bewerten.",
+    "en": "I have the responsibility to evaluate its progress."
    }
   },
   {
@@ -10342,6 +11109,10 @@
     "de": "https://de.wiktionary.org/wiki/zerstören#1",
     "en": "https://en.wiktionary.org/wiki/zerstören#German",
     "en_def": "https://en-word.net/lemma/destroy"
+   },
+   "example": {
+    "de": "Der Alkohol hat seine Gesundheit zerstört.",
+    "en": "Alcohol has destroyed his health."
    }
   },
   {
@@ -10448,6 +11219,10 @@
     "de": "https://de.wiktionary.org/wiki/beginnen#1",
     "en": "https://en.wiktionary.org/wiki/beginnen#German",
     "en_def": "https://en-word.net/lemma/begin"
+   },
+   "example": {
+    "de": "Der Vortrag hat begonnen.",
+    "en": "The lecture has begun."
    }
   },
   {
@@ -10488,6 +11263,10 @@
     "de": "https://de.wiktionary.org/wiki/Aufgabe#1",
     "en": "https://en.wiktionary.org/wiki/Aufgabe#German",
     "en_def": "https://en-word.net/lemma/task"
+   },
+   "example": {
+    "de": "Sie hat es sich zur Aufgabe gemacht, ihren Garten insektenfreundlich zu gestalten.",
+    "en": "She’s made it her mission to shape her garden in an insect-friendly way."
    }
   },
   {
@@ -10569,6 +11348,10 @@
     "de": "https://de.wiktionary.org/wiki/zuvor#1",
     "en": "https://en.wiktionary.org/wiki/zuvor#German",
     "en_def": "https://en-word.net/lemma/previously"
+   },
+   "example": {
+    "de": "Sie trug wesentlich dazu bei, dass der zuvor beliebte König in Ungnade fiel.",
+    "en": "She contributed greatly to the fall from grace of the previously popular king."
    }
   },
   {
@@ -10630,6 +11413,10 @@
     "de": "https://de.wiktionary.org/wiki/Freude#1",
     "en": "https://en.wiktionary.org/wiki/Freude#German",
     "en_def": "https://en-word.net/lemma/joy"
+   },
+   "example": {
+    "de": "Große Freude kommt auf.",
+    "en": "Great joy is erupting."
    }
   },
   {
@@ -10739,6 +11526,10 @@
     "de": "https://de.wiktionary.org/wiki/Brauch#1",
     "en": "https://en.wiktionary.org/wiki/Brauch#German",
     "en_def": "https://en-word.net/lemma/custom"
+   },
+   "example": {
+    "de": "Bei uns ist es Brauch, die Braut über die Schwelle zu tragen.",
+    "en": "Here it is a custom to carry the bride over the threshold."
    }
   },
   {
@@ -10761,6 +11552,10 @@
     "de": "https://de.wiktionary.org/wiki/übel#1",
     "en": "https://en.wiktionary.org/wiki/übel#German",
     "en_def": "https://en-word.net/lemma/bad"
+   },
+   "example": {
+    "de": "Der Gesang war wirklich übel.",
+    "en": "The singing was really very bad."
    }
   },
   {
@@ -10782,6 +11577,10 @@
     "de": "https://de.wiktionary.org/wiki/Übel#1",
     "en": "https://en.wiktionary.org/wiki/Übel#German",
     "en_def": "https://en-word.net/lemma/evil"
+   },
+   "example": {
+    "de": "Du musst das kleinere Übel wählen.",
+    "en": "You must choose the lesser evil."
    }
   },
   {
@@ -10796,6 +11595,7 @@
    "definition_en": "A message that seems to convey no meaning.",
    "definition_de": "etwas, das keinen Sinn hat",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1451,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Unsinn#1",
@@ -10868,6 +11668,10 @@
     "de": "https://de.wiktionary.org/wiki/bedeuten#1",
     "en": "https://en.wiktionary.org/wiki/bedeuten#German",
     "en_def": "https://en-word.net/lemma/mean"
+   },
+   "example": {
+    "de": "Ein klarer Himmel bedeutet eine kalte Nacht.",
+    "en": "A clear sky means a cold night."
    }
   },
   {
@@ -10889,6 +11693,10 @@
     "de": "https://de.wiktionary.org/wiki/Hälfte#1",
     "en": "https://en.wiktionary.org/wiki/Hälfte#German",
     "en_def": "https://en-word.net/lemma/half"
+   },
+   "example": {
+    "de": "Jeder von uns kriegt die Hälfte.",
+    "en": "Each of us gets half."
    }
   },
   {
@@ -10908,6 +11716,10 @@
     "de": "https://de.wiktionary.org/wiki/schwanger#1",
     "en": "https://en.wiktionary.org/wiki/schwanger#German",
     "en_def": "https://en-word.net/lemma/pregnant"
+   },
+   "example": {
+    "de": "Sie ist schwanger von ihrem Mann Peter mit ihrem dritten Kind.",
+    "en": "She is pregnant from her husband Peter with her third child."
    }
   },
   {
@@ -10974,6 +11786,10 @@
     "de": "https://de.wiktionary.org/wiki/drehen#1",
     "en": "https://en.wiktionary.org/wiki/drehen#German",
     "en_def": "https://en-word.net/lemma/turn"
+   },
+   "example": {
+    "de": "Dreh den Spiegel etwas nach links!",
+    "en": "Turn the mirror a little to the left!"
    }
   },
   {
@@ -11017,6 +11833,10 @@
     "de": "https://de.wiktionary.org/wiki/danken#1",
     "en": "https://en.wiktionary.org/wiki/danken#German",
     "en_def": "https://en-word.net/lemma/thank"
+   },
+   "example": {
+    "de": "Peter hat Michaela mit einem großen Blumenstrauß gedankt.",
+    "en": "Peter thanked Michaela with a big bouquet."
    }
   },
   {
@@ -11038,6 +11858,10 @@
     "de": "https://de.wiktionary.org/wiki/Erfolg#1",
     "en": "https://en.wiktionary.org/wiki/Erfolg#German",
     "en_def": "https://en-word.net/lemma/success"
+   },
+   "example": {
+    "de": "Das Projekt ist ein großer Erfolg.",
+    "en": "The project is a great success."
    }
   },
   {
@@ -11060,6 +11884,10 @@
     "de": "https://de.wiktionary.org/wiki/zufrieden#1",
     "en": "https://en.wiktionary.org/wiki/zufrieden#German",
     "en_def": "https://en-word.net/lemma/satisfied"
+   },
+   "example": {
+    "de": "Bist du mit deiner neuen Wohnung zufrieden?",
+    "en": "Are you satisfied with your new apartment?"
    }
   },
   {
@@ -11084,6 +11912,10 @@
     "de": "https://de.wiktionary.org/wiki/schließen#1",
     "en": "https://en.wiktionary.org/wiki/schließen#German",
     "en_def": "https://en-word.net/lemma/shut"
+   },
+   "example": {
+    "de": "Das Geschäft schließt um 18.00 Uhr.",
+    "en": "The store closes at 6 p.m."
    }
   },
   {
@@ -11150,6 +11982,10 @@
     "de": "https://de.wiktionary.org/wiki/Bericht#1",
     "en": "https://en.wiktionary.org/wiki/Bericht#German",
     "en_def": "https://en-word.net/lemma/report"
+   },
+   "example": {
+    "de": "Glücklicherweise liegen keine Berichte über Unfallopfer vor.",
+    "en": "Fortunately, there are no reports of accident victims."
    }
   },
   {
@@ -11192,6 +12028,10 @@
     "de": "https://de.wiktionary.org/wiki/Schmerz#1",
     "en": "https://en.wiktionary.org/wiki/Schmerz#German",
     "en_def": "https://en-word.net/lemma/ache"
+   },
+   "example": {
+    "de": "Haben Sie Schmerzen?",
+    "en": "Do you feel pain?"
    }
   },
   {
@@ -11227,6 +12067,7 @@
    "definition_en": "Broadcasting visual images of stationary or moving objects.",
    "definition_de": "das analoge und digitale Senden, Empfangen und die Technik der Bild- und Tonübertragung im Allgemeinen",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1504,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Fernsehen#1",
@@ -11251,6 +12092,10 @@
     "de": "https://de.wiktionary.org/wiki/schließlich#1",
     "en": "https://en.wiktionary.org/wiki/schließlich#German",
     "en_def": "https://en-word.net/lemma/finally"
+   },
+   "example": {
+    "de": "Es freut mich, Sie schließlich zu treffen.",
+    "en": "I'm glad to finally meet you."
    }
   },
   {
@@ -11294,6 +12139,10 @@
     "de": "https://de.wiktionary.org/wiki/Angebot#1",
     "en": "https://en.wiktionary.org/wiki/Angebot#German",
     "en_def": "https://en-word.net/lemma/offer"
+   },
+   "example": {
+    "de": "Es liegt ein neues Angebot auf dem Tisch.",
+    "en": "There is a new offer on the table."
    }
   },
   {
@@ -11316,6 +12165,10 @@
     "de": "https://de.wiktionary.org/wiki/nah#1",
     "en": "https://en.wiktionary.org/wiki/nah#German",
     "en_def": "https://en-word.net/lemma/near"
+   },
+   "example": {
+    "de": "Ich plane in naher Zukunft eine Reise nach Deutschland.",
+    "en": "I'm planning a trip to Germany in the near future."
    }
   },
   {
@@ -11337,6 +12190,10 @@
     "de": "https://de.wiktionary.org/wiki/Rennen#1",
     "en": "https://en.wiktionary.org/wiki/Rennen#German",
     "en_def": "https://en-word.net/lemma/race"
+   },
+   "example": {
+    "de": "Nur ein Sportler kann dieses Rennen gewinnen.",
+    "en": "Only one sportsman can win in this race."
    }
   },
   {
@@ -11361,6 +12218,10 @@
     "de": "https://de.wiktionary.org/wiki/rennen#1",
     "en": "https://en.wiktionary.org/wiki/rennen#German",
     "en_def": "https://en-word.net/lemma/run"
+   },
+   "example": {
+    "de": "So schnell wie Mike rennt niemand in der Klasse.",
+    "en": "In this class, nobody runs as fast as Mike."
    }
   },
   {
@@ -11427,6 +12288,10 @@
     "de": "https://de.wiktionary.org/wiki/dauern#1",
     "en": "https://en.wiktionary.org/wiki/dauern#German",
     "en_def": "https://en-word.net/lemma/last"
+   },
+   "example": {
+    "de": "Der Film dauert zwei Stunden.",
+    "en": "The movie lasts two hours."
    }
   },
   {
@@ -11555,6 +12420,10 @@
     "de": "https://de.wiktionary.org/wiki/halb#1",
     "en": "https://en.wiktionary.org/wiki/halb#German",
     "en_def": "https://en-word.net/lemma/half"
+   },
+   "example": {
+    "de": "Er ist seit einem halben Monat nicht mehr hier gewesen.",
+    "en": "He hasn’t been here for half a month."
    }
   },
   {
@@ -11667,6 +12536,10 @@
     "de": "https://de.wiktionary.org/wiki/versprechen#1",
     "en": "https://en.wiktionary.org/wiki/versprechen#German",
     "en_def": "https://en-word.net/lemma/promise"
+   },
+   "example": {
+    "de": "Ich verspreche es dir.",
+    "en": "I promise you."
    }
   },
   {
@@ -11712,6 +12585,10 @@
     "de": "https://de.wiktionary.org/wiki/verdienen#1",
     "en": "https://en.wiktionary.org/wiki/verdienen#German",
     "en_def": "https://en-word.net/lemma/earn"
+   },
+   "example": {
+    "de": "Ich verdiene viel Geld bei meinem Job.",
+    "en": "I make a lot of money at my job."
    }
   },
   {
@@ -11757,6 +12634,10 @@
     "de": "https://de.wiktionary.org/wiki/Schaden#1",
     "en": "https://en.wiktionary.org/wiki/Schaden#German",
     "en_def": "https://en-word.net/lemma/damage"
+   },
+   "example": {
+    "de": "Das Auto hat einen Schaden.",
+    "en": "The car is damaged."
    }
   },
   {
@@ -11781,6 +12662,10 @@
     "de": "https://de.wiktionary.org/wiki/beenden#1",
     "en": "https://en.wiktionary.org/wiki/beenden#German",
     "en_def": "https://en-word.net/lemma/end"
+   },
+   "example": {
+    "de": "Die Ankündigung beendete die Spekulationen über die Zukunft des Unternehmens.",
+    "en": "The announcement put an end to speculation about the company's future."
    }
   },
   {
@@ -11864,6 +12749,7 @@
    "definition_en": "The soft tissue of the body of a vertebrate: mainly muscle tissue and fat.",
    "definition_de": "Muskel- und häufig auch Fettgewebe",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1582,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Fleisch#1",
@@ -11893,6 +12779,10 @@
     "de": "https://de.wiktionary.org/wiki/reichen#1",
     "en": "https://en.wiktionary.org/wiki/reichen#German",
     "en_def": "https://en-word.net/lemma/hand"
+   },
+   "example": {
+    "de": "Bitte reich mir die Butter.",
+    "en": "Please pass the butter."
    }
   },
   {
@@ -12002,6 +12892,10 @@
     "de": "https://de.wiktionary.org/wiki/leiden#1",
     "en": "https://en.wiktionary.org/wiki/leiden#German",
     "en_def": "https://en-word.net/lemma/suffer"
+   },
+   "example": {
+    "de": "Lerne leiden ohne zu klagen.",
+    "en": "Learn to suffer without complaining."
    }
   },
   {
@@ -12023,6 +12917,10 @@
     "de": "https://de.wiktionary.org/wiki/See#1",
     "en": "https://en.wiktionary.org/wiki/See#German",
     "en_def": "https://en-word.net/lemma/lake"
+   },
+   "example": {
+    "de": "Dieser See ist sehr klein.",
+    "en": "This lake is very small."
    }
   },
   {
@@ -12044,6 +12942,10 @@
     "de": "https://de.wiktionary.org/wiki/Unterschied#1",
     "en": "https://en.wiktionary.org/wiki/Unterschied#German",
     "en_def": "https://en-word.net/lemma/difference"
+   },
+   "example": {
+    "de": "Was ist der Unterschied zwischen Männern und Frauen?",
+    "en": "What is the difference between men and women?"
    }
   },
   {
@@ -12089,6 +12991,10 @@
     "de": "https://de.wiktionary.org/wiki/schreien#1",
     "en": "https://en.wiktionary.org/wiki/schreien#German",
     "en_def": "https://en-word.net/lemma/scream"
+   },
+   "example": {
+    "de": "Warum schreist du?",
+    "en": "Why are you shouting?"
    }
   },
   {
@@ -12132,6 +13038,10 @@
     "de": "https://de.wiktionary.org/wiki/verhalten#1",
     "en": "https://en.wiktionary.org/wiki/verhalten#German",
     "en_def": "https://en-word.net/lemma/subdued"
+   },
+   "example": {
+    "de": "Das Publikum bedachte die Rede mit verhaltenem Applaus.",
+    "en": "The audience received the speech with subdued applause."
    }
   },
   {
@@ -12151,6 +13061,7 @@
     "participle": "verhalten",
     "auxiliary": "haben"
    },
+   "reflexive": true,
    "freq_rank": 1608,
    "source": {
     "de": "https://de.wiktionary.org/wiki/verhalten#2",
@@ -12201,6 +13112,10 @@
     "de": "https://de.wiktionary.org/wiki/treten#1",
     "en": "https://en.wiktionary.org/wiki/treten#German",
     "en_def": "https://en-word.net/lemma/step"
+   },
+   "example": {
+    "de": "Bitte treten Sie hierher.",
+    "en": "Please step over here."
    }
   },
   {
@@ -12331,6 +13246,10 @@
     "de": "https://de.wiktionary.org/wiki/blöd#1",
     "en": "https://en.wiktionary.org/wiki/blöd#German",
     "en_def": "https://en-word.net/lemma/stupid"
+   },
+   "example": {
+    "de": "Ich finde einfach den blöden Schlüssel nicht!",
+    "en": "I just can't find this stupid key!"
    }
   },
   {
@@ -12352,6 +13271,10 @@
     "de": "https://de.wiktionary.org/wiki/Frühstück#1",
     "en": "https://en.wiktionary.org/wiki/Frühstück#German",
     "en_def": "https://en-word.net/lemma/breakfast"
+   },
+   "example": {
+    "de": "Gewöhnlich essen sie ihr Frühstück im Bett.",
+    "en": "They usually have their breakfast in bed."
    }
   },
   {
@@ -12371,11 +13294,16 @@
     "participle": "aufgepasst",
     "auxiliary": "haben"
    },
+   "separable": "auf",
    "freq_rank": 1637,
    "source": {
     "de": "https://de.wiktionary.org/wiki/aufpassen#2",
     "en": "https://en.wiktionary.org/wiki/aufpassen#German",
     "en_def": "https://en-word.net/lemma/take%20care"
+   },
+   "example": {
+    "de": "Könntest du kurz auf meinen Hund aufpassen?",
+    "en": "Could you look after my dog for a moment?"
    }
   },
   {
@@ -12567,6 +13495,10 @@
     "de": "https://de.wiktionary.org/wiki/Lösung#1",
     "en": "https://en.wiktionary.org/wiki/Lösung#German",
     "en_def": "https://en-word.net/lemma/answer"
+   },
+   "example": {
+    "de": "Alkohol ist keine Lösung für ein Problem.",
+    "en": "Alcohol is not a solution to a problem."
    }
   },
   {
@@ -12610,6 +13542,10 @@
     "de": "https://de.wiktionary.org/wiki/irre#1",
     "en": "https://en.wiktionary.org/wiki/irre#German",
     "en_def": "https://en-word.net/lemma/insane"
+   },
+   "example": {
+    "de": "Sag mal, bist du völlig irre geworden?",
+    "en": "Tell me, did you become completely insane?"
    }
   },
   {
@@ -12701,6 +13637,10 @@
     "de": "https://de.wiktionary.org/wiki/nutzen#1",
     "en": "https://en.wiktionary.org/wiki/nutzen#German",
     "en_def": "https://en-word.net/lemma/use"
+   },
+   "example": {
+    "de": "Du solltest deine Talente nutzen.",
+    "en": "You should make use of your talents."
    }
   },
   {
@@ -12725,6 +13665,10 @@
     "de": "https://de.wiktionary.org/wiki/wünschen#1",
     "en": "https://en.wiktionary.org/wiki/wünschen#German",
     "en_def": "https://en-word.net/lemma/wish"
+   },
+   "example": {
+    "de": "Ich wünsche mir ein Meerschweinchen.",
+    "en": "I want a guinea pig."
    }
   },
   {
@@ -12746,6 +13690,10 @@
     "de": "https://de.wiktionary.org/wiki/Verantwortung#1",
     "en": "https://en.wiktionary.org/wiki/Verantwortung#German",
     "en_def": "https://en-word.net/lemma/responsibility"
+   },
+   "example": {
+    "de": "Diese Verantwortung kann dir niemand abnehmen.",
+    "en": "Nobody can take this responsibility away from you."
    }
   },
   {
@@ -12857,6 +13805,10 @@
     "de": "https://de.wiktionary.org/wiki/kosten#1",
     "en": "https://en.wiktionary.org/wiki/kosten#German",
     "en_def": "https://en-word.net/lemma/cost"
+   },
+   "example": {
+    "de": "Was kostet das alles?",
+    "en": "What does all this cost?"
    }
   },
   {
@@ -12966,6 +13918,10 @@
     "de": "https://de.wiktionary.org/wiki/dankbar#1",
     "en": "https://en.wiktionary.org/wiki/dankbar#German",
     "en_def": "https://en-word.net/lemma/grateful"
+   },
+   "example": {
+    "de": "Ich bin sicher, er war dir dafür dankbar.",
+    "en": "I'm sure he's grateful to you."
    }
   },
   {
@@ -12987,6 +13943,10 @@
     "de": "https://de.wiktionary.org/wiki/Gehirn#1",
     "en": "https://en.wiktionary.org/wiki/Gehirn#German",
     "en_def": "https://en-word.net/lemma/brain"
+   },
+   "example": {
+    "de": "Das Gehirn benötigt Sauerstoff, um zu funktionieren.",
+    "en": "The brain needs oxygen in order to function."
    }
   },
   {
@@ -13001,11 +13961,16 @@
    "definition_en": "A quality of spirit that enables you to face danger or pain without showing fear.",
    "definition_de": "Geisteshaltung, bei der Handlungen in einer gefährlichen, kritischen oder waghalsigen Situation energisch und furchtlos ausgeführt werden",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1718,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Mut#1",
     "en": "https://en.wiktionary.org/wiki/Mut#German",
     "en_def": "https://en-word.net/lemma/courage"
+   },
+   "example": {
+    "de": "Ich wünschte, ich hätte den Mut, auf einer Bühne vor Publikum zu sprechen.",
+    "en": "I wish I had the courage to speak on stage before an audience."
    }
   },
   {
@@ -13041,6 +14006,7 @@
    "definition_en": "Relatively permanent disorder of the mind.",
    "definition_de": "bestimmte Verhaltens- oder Denkmuster; historisch und umgangssprachlich auch Geisteskrankheit, bei der man nicht mehr für zurechnungsfähig gehalten wurde",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1724,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Wahnsinn#1",
@@ -13131,6 +14097,10 @@
     "de": "https://de.wiktionary.org/wiki/Thema#1",
     "en": "https://en.wiktionary.org/wiki/Thema#German",
     "en_def": "https://en-word.net/lemma/topic"
+   },
+   "example": {
+    "de": "Das Thema hatten wir schon.",
+    "en": "We've already talked about this (subject)."
    }
   },
   {
@@ -13193,6 +14163,10 @@
     "de": "https://de.wiktionary.org/wiki/überprüfen#1",
     "en": "https://en.wiktionary.org/wiki/überprüfen#German",
     "en_def": "https://en-word.net/lemma/check"
+   },
+   "example": {
+    "de": "Das gehört überprüft.",
+    "en": "That needs to be checked."
    }
   },
   {
@@ -13235,6 +14209,10 @@
     "de": "https://de.wiktionary.org/wiki/Baum#1",
     "en": "https://en.wiktionary.org/wiki/Baum#German",
     "en_def": "https://en-word.net/lemma/tree"
+   },
+   "example": {
+    "de": "Vögel nisten gern in Bäumen.",
+    "en": "Birds like to nest in trees."
    }
   },
   {
@@ -13254,6 +14232,10 @@
     "de": "https://de.wiktionary.org/wiki/anscheinend#1",
     "en": "https://en.wiktionary.org/wiki/anscheinend#German",
     "en_def": "https://en-word.net/lemma/apparently"
+   },
+   "example": {
+    "de": "Anscheinend wird es heute nicht regnen.",
+    "en": "Apparently it will not rain today"
    }
   },
   {
@@ -13278,6 +14260,10 @@
     "de": "https://de.wiktionary.org/wiki/hoffen#1",
     "en": "https://en.wiktionary.org/wiki/hoffen#German",
     "en_def": "https://en-word.net/lemma/hope"
+   },
+   "example": {
+    "de": "Ich hoffe auf eine vollständige Heilung.",
+    "en": "I hope for a complete cure."
    }
   },
   {
@@ -13341,6 +14327,10 @@
     "de": "https://de.wiktionary.org/wiki/Fräulein#1",
     "en": "https://en.wiktionary.org/wiki/Fräulein#German",
     "en_def": "https://en-word.net/lemma/miss"
+   },
+   "example": {
+    "de": "Würden Sie mir kurz helfen, junges Fräulein!",
+    "en": "Would you help me please, miss!"
    }
   },
   {
@@ -13495,6 +14485,10 @@
     "de": "https://de.wiktionary.org/wiki/hinterlassen#2",
     "en": "https://en.wiktionary.org/wiki/hinterlassen#German",
     "en_def": "https://en-word.net/lemma/leave"
+   },
+   "example": {
+    "de": "Der Hirsch hinterließ Spuren im Schnee.",
+    "en": "The deer left tracks in the snow."
    }
   },
   {
@@ -13625,6 +14619,10 @@
     "de": "https://de.wiktionary.org/wiki/City#1",
     "en": "https://en.wiktionary.org/wiki/City#German",
     "en_def": "https://en-word.net/lemma/downtown"
+   },
+   "example": {
+    "de": "Wir fahren heute Nachmittag in die City.",
+    "en": "We’re going downtown this afternoon."
    }
   },
   {
@@ -13710,6 +14708,10 @@
     "de": "https://de.wiktionary.org/wiki/Natur#1",
     "en": "https://en.wiktionary.org/wiki/Natur#German",
     "en_def": "https://en-word.net/lemma/nature"
+   },
+   "example": {
+    "de": "Wissenschaft ist das Studium der Natur.",
+    "en": "Science is the study of nature."
    }
   },
   {
@@ -13776,6 +14778,10 @@
     "de": "https://de.wiktionary.org/wiki/küssen#1",
     "en": "https://en.wiktionary.org/wiki/küssen#German",
     "en_def": "https://en-word.net/lemma/kiss"
+   },
+   "example": {
+    "de": "Sie küsste ihn nur wie eine Schwester.",
+    "en": "She only kissed him like a sister."
    }
   },
   {
@@ -13835,6 +14841,10 @@
     "de": "https://de.wiktionary.org/wiki/Flug#1",
     "en": "https://en.wiktionary.org/wiki/Flug#German",
     "en_def": "https://en-word.net/lemma/flight"
+   },
+   "example": {
+    "de": "Der Flug verlief sehr ruhig.",
+    "en": "The flight went very smoothly."
    }
   },
   {
@@ -13902,6 +14912,10 @@
     "de": "https://de.wiktionary.org/wiki/Schwert#1",
     "en": "https://en.wiktionary.org/wiki/Schwert#German",
     "en_def": "https://en-word.net/lemma/sword"
+   },
+   "example": {
+    "de": "Er zückte augenblicklich sein Schwert.",
+    "en": "He drew his sword immediately."
    }
   },
   {
@@ -13966,6 +14980,10 @@
     "de": "https://de.wiktionary.org/wiki/mindestens#1",
     "en": "https://en.wiktionary.org/wiki/mindestens#German",
     "en_def": "https://en-word.net/lemma/at%20least"
+   },
+   "example": {
+    "de": "Du brauchst mindestens drei Personen, um den Schrank zu tragen.",
+    "en": "You need at least three people to carry that cupboard."
    }
   },
   {
@@ -13987,6 +15005,10 @@
     "de": "https://de.wiktionary.org/wiki/Fisch#1",
     "en": "https://en.wiktionary.org/wiki/Fisch#German",
     "en_def": "https://en-word.net/lemma/fish"
+   },
+   "example": {
+    "de": "Wir haben jeder einen Fisch gefangen.",
+    "en": "Each one of us has caught a fish."
    }
   },
   {
@@ -14050,6 +15072,10 @@
     "de": "https://de.wiktionary.org/wiki/Garten#1",
     "en": "https://en.wiktionary.org/wiki/Garten#German",
     "en_def": "https://en-word.net/lemma/garden"
+   },
+   "example": {
+    "de": "Wir sitzen im Garten.",
+    "en": "We're sitting in the garden."
    }
   },
   {
@@ -14094,6 +15120,10 @@
     "de": "https://de.wiktionary.org/wiki/wahnsinnig#1",
     "en": "https://en.wiktionary.org/wiki/wahnsinnig#German",
     "en_def": "https://en-word.net/lemma/mad"
+   },
+   "example": {
+    "de": "Sind Sie wahnsinnig?",
+    "en": "Are you insane?"
    }
   },
   {
@@ -14116,6 +15146,10 @@
     "de": "https://de.wiktionary.org/wiki/ähnlich#1",
     "en": "https://en.wiktionary.org/wiki/ähnlich#German",
     "en_def": "https://en-word.net/lemma/similar"
+   },
+   "example": {
+    "de": "Sie ist mir ähnlich. / Sie ist ähnlich wie ich.",
+    "en": "She is similar to me."
    }
   },
   {
@@ -14135,11 +15169,16 @@
     "participle": "aufgegeben",
     "auxiliary": "haben"
    },
+   "separable": "auf",
    "freq_rank": 1896,
    "source": {
     "de": "https://de.wiktionary.org/wiki/aufgeben#1",
     "en": "https://en.wiktionary.org/wiki/aufgeben#German",
     "en_def": "https://en-word.net/lemma/give%20up"
+   },
+   "example": {
+    "de": "Er gab es auf, die schwierige Aufgabe zu lösen.",
+    "en": "He gave up on solving the difficult task."
    }
   },
   {
@@ -14305,6 +15344,7 @@
    "definition_en": "The quality or state of the achromatic color of least lightness (bearing the least resemblance to white)",
    "definition_de": "Name des schwarzen, des dunkelsten Farbtons, Malfarbe, Streichfarbe",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1912,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Schwarz#1",
@@ -14375,6 +15415,10 @@
     "de": "https://de.wiktionary.org/wiki/langweilig#1",
     "en": "https://en.wiktionary.org/wiki/langweilig#German",
     "en_def": "https://en-word.net/lemma/boring"
+   },
+   "example": {
+    "de": "Das ist langweilig.",
+    "en": "That's boring."
    }
   },
   {
@@ -14439,6 +15483,10 @@
     "de": "https://de.wiktionary.org/wiki/reisen#1",
     "en": "https://en.wiktionary.org/wiki/reisen#German",
     "en_def": "https://en-word.net/lemma/travel"
+   },
+   "example": {
+    "de": "Im Sommer wollen wir an das Rote Meer reisen.",
+    "en": "We want to travel to the Red Sea in summer."
    }
   },
   {
@@ -14481,6 +15529,10 @@
     "de": "https://de.wiktionary.org/wiki/Gang#1",
     "en": "https://en.wiktionary.org/wiki/Gang#German",
     "en_def": "https://en-word.net/lemma/gait"
+   },
+   "example": {
+    "de": "Unser Gang durch die Stadt war sehr interessant.",
+    "en": "Our walk through the city was very interesting."
    }
   },
   {
@@ -14505,6 +15557,10 @@
     "de": "https://de.wiktionary.org/wiki/stehlen#1",
     "en": "https://en.wiktionary.org/wiki/stehlen#German",
     "en_def": "https://en-word.net/lemma/steal"
+   },
+   "example": {
+    "de": "Er hat mir ein Buch gestohlen.",
+    "en": "He stole a book from me."
    }
   },
   {
@@ -14519,6 +15575,7 @@
    "definition_en": "Action taken in return for an injury or offense.",
    "definition_de": "Handlung gegen eine oder mehrere Personen mit beabsichtigten negativen Auswirkungen als Reaktion auf ein erlittenes (manchmal auch nur vermeintliches) Unrecht",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 1939,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Rache#1",
@@ -14566,6 +15623,10 @@
     "de": "https://de.wiktionary.org/wiki/Wesen#1",
     "en": "https://en.wiktionary.org/wiki/Wesen#German",
     "en_def": "https://en-word.net/lemma/being"
+   },
+   "example": {
+    "de": "In der Tiefsee hat man seltsame Wesen entdeckt.",
+    "en": "In the deep sea, strange creatures have been discovered."
    }
   },
   {
@@ -14629,6 +15690,10 @@
     "de": "https://de.wiktionary.org/wiki/Durcheinander#1",
     "en": "https://en.wiktionary.org/wiki/Durcheinander#German",
     "en_def": "https://en-word.net/lemma/chaos"
+   },
+   "example": {
+    "de": "Warum ist hier so ein Durcheinander?",
+    "en": "Why is there such a mess in here?"
    }
   },
   {
@@ -14692,6 +15757,10 @@
     "de": "https://de.wiktionary.org/wiki/Karriere#1",
     "en": "https://en.wiktionary.org/wiki/Karriere#German",
     "en_def": "https://en-word.net/lemma/career"
+   },
+   "example": {
+    "de": "Ihr großes Talent wurde schon am Anfang ihrer Karriere erkannt.",
+    "en": "Her great talent was recognised right at the beginning of her career."
    }
   },
   {
@@ -14761,6 +15830,10 @@
     "de": "https://de.wiktionary.org/wiki/verfolgen#1",
     "en": "https://en.wiktionary.org/wiki/verfolgen#German",
     "en_def": "https://en-word.net/lemma/pursue"
+   },
+   "example": {
+    "de": "Die Katze verfolgt den Vogel.",
+    "en": "The cat chases the bird."
    }
   },
   {
@@ -14806,6 +15879,10 @@
     "de": "https://de.wiktionary.org/wiki/nerven#1",
     "en": "https://en.wiktionary.org/wiki/nerven#German",
     "en_def": "https://en-word.net/lemma/annoy"
+   },
+   "example": {
+    "de": "Es nervt mich.",
+    "en": "It bugs me."
    }
   },
   {
@@ -14830,6 +15907,10 @@
     "de": "https://de.wiktionary.org/wiki/entlassen#1",
     "en": "https://en.wiktionary.org/wiki/entlassen#German",
     "en_def": "https://en-word.net/lemma/dismiss"
+   },
+   "example": {
+    "de": "Er wurde aus dem Gefängnis entlassen.",
+    "en": "He was released from prison."
    }
   },
   {
@@ -14958,6 +16039,10 @@
     "de": "https://de.wiktionary.org/wiki/lauter#1",
     "en": "https://en.wiktionary.org/wiki/lauter#German",
     "en_def": "https://en-word.net/lemma/sincere"
+   },
+   "example": {
+    "de": "Der Angeklagten können lautere Absichten nicht abgesprochen werden.",
+    "en": "The defendant’s honorable intentions cannot be denied."
    }
   },
   {
@@ -15147,8 +16232,9 @@
     "present3": "steht auf",
     "past": "stand auf",
     "participle": "aufgestanden",
-    "auxiliary": "sein / haben"
+    "auxiliary": "sein"
    },
+   "separable": "auf",
    "freq_rank": 2023,
    "source": {
     "de": "https://de.wiktionary.org/wiki/aufstehen#1",
@@ -15178,6 +16264,10 @@
     "de": "https://de.wiktionary.org/wiki/hassen#1",
     "en": "https://en.wiktionary.org/wiki/hassen#German",
     "en_def": "https://en-word.net/lemma/hate"
+   },
+   "example": {
+    "de": "Es gibt nichts, das ich mehr hasse als Wespen.",
+    "en": "There is nothing I hate more than wasps."
    }
   },
   {
@@ -15237,6 +16327,7 @@
    "definition_en": "The act of preparing something (as food) by the application of heat.",
    "definition_de": "das Zubereiten von Essen",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2035,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Kochen#2",
@@ -15331,6 +16422,10 @@
     "de": "https://de.wiktionary.org/wiki/peinlich#1",
     "en": "https://en.wiktionary.org/wiki/peinlich#German",
     "en_def": "https://en-word.net/lemma/awkward"
+   },
+   "example": {
+    "de": "Es gab eine peinliche Stille.",
+    "en": "There was an awkward silence."
    }
   },
   {
@@ -15413,6 +16508,32 @@
     "de": "https://de.wiktionary.org/wiki/Mond#1",
     "en": "https://en.wiktionary.org/wiki/Mond#German",
     "en_def": "https://en-word.net/lemma/moon"
+   },
+   "example": {
+    "de": "Ganymed ist der größte Mond des Sonnensystems.",
+    "en": "Ganymede is the biggest moon of the Solar System."
+   }
+  },
+  {
+   "id": "Daten#noun",
+   "word": "Daten",
+   "pos": "noun",
+   "gender": null,
+   "article": "die",
+   "ipa": "[ˈdaːtn̩]",
+   "syllables": null,
+   "english": "data",
+   "definition_en": "A collection of facts from which conclusions may be drawn.",
+   "definition_de": "Sammlung ermittelter/gewonnener Messwerte oder auch statistischer Angaben zu etwas",
+   "forms": {
+    "plural": "Daten"
+   },
+   "number": "plural_only",
+   "freq_rank": 2059,
+   "source": {
+    "de": "https://de.wiktionary.org/wiki/Daten#1",
+    "en": "https://en.wiktionary.org/wiki/Daten#German",
+    "en_def": "https://en-word.net/lemma/data"
    }
   },
   {
@@ -15437,6 +16558,10 @@
     "de": "https://de.wiktionary.org/wiki/merken#1",
     "en": "https://en.wiktionary.org/wiki/merken#German",
     "en_def": "https://en-word.net/lemma/notice"
+   },
+   "example": {
+    "de": "Man merkt das ja kaum.",
+    "en": "You barely notice it."
    }
   },
   {
@@ -15451,6 +16576,7 @@
    "definition_en": "A state of dishonor.",
    "definition_de": "etwas, was jemandem in seinem Ansehen stark schadet",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2061,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Schande#1",
@@ -15477,6 +16603,10 @@
     "de": "https://de.wiktionary.org/wiki/Sieg#1",
     "en": "https://en.wiktionary.org/wiki/Sieg#German",
     "en_def": "https://en-word.net/lemma/victory"
+   },
+   "example": {
+    "de": "Bald gehört uns der Sieg.",
+    "en": "Soon victory will be ours."
    }
   },
   {
@@ -15499,6 +16629,10 @@
     "de": "https://de.wiktionary.org/wiki/satt#1",
     "en": "https://en.wiktionary.org/wiki/satt#German",
     "en_def": "https://en-word.net/lemma/satiated"
+   },
+   "example": {
+    "de": "Willst du noch was? − Nein danke, ich bin satt.",
+    "en": "Do you want some more? – No thanks, I'm done."
    }
   },
   {
@@ -15513,11 +16647,16 @@
    "definition_en": "Nonsensical talk or writing.",
    "definition_de": "Quatsch; unsinnige Idee; unglaubhafte Aussage",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2067,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Blödsinn#1",
     "en": "https://en.wiktionary.org/wiki/Blödsinn#German",
     "en_def": "https://en-word.net/lemma/rubbish"
+   },
+   "example": {
+    "de": "Was für ein Blödsinn ist das?",
+    "en": "What sort of nonsense is this?"
    }
   },
   {
@@ -15563,6 +16702,10 @@
     "de": "https://de.wiktionary.org/wiki/handeln#1",
     "en": "https://en.wiktionary.org/wiki/handeln#German",
     "en_def": "https://en-word.net/lemma/act"
+   },
+   "example": {
+    "de": "Jeder ist dafür verantwortlich, wie er handelt.",
+    "en": "Everybody is responsible for the way they act."
    }
   },
   {
@@ -15587,6 +16730,10 @@
     "de": "https://de.wiktionary.org/wiki/enden#1",
     "en": "https://en.wiktionary.org/wiki/enden#German",
     "en_def": "https://en-word.net/lemma/end"
+   },
+   "example": {
+    "de": "Die Frist endete gestern um 22 Uhr.",
+    "en": "The deadline ended yesterday at 10 p.m."
    }
   },
   {
@@ -15633,6 +16780,10 @@
     "de": "https://de.wiktionary.org/wiki/raten#1",
     "en": "https://en.wiktionary.org/wiki/raten#German",
     "en_def": "https://en-word.net/lemma/advise"
+   },
+   "example": {
+    "de": "Ich rate dir dazu, die Chance zu ergreifen.",
+    "en": "I advise you to take the chance."
    }
   },
   {
@@ -15654,6 +16805,10 @@
     "de": "https://de.wiktionary.org/wiki/Kunst#1",
     "en": "https://en.wiktionary.org/wiki/Kunst#German",
     "en_def": "https://en-word.net/lemma/art"
+   },
+   "example": {
+    "de": "Diese Woche wird im Museum mittelalterliche Kunst ausgestellt.",
+    "en": "This week, medieval works of art are on display in the museum."
    }
   },
   {
@@ -15668,6 +16823,7 @@
    "definition_en": "The state of being silent (as when no one is speaking)",
    "definition_de": "Zustand und (Unterlassungs-)Handlung, in dem keine Aussage getätigt wird (bzw. keine akustische Kommunikation stattfindet)",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2081,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Schweigen#1",
@@ -15697,6 +16853,10 @@
     "de": "https://de.wiktionary.org/wiki/schweigen#1",
     "en": "https://en.wiktionary.org/wiki/schweigen#German",
     "en_def": "https://en-word.net/lemma/keep%20quiet"
+   },
+   "example": {
+    "de": "Wer schweigt, stimmt zu!",
+    "en": "Who is silent agrees!"
    }
   },
   {
@@ -15781,6 +16941,10 @@
     "de": "https://de.wiktionary.org/wiki/Stock#1",
     "en": "https://en.wiktionary.org/wiki/Stock#German",
     "en_def": "https://en-word.net/lemma/stick"
+   },
+   "example": {
+    "de": "Schau mal, ich habe einen Stock gefunden, der wie ein Schwert aussieht.",
+    "en": "Check it out, I found a stick that looks like a sword."
    }
   },
   {
@@ -15864,6 +17028,10 @@
     "de": "https://de.wiktionary.org/wiki/dunkel#1",
     "en": "https://en.wiktionary.org/wiki/dunkel#German",
     "en_def": "https://en-word.net/lemma/dark"
+   },
+   "example": {
+    "de": "Im Winter wird es früher dunkel.",
+    "en": "In the winter, it gets dark earlier."
    }
   },
   {
@@ -15878,6 +17046,7 @@
    "definition_en": "Absence of light or illumination.",
    "definition_de": "lichtarmer oder völlig lichtloser Zustand, in dem sich etwas befindet oder der etwas auszeichnet",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2100,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Dunkel#1",
@@ -15931,6 +17100,10 @@
     "de": "https://de.wiktionary.org/wiki/kontrollieren#1",
     "en": "https://en.wiktionary.org/wiki/kontrollieren#German",
     "en_def": "https://en-word.net/lemma/check"
+   },
+   "example": {
+    "de": "Kannst du mal kontrollieren, ob ich alles richtig gemacht habe?",
+    "en": "Can you check whether I've done everything correctly?"
    }
   },
   {
@@ -16036,6 +17209,10 @@
     "de": "https://de.wiktionary.org/wiki/freundlich#1",
     "en": "https://en.wiktionary.org/wiki/freundlich#German",
     "en_def": "https://en-word.net/lemma/friendly"
+   },
+   "example": {
+    "de": "Sie sind sehr freundlich.",
+    "en": "You/they are very nice."
    }
   },
   {
@@ -16060,6 +17237,10 @@
     "de": "https://de.wiktionary.org/wiki/rauchen#1",
     "en": "https://en.wiktionary.org/wiki/rauchen#German",
     "en_def": "https://en-word.net/lemma/smoke"
+   },
+   "example": {
+    "de": "Das abgebrannte Haus raucht noch immer.",
+    "en": "The burned-down house is still smoking."
    }
   },
   {
@@ -16103,6 +17284,10 @@
     "de": "https://de.wiktionary.org/wiki/Stuhl#1",
     "en": "https://en.wiktionary.org/wiki/Stuhl#German",
     "en_def": "https://en-word.net/lemma/chair"
+   },
+   "example": {
+    "de": "Ich habe die ganze Zeit auf meinem Stuhl gesessen!",
+    "en": "I've been sitting on my chair the whole time!"
    }
   },
   {
@@ -16127,6 +17312,10 @@
     "de": "https://de.wiktionary.org/wiki/vergeben#1",
     "en": "https://en.wiktionary.org/wiki/vergeben#German",
     "en_def": "https://en-word.net/lemma/award"
+   },
+   "example": {
+    "de": "Wir haben den Auftrag an ein Drittunternehmen vergeben.",
+    "en": "We have awarded the contract to an external company."
    }
   },
   {
@@ -16146,11 +17335,16 @@
     "participle": "ausgegangen",
     "auxiliary": "sein"
    },
+   "separable": "aus",
    "freq_rank": 2133,
    "source": {
     "de": "https://de.wiktionary.org/wiki/ausgehen#1",
     "en": "https://en.wiktionary.org/wiki/ausgehen#German",
     "en_def": "https://en-word.net/lemma/go%20out"
+   },
+   "example": {
+    "de": "Ich gehe nicht in die Disko, weil ich tanzen will, sondern weil ich ausgehen will.",
+    "en": "I am not going to the nightclub because I want to dance, but because I want to go out."
    }
   },
   {
@@ -16165,6 +17359,7 @@
    "definition_en": "A defiant act.",
    "definition_de": "eigensinniges, störrisches Beharren auf der eigenen Position",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2135,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Trotz#1",
@@ -16231,11 +17426,16 @@
     "participle": "angenommen",
     "auxiliary": "haben"
    },
+   "separable": "an",
    "freq_rank": 2140,
    "source": {
     "de": "https://de.wiktionary.org/wiki/annehmen#1",
     "en": "https://en.wiktionary.org/wiki/annehmen#German",
     "en_def": "https://en-word.net/lemma/assume"
+   },
+   "example": {
+    "de": "Mein Fehler. Ich nahm an, sie sei ledig.",
+    "en": "My mistake. I assumed she was single."
    }
   },
   {
@@ -16346,6 +17546,10 @@
     "de": "https://de.wiktionary.org/wiki/teuer#1",
     "en": "https://en.wiktionary.org/wiki/teuer#German",
     "en_def": "https://en-word.net/lemma/expensive"
+   },
+   "example": {
+    "de": "Dieses Auto ist mir zu teuer.",
+    "en": "This car is too expensive for me."
    }
   },
   {
@@ -16370,6 +17574,10 @@
     "de": "https://de.wiktionary.org/wiki/wählen#1",
     "en": "https://en.wiktionary.org/wiki/wählen#German",
     "en_def": "https://en-word.net/lemma/choose"
+   },
+   "example": {
+    "de": "Ich wähle diese Hose da, die mit der Bügelfalte.",
+    "en": "I'm choosing these pants here, the ones with the crease."
    }
   },
   {
@@ -16436,6 +17644,10 @@
     "de": "https://de.wiktionary.org/wiki/erlauben#1",
     "en": "https://en.wiktionary.org/wiki/erlauben#German",
     "en_def": "https://en-word.net/lemma/allow"
+   },
+   "example": {
+    "de": "Essen ist in der Bibliothek nicht erlaubt.",
+    "en": "Eating is not permitted in the library."
    }
   },
   {
@@ -16498,6 +17710,10 @@
     "de": "https://de.wiktionary.org/wiki/bewusst#1",
     "en": "https://en.wiktionary.org/wiki/bewusst#German",
     "en_def": "https://en-word.net/lemma/conscious"
+   },
+   "example": {
+    "de": "Ja, ich war mir dieser Tatsache bewusst.",
+    "en": "Yes, I was aware of that fact."
    }
   },
   {
@@ -16541,11 +17757,16 @@
     "participle": "gestritten",
     "auxiliary": "haben"
    },
+   "reflexive": true,
    "freq_rank": 2185,
    "source": {
     "de": "https://de.wiktionary.org/wiki/streiten#1",
     "en": "https://en.wiktionary.org/wiki/streiten#German",
     "en_def": "https://en-word.net/lemma/argue"
+   },
+   "example": {
+    "de": "Ich streite mich oft mit meiner Mutter.",
+    "en": "I argue with my mother often."
    }
   },
   {
@@ -16591,6 +17812,10 @@
     "de": "https://de.wiktionary.org/wiki/überzeugen#1",
     "en": "https://en.wiktionary.org/wiki/überzeugen#German",
     "en_def": "https://en-word.net/lemma/convince"
+   },
+   "example": {
+    "de": "Er hat mich von seinen Fähigkeiten überzeugt.",
+    "en": "He convinced me of his abilities."
    }
   },
   {
@@ -16612,6 +17837,10 @@
     "de": "https://de.wiktionary.org/wiki/Alkohol#1",
     "en": "https://en.wiktionary.org/wiki/Alkohol#German",
     "en_def": "https://en-word.net/lemma/alcohol"
+   },
+   "example": {
+    "de": "Alkohol ist farblos.",
+    "en": "Alcohol is colourless."
    }
   },
   {
@@ -16631,6 +17860,7 @@
     "participle": "weitergemacht",
     "auxiliary": "haben"
    },
+   "separable": "weiter",
    "freq_rank": 2197,
    "source": {
     "de": "https://de.wiktionary.org/wiki/weitermachen#1",
@@ -16681,6 +17911,10 @@
     "de": "https://de.wiktionary.org/wiki/fehlen#1",
     "en": "https://en.wiktionary.org/wiki/fehlen#German",
     "en_def": "https://en-word.net/lemma/lack"
+   },
+   "example": {
+    "de": "Der Suppe fehlt es an Geschmack.",
+    "en": "The soup lacks flavor."
    }
   },
   {
@@ -16721,6 +17955,7 @@
     "participle": "zurückgekommen",
     "auxiliary": "sein"
    },
+   "separable": "zurück",
    "freq_rank": 2208,
    "source": {
     "de": "https://de.wiktionary.org/wiki/zurückkommen#1",
@@ -16811,6 +18046,10 @@
     "de": "https://de.wiktionary.org/wiki/Gegenteil#1",
     "en": "https://en.wiktionary.org/wiki/Gegenteil#German",
     "en_def": "https://en-word.net/lemma/opposite"
+   },
+   "example": {
+    "de": "Das Gegenteil tritt ein, wenn wir uns wertend äußern.",
+    "en": "The opposite happens when we express ourselves in a judgmental way."
    }
   },
   {
@@ -16854,6 +18093,10 @@
     "de": "https://de.wiktionary.org/wiki/Projekt#1",
     "en": "https://en.wiktionary.org/wiki/Projekt#German",
     "en_def": "https://en-word.net/lemma/project"
+   },
+   "example": {
+    "de": "Ein solch großes Projekt sollte professionell betreut werden.",
+    "en": "Such a big project should be managed professionally."
    }
   },
   {
@@ -16902,6 +18145,10 @@
     "de": "https://de.wiktionary.org/wiki/zählen#1",
     "en": "https://en.wiktionary.org/wiki/zählen#German",
     "en_def": "https://en-word.net/lemma/count"
+   },
+   "example": {
+    "de": "Ich habe gerade gezählt, dass wir nur noch zwölf Tomaten haben.",
+    "en": "I have just counted and seen us to have only twelve tomatoes in total."
    }
   },
   {
@@ -17031,6 +18278,10 @@
     "de": "https://de.wiktionary.org/wiki/Ohr#2",
     "en": "https://en.wiktionary.org/wiki/Ohr#German",
     "en_def": "https://en-word.net/lemma/ear"
+   },
+   "example": {
+    "de": "Du musst lauter sprechen, meine Ohren sind nicht mehr so gut.",
+    "en": "You'll have to speak up, my ears aren't quite as good anymore."
    }
   },
   {
@@ -17529,6 +18780,10 @@
     "de": "https://de.wiktionary.org/wiki/stoppen#1",
     "en": "https://en.wiktionary.org/wiki/stoppen#German",
     "en_def": "https://en-word.net/lemma/stop"
+   },
+   "example": {
+    "de": "Wir müssen diese Entwicklung stoppen.",
+    "en": "We must stop this development."
    }
   },
   {
@@ -17569,11 +18824,16 @@
     "participle": "aufgemacht",
     "auxiliary": "haben"
    },
+   "separable": "auf",
    "freq_rank": 2322,
    "source": {
     "de": "https://de.wiktionary.org/wiki/aufmachen#1",
     "en": "https://en.wiktionary.org/wiki/aufmachen#German",
     "en_def": "https://en-word.net/lemma/open"
+   },
+   "example": {
+    "de": "Kannst du dieses Glas aufmachen?",
+    "en": "Can you open this jar?"
    }
   },
   {
@@ -17662,6 +18922,10 @@
     "de": "https://de.wiktionary.org/wiki/packen#1",
     "en": "https://en.wiktionary.org/wiki/packen#German",
     "en_def": "https://en-word.net/lemma/pack"
+   },
+   "example": {
+    "de": "Du musst deine Sachen packen.",
+    "en": "You need to pack your stuff."
    }
   },
   {
@@ -17676,11 +18940,16 @@
    "definition_en": "Good-natured tolerance of delay or incompetence.",
    "definition_de": "Fähigkeit, auf etwas länger zu warten",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2345,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Geduld#1",
     "en": "https://en.wiktionary.org/wiki/Geduld#German",
     "en_def": "https://en-word.net/lemma/patience"
+   },
+   "example": {
+    "de": "Sie wartete mit großer Geduld, bis sie endlich an der Reihe war.",
+    "en": "She waited very patiently, until finally it was her turn."
    }
   },
   {
@@ -17772,6 +19041,10 @@
     "de": "https://de.wiktionary.org/wiki/unterschreiben#1",
     "en": "https://en.wiktionary.org/wiki/unterschreiben#German",
     "en_def": "https://en-word.net/lemma/sign"
+   },
+   "example": {
+    "de": "Unterschreiben Sie bitte auf der punktierten Linie.",
+    "en": "Please sign on the dotted line."
    }
   },
   {
@@ -17796,6 +19069,10 @@
     "de": "https://de.wiktionary.org/wiki/drücken#1",
     "en": "https://en.wiktionary.org/wiki/drücken#German",
     "en_def": "https://en-word.net/lemma/push"
+   },
+   "example": {
+    "de": "Drück diesen Knopf nicht!",
+    "en": "Don't press that button!"
    }
   },
   {
@@ -17838,6 +19115,10 @@
     "de": "https://de.wiktionary.org/wiki/Medizin#1",
     "en": "https://en.wiktionary.org/wiki/Medizin#German",
     "en_def": "https://en-word.net/lemma/medicine"
+   },
+   "example": {
+    "de": "Er studiert Medizin.",
+    "en": "He studies medicine."
    }
   },
   {
@@ -17915,6 +19196,7 @@
    "definition_en": "A state of extreme confusion and disorder.",
    "definition_de": "Zustand der Unordnung",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2370,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Chaos#1",
@@ -17962,6 +19244,10 @@
     "de": "https://de.wiktionary.org/wiki/Hof#1",
     "en": "https://en.wiktionary.org/wiki/Hof#German",
     "en_def": "https://en-word.net/lemma/yard"
+   },
+   "example": {
+    "de": "Der Hof hinter unserm Haus ist mit Schiefer gepflastert.",
+    "en": "The yard behind our house is paved with slate."
    }
   },
   {
@@ -17986,6 +19272,10 @@
     "de": "https://de.wiktionary.org/wiki/akzeptieren#1",
     "en": "https://en.wiktionary.org/wiki/akzeptieren#German",
     "en_def": "https://en-word.net/lemma/accept"
+   },
+   "example": {
+    "de": "Die neue Schülerin wurde von ihren Mitschülern anfangs nicht akzeptiert.",
+    "en": "The new student was not accepted by her classmates at first."
    }
   },
   {
@@ -18005,11 +19295,16 @@
     "participle": "angezogen",
     "auxiliary": "haben"
    },
+   "separable": "an",
    "freq_rank": 2381,
    "source": {
     "de": "https://de.wiktionary.org/wiki/anziehen#1",
     "en": "https://en.wiktionary.org/wiki/anziehen#German",
     "en_def": "https://en-word.net/lemma/put%20on"
+   },
+   "example": {
+    "de": "Ich ziehe (mir) meinen Pulli an.",
+    "en": "I put on my pullover."
    }
   },
   {
@@ -18031,6 +19326,10 @@
     "de": "https://de.wiktionary.org/wiki/Bauch#1",
     "en": "https://en.wiktionary.org/wiki/Bauch#German",
     "en_def": "https://en-word.net/lemma/belly"
+   },
+   "example": {
+    "de": "Mein Bauch tut mir so weh!",
+    "en": "My belly hurts so bad!"
    }
   },
   {
@@ -18055,6 +19354,10 @@
     "de": "https://de.wiktionary.org/wiki/ertragen#1",
     "en": "https://en.wiktionary.org/wiki/ertragen#German",
     "en_def": "https://en-word.net/lemma/bear"
+   },
+   "example": {
+    "de": "Ich kann die neue Freundin von meinem Bruder nicht ertragen.",
+    "en": "I can’t stand my brother’s new girlfriend."
    }
   },
   {
@@ -18100,6 +19403,10 @@
     "de": "https://de.wiktionary.org/wiki/landen#1",
     "en": "https://en.wiktionary.org/wiki/landen#German",
     "en_def": "https://en-word.net/lemma/land"
+   },
+   "example": {
+    "de": "Das Flugzeug landet auf der Landebahn.",
+    "en": "The plane lands on the runway."
    }
   },
   {
@@ -18145,6 +19452,10 @@
     "de": "https://de.wiktionary.org/wiki/beobachten#1",
     "en": "https://en.wiktionary.org/wiki/beobachten#German",
     "en_def": "https://en-word.net/lemma/watch"
+   },
+   "example": {
+    "de": "Sie werden beobachtet.",
+    "en": "You are being watched."
    }
   },
   {
@@ -18236,6 +19547,10 @@
     "de": "https://de.wiktionary.org/wiki/fliehen#1",
     "en": "https://en.wiktionary.org/wiki/fliehen#German",
     "en_def": "https://en-word.net/lemma/flee"
+   },
+   "example": {
+    "de": "Als die Polizei eintraf, war der Räuber bereits geflohen.",
+    "en": "When the police arrived, the robber had already fled."
    }
   },
   {
@@ -18300,6 +19615,10 @@
     "de": "https://de.wiktionary.org/wiki/Gebiet#1",
     "en": "https://en.wiktionary.org/wiki/Gebiet#German",
     "en_def": "https://en-word.net/lemma/area"
+   },
+   "example": {
+    "de": "Viele Bewohner hatten das bedrohte Gebiet verlassen müssen.",
+    "en": "Many residents had to leave the threatened area."
    }
   },
   {
@@ -18346,6 +19665,10 @@
     "de": "https://de.wiktionary.org/wiki/verbunden#1",
     "en": "https://en.wiktionary.org/wiki/verbunden#German",
     "en_def": "https://en-word.net/lemma/interconnected"
+   },
+   "example": {
+    "de": "Die Sensoren sind mit einem Monitor verbunden.",
+    "en": "The sensors are connected to a monitor."
    }
   },
   {
@@ -18388,6 +19711,10 @@
     "de": "https://de.wiktionary.org/wiki/Brust#1",
     "en": "https://en.wiktionary.org/wiki/Brust#German",
     "en_def": "https://en-word.net/lemma/breast"
+   },
+   "example": {
+    "de": "Die Kugel traf ihn mitten in die Brust.",
+    "en": "The bullet hit him right in the chest."
    }
   },
   {
@@ -18445,6 +19772,7 @@
    "definition_en": "Animal hunted for food or sport.",
    "definition_de": "Gesamtheit freilebender, jagdbarer Tiere",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2453,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Wild#1",
@@ -18491,11 +19819,16 @@
     "participle": "zugehört",
     "auxiliary": "haben"
    },
+   "separable": "zu",
    "freq_rank": 2456,
    "source": {
     "de": "https://de.wiktionary.org/wiki/zuhören#1",
     "en": "https://en.wiktionary.org/wiki/zuhören#German",
     "en_def": "https://en-word.net/lemma/listen"
+   },
+   "example": {
+    "de": "Hör mir zu.",
+    "en": "Listen to me."
    }
   },
   {
@@ -18562,6 +19895,10 @@
     "de": "https://de.wiktionary.org/wiki/Vorschlag#1",
     "en": "https://en.wiktionary.org/wiki/Vorschlag#German",
     "en_def": "https://en-word.net/lemma/proposal"
+   },
+   "example": {
+    "de": "Wir hätten auf ihren Vorschlag hören sollen.",
+    "en": "We should have listened to their suggestion."
    }
   },
   {
@@ -18731,6 +20068,7 @@
    "definition_en": "Food that is discarded (as from a kitchen)",
    "definition_de": "gemischte Abfälle, wertlose Abfallmischung",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2476,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Müll#1",
@@ -18781,6 +20119,10 @@
     "de": "https://de.wiktionary.org/wiki/erleben#1",
     "en": "https://en.wiktionary.org/wiki/erleben#German",
     "en_def": "https://en-word.net/lemma/experience"
+   },
+   "example": {
+    "de": "Wir erleben gerade einige Turbulenzen.",
+    "en": "We are experiencing some turbulence right now."
    }
   },
   {
@@ -18802,6 +20144,10 @@
     "de": "https://de.wiktionary.org/wiki/Mittagessen#1",
     "en": "https://en.wiktionary.org/wiki/Mittagessen#German",
     "en_def": "https://en-word.net/lemma/lunch"
+   },
+   "example": {
+    "de": "Ein Butterbrot war mein einziges Mittagessen.",
+    "en": "A single sandwich was my whole lunch."
    }
   },
   {
@@ -18868,6 +20214,10 @@
     "de": "https://de.wiktionary.org/wiki/Gewehr#1",
     "en": "https://en.wiktionary.org/wiki/Gewehr#German",
     "en_def": "https://en-word.net/lemma/rifle"
+   },
+   "example": {
+    "de": "Er packt sein Gewehr und geht auf die Jagd.",
+    "en": "He packs up his rifle and goes hunting."
    }
   },
   {
@@ -18889,6 +20239,10 @@
     "de": "https://de.wiktionary.org/wiki/Spiegel#1",
     "en": "https://en.wiktionary.org/wiki/Spiegel#German",
     "en_def": "https://en-word.net/lemma/mirror"
+   },
+   "example": {
+    "de": "Sie hatte einen großen Spiegel.",
+    "en": "She had a large mirror."
    }
   },
   {
@@ -18910,6 +20264,10 @@
     "de": "https://de.wiktionary.org/wiki/Wetter#1",
     "en": "https://en.wiktionary.org/wiki/Wetter#German",
     "en_def": "https://en-word.net/lemma/weather"
+   },
+   "example": {
+    "de": "Heute ist schönes Wetter.",
+    "en": "The weather is nice today."
    }
   },
   {
@@ -18994,6 +20352,10 @@
     "de": "https://de.wiktionary.org/wiki/Strafe#1",
     "en": "https://en.wiktionary.org/wiki/Strafe#German",
     "en_def": "https://en-word.net/lemma/penalty"
+   },
+   "example": {
+    "de": "Strafe muss sein.",
+    "en": "Punishment is necessary."
    }
   },
   {
@@ -19018,6 +20380,10 @@
     "de": "https://de.wiktionary.org/wiki/langen#2",
     "en": "https://en.wiktionary.org/wiki/langen#German",
     "en_def": "https://en-word.net/lemma/suffice"
+   },
+   "example": {
+    "de": "Mir langt's.",
+    "en": "I've had enough"
    }
   },
   {
@@ -19253,6 +20619,10 @@
     "de": "https://de.wiktionary.org/wiki/bestens#1",
     "en": "https://en.wiktionary.org/wiki/bestens#German",
     "en_def": "https://en-word.net/lemma/perfectly"
+   },
+   "example": {
+    "de": "Ich habe mich bestens amüsiert.",
+    "en": "I thoroughly enjoyed myself."
    }
   },
   {
@@ -19267,6 +20637,7 @@
    "definition_en": "An unjust act.",
    "definition_de": "Verletzung des Rechts",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2571,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Unrecht#1",
@@ -19461,6 +20832,10 @@
     "de": "https://de.wiktionary.org/wiki/Täter#1",
     "en": "https://en.wiktionary.org/wiki/Täter#German",
     "en_def": "https://en-word.net/lemma/perpetrator"
+   },
+   "example": {
+    "de": "Die Polizei konnte den Täter festnehmen.",
+    "en": "Police were able to arrest the perpetrator."
    }
   },
   {
@@ -19528,6 +20903,10 @@
     "de": "https://de.wiktionary.org/wiki/dienen#1",
     "en": "https://en.wiktionary.org/wiki/dienen#German",
     "en_def": "https://en-word.net/lemma/serve"
+   },
+   "example": {
+    "de": "Diese Kirche diente während der Invasion als Krankenhaus.",
+    "en": "This church served as a hospital during the invasion."
    }
   },
   {
@@ -19613,6 +20992,10 @@
     "de": "https://de.wiktionary.org/wiki/Publikum#1",
     "en": "https://en.wiktionary.org/wiki/Publikum#German",
     "en_def": "https://en-word.net/lemma/public"
+   },
+   "example": {
+    "de": "Das Buch richtet sich an ein breites Publikum.",
+    "en": "The book is addressed to a broad audience."
    }
   },
   {
@@ -19630,7 +21013,7 @@
     "present3": "wechselt",
     "past": "wechselte",
     "participle": "gewechselt",
-    "auxiliary": "haben / sein"
+    "auxiliary": "haben"
    },
    "freq_rank": 2617,
    "source": {
@@ -19656,11 +21039,16 @@
     "participle": "losgeworden",
     "auxiliary": "sein"
    },
+   "separable": "los",
    "freq_rank": 2627,
    "source": {
     "de": "https://de.wiktionary.org/wiki/loswerden#1",
     "en": "https://en.wiktionary.org/wiki/loswerden#German",
     "en_def": "https://en-word.net/lemma/get%20rid%20of"
+   },
+   "example": {
+    "de": "Du musst diesen Kram loswerden. Er liegt im Weg.",
+    "en": "You have to get rid of this stuff. It's in the way."
    }
   },
   {
@@ -19682,6 +21070,10 @@
     "de": "https://de.wiktionary.org/wiki/Sturm#1",
     "en": "https://en.wiktionary.org/wiki/Sturm#German",
     "en_def": "https://en-word.net/lemma/storm"
+   },
+   "example": {
+    "de": "Ein Sturm kommt auf.",
+    "en": "A storm is coming."
    }
   },
   {
@@ -19727,6 +21119,10 @@
     "de": "https://de.wiktionary.org/wiki/starten#1",
     "en": "https://en.wiktionary.org/wiki/starten#German",
     "en_def": "https://en-word.net/lemma/start"
+   },
+   "example": {
+    "de": "Die Maschine ist pünktlich gestartet.",
+    "en": "The plane started on time."
    }
   },
   {
@@ -19839,6 +21235,10 @@
     "de": "https://de.wiktionary.org/wiki/wetten#1",
     "en": "https://en.wiktionary.org/wiki/wetten#German",
     "en_def": "https://en-word.net/lemma/bet"
+   },
+   "example": {
+    "de": "Ich wette, Lisa wartet schon auf uns.",
+    "en": "I bet Lisa is waiting for us already."
    }
   },
   {
@@ -19936,6 +21336,7 @@
    "definition_en": "The cardinal compass point that is at 180 degrees.",
    "definition_de": "Himmelsrichtung, die zum Südpol weist; Haupthimmelsrichtung, die Norden gegenüber und zwischen Westen und Osten liegt. Die Richtung verläuft rechtwinklig zum Äquator und parallel zu den Längenkreisen.",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2661,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Süden#1",
@@ -19955,6 +21356,7 @@
    "definition_en": "All of the living human inhabitants of the earth.",
    "definition_de": "Gesamtheit aller Menschen",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2663,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Menschheit#1",
@@ -20059,6 +21461,7 @@
    "definition_en": "A strong emotion; a feeling that is oriented toward some real or supposed grievance.",
    "definition_de": "starke Gemütserregung, ein Gefühl großen Ärgers, oft in Verbindung mit aggressivem Verhalten",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2680,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Wut#1",
@@ -20083,11 +21486,16 @@
     "participle": "angefasst",
     "auxiliary": "haben"
    },
+   "separable": "an",
    "freq_rank": 2686,
    "source": {
     "de": "https://de.wiktionary.org/wiki/anfassen#1",
     "en": "https://en.wiktionary.org/wiki/anfassen#German",
     "en_def": "https://en-word.net/lemma/touch"
+   },
+   "example": {
+    "de": "Nicht anfassen!",
+    "en": "Don't touch!"
    }
   },
   {
@@ -20149,6 +21557,10 @@
     "de": "https://de.wiktionary.org/wiki/angeblich#1",
     "en": "https://en.wiktionary.org/wiki/angeblich#German",
     "en_def": "https://en-word.net/lemma/alleged"
+   },
+   "example": {
+    "de": "Der Kandidat lehnte es ab, sich zu der angeblichen Affäre zu äußern.",
+    "en": "The candidate refused to comment on the alleged affair."
    }
   },
   {
@@ -20170,6 +21582,10 @@
     "de": "https://de.wiktionary.org/wiki/Mittag#1",
     "en": "https://en.wiktionary.org/wiki/Mittag#German",
     "en_def": "https://en-word.net/lemma/noon"
+   },
+   "example": {
+    "de": "Sie hat bis Mittag geschlafen.",
+    "en": "She slept until midday."
    }
   },
   {
@@ -20257,6 +21673,10 @@
     "de": "https://de.wiktionary.org/wiki/Tausend#1",
     "en": "https://en.wiktionary.org/wiki/Tausend#German",
     "en_def": "https://en-word.net/lemma/thousand"
+   },
+   "example": {
+    "de": "Was bedeutet die Tausend, die du hier aufgeschrieben hast?",
+    "en": "What does this thousand mean that you wrote down here?"
    }
   },
   {
@@ -20343,11 +21763,16 @@
     "participle": "zugegeben",
     "auxiliary": "haben"
    },
+   "separable": "zu",
    "freq_rank": 2715,
    "source": {
     "de": "https://de.wiktionary.org/wiki/zugeben#1",
     "en": "https://en.wiktionary.org/wiki/zugeben#German",
     "en_def": "https://en-word.net/lemma/admit"
+   },
+   "example": {
+    "de": "Er hat zugegeben, dass es stimmte.",
+    "en": "He acknowledged it to be true."
    }
   },
   {
@@ -20362,6 +21787,7 @@
    "definition_en": "The property of being pure and fresh (as if newly made); not stale or deteriorated.",
    "definition_de": "als angenehm empfundene kühlende Wirkung",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2720,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Frische#1",
@@ -20433,6 +21859,10 @@
     "de": "https://de.wiktionary.org/wiki/Stoff#1",
     "en": "https://en.wiktionary.org/wiki/Stoff#German",
     "en_def": "https://en-word.net/lemma/substance"
+   },
+   "example": {
+    "de": "Es gibt dieses Semester viel Stoff durchzunehmen.",
+    "en": "There's a lot of material to cover this semester."
    }
   },
   {
@@ -20518,6 +21948,10 @@
     "de": "https://de.wiktionary.org/wiki/Gnade#1",
     "en": "https://en.wiktionary.org/wiki/Gnade#German",
     "en_def": "https://en-word.net/lemma/mercy"
+   },
+   "example": {
+    "de": "Er flehte um Gnade.",
+    "en": "He begged for mercy."
    }
   },
   {
@@ -20542,6 +21976,10 @@
     "de": "https://de.wiktionary.org/wiki/entspannen#2",
     "en": "https://en.wiktionary.org/wiki/entspannen#German",
     "en_def": "https://en-word.net/lemma/relax"
+   },
+   "example": {
+    "de": "Der Schütze entspannte den Bogen wieder und legte den Pfeil zurück in den Köcher.",
+    "en": "The archer relaxed the bow again and put the arrow back in the quiver."
    }
   },
   {
@@ -20606,11 +22044,16 @@
     "participle": "zurückgekehrt",
     "auxiliary": "sein"
    },
+   "separable": "zurück",
    "freq_rank": 2766,
    "source": {
     "de": "https://de.wiktionary.org/wiki/zurückkehren#1",
     "en": "https://en.wiktionary.org/wiki/zurückkehren#German",
     "en_def": "https://en-word.net/lemma/return"
+   },
+   "example": {
+    "de": "Aus dem Sand ist er gekommen, zum Sand kehrt er zurück.",
+    "en": "From the sand, he has come, to the sand, he returns."
    }
   },
   {
@@ -20656,6 +22099,10 @@
     "de": "https://de.wiktionary.org/wiki/Information#1",
     "en": "https://en.wiktionary.org/wiki/Information#German",
     "en_def": "https://en-word.net/lemma/information"
+   },
+   "example": {
+    "de": "Wir brauchen mehr Informationen über den Fall.",
+    "en": "We need more information about the case."
    }
   },
   {
@@ -20712,6 +22159,7 @@
    "definition_en": "The work of cleansing (usually with soap and water)",
    "definition_de": "das Reinigen von etwas in oder auch mit einer Flüssigkeit",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 2777,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Waschen#1",
@@ -20741,6 +22189,10 @@
     "de": "https://de.wiktionary.org/wiki/waschen#1",
     "en": "https://en.wiktionary.org/wiki/waschen#German",
     "en_def": "https://en-word.net/lemma/wash"
+   },
+   "example": {
+    "de": "Wasch dir die Hände, bevor du zu Tisch gehst.",
+    "en": "Wash your hands before you sit down to eat."
    }
   },
   {
@@ -20786,6 +22238,10 @@
     "de": "https://de.wiktionary.org/wiki/warnen#1",
     "en": "https://en.wiktionary.org/wiki/warnen#German",
     "en_def": "https://en-word.net/lemma/warn"
+   },
+   "example": {
+    "de": "Kritiker warnen vor unabsehbaren Folgen für Gesundheit und Umwelt.",
+    "en": "Critics warn against the unpredictable impact on human health and the environment."
    }
   },
   {
@@ -20829,6 +22285,10 @@
     "de": "https://de.wiktionary.org/wiki/lecker#1",
     "en": "https://en.wiktionary.org/wiki/lecker#German",
     "en_def": "https://en-word.net/lemma/yummy"
+   },
+   "example": {
+    "de": "Das ist ein sehr leckerer Keks.",
+    "en": "This is a very tasty biscuit."
    }
   },
   {
@@ -20910,13 +22370,17 @@
     "present3": "irrt",
     "past": "irrte",
     "participle": "geirrt",
-    "auxiliary": "haben / sein"
+    "auxiliary": "haben"
    },
    "freq_rank": 2812,
    "source": {
     "de": "https://de.wiktionary.org/wiki/irren#1",
     "en": "https://en.wiktionary.org/wiki/irren#German",
     "en_def": "https://en-word.net/lemma/err"
+   },
+   "example": {
+    "de": "Du irrst dich, Naomi und ich haben uns nur unterhalten.",
+    "en": "You are wrong, Naomi and I were only talking."
    }
   },
   {
@@ -20959,6 +22423,10 @@
     "de": "https://de.wiktionary.org/wiki/Krankenwagen#1",
     "en": "https://en.wiktionary.org/wiki/Krankenwagen#German",
     "en_def": "https://en-word.net/lemma/ambulance"
+   },
+   "example": {
+    "de": "Rufen Sie einen Krankenwagen!",
+    "en": "Call an ambulance!"
    }
   },
   {
@@ -20983,6 +22451,10 @@
     "de": "https://de.wiktionary.org/wiki/entfernen#1",
     "en": "https://en.wiktionary.org/wiki/entfernen#German",
     "en_def": "https://en-word.net/lemma/remove"
+   },
+   "example": {
+    "de": "Der Hausmeister entfernt die Graffitis von der Wand.",
+    "en": "The caretaker is removing the graffiti from the wall."
    }
   },
   {
@@ -21319,6 +22791,10 @@
     "de": "https://de.wiktionary.org/wiki/Klo#1",
     "en": "https://en.wiktionary.org/wiki/Klo#German",
     "en_def": "https://en-word.net/lemma/toilet"
+   },
+   "example": {
+    "de": "Und wenn ich aufs Klo muss?",
+    "en": "And if I need the toilet?"
    }
   },
   {
@@ -21379,6 +22855,10 @@
     "de": "https://de.wiktionary.org/wiki/meistens#1",
     "en": "https://en.wiktionary.org/wiki/meistens#German",
     "en_def": "https://en-word.net/lemma/mostly"
+   },
+   "example": {
+    "de": "Meistens stehe ich zeitig auf.",
+    "en": "I usually get up early."
    }
   },
   {
@@ -21403,6 +22883,10 @@
     "de": "https://de.wiktionary.org/wiki/heilen#1",
     "en": "https://en.wiktionary.org/wiki/heilen#German",
     "en_def": "https://en-word.net/lemma/heal"
+   },
+   "example": {
+    "de": "Die Zeit heilt alle Wunden.",
+    "en": "Time heals all wounds."
    }
   },
   {
@@ -21422,6 +22906,10 @@
     "de": "https://de.wiktionary.org/wiki/stattdessen#1",
     "en": "https://en.wiktionary.org/wiki/stattdessen#German",
     "en_def": "https://en-word.net/lemma/instead"
+   },
+   "example": {
+    "de": "Ich mag keine Leber. Stattdessen nehme ich Huhn.",
+    "en": "I don't like liver. Instead, I'll have chicken."
    }
   },
   {
@@ -21443,6 +22931,10 @@
     "de": "https://de.wiktionary.org/wiki/Stimmung#1",
     "en": "https://en.wiktionary.org/wiki/Stimmung#German",
     "en_def": "https://en-word.net/lemma/mood"
+   },
+   "example": {
+    "de": "Er war (in) guter Stimmung.",
+    "en": "He was in a good mood."
    }
   },
   {
@@ -21485,6 +22977,10 @@
     "de": "https://de.wiktionary.org/wiki/Künstler#1",
     "en": "https://en.wiktionary.org/wiki/Künstler#German",
     "en_def": "https://en-word.net/lemma/artist"
+   },
+   "example": {
+    "de": "Der Künstler macht ein Bild.",
+    "en": "The artist creates a picture."
    }
   },
   {
@@ -21509,6 +23005,10 @@
     "de": "https://de.wiktionary.org/wiki/wachsen#1",
     "en": "https://en.wiktionary.org/wiki/wachsen#German",
     "en_def": "https://en-word.net/lemma/grow"
+   },
+   "example": {
+    "de": "Die Pflanze wächst schneller als ich dachte.",
+    "en": "The plant is growing faster than I thought."
    }
   },
   {
@@ -21575,6 +23075,10 @@
     "de": "https://de.wiktionary.org/wiki/Fluch#1",
     "en": "https://en.wiktionary.org/wiki/Fluch#German",
     "en_def": "https://en-word.net/lemma/curse"
+   },
+   "example": {
+    "de": "Technologie kann ein Fluch und ein Segen zugleich sein.",
+    "en": "Technology can be both a curse and a blessing."
    }
   },
   {
@@ -21659,6 +23163,10 @@
     "de": "https://de.wiktionary.org/wiki/Fett#2",
     "en": "https://en.wiktionary.org/wiki/Fett#German",
     "en_def": "https://en-word.net/lemma/fat"
+   },
+   "example": {
+    "de": "Speck ist reich an Fett.",
+    "en": "Bacon is rich in fat."
    }
   },
   {
@@ -21718,11 +23226,16 @@
     "participle": "eingeladen",
     "auxiliary": "haben"
    },
+   "separable": "ein",
    "freq_rank": 2960,
    "source": {
     "de": "https://de.wiktionary.org/wiki/einladen#1",
     "en": "https://en.wiktionary.org/wiki/einladen#German",
     "en_def": "https://en-word.net/lemma/invite"
+   },
+   "example": {
+    "de": "Warum hast du ihn eingeladen? Keiner von uns mag ihn.",
+    "en": "Why did you invite him? None of us like him."
    }
   },
   {
@@ -21763,11 +23276,16 @@
     "participle": "aufgewacht",
     "auxiliary": "sein"
    },
+   "separable": "auf",
    "freq_rank": 2962,
    "source": {
     "de": "https://de.wiktionary.org/wiki/aufwachen#1",
     "en": "https://en.wiktionary.org/wiki/aufwachen#German",
     "en_def": "https://en-word.net/lemma/wake%20up"
+   },
+   "example": {
+    "de": "Heute Morgen bin ich mit einem Kater aufgewacht.",
+    "en": "This morning I woke up with a hangover."
    }
   },
   {
@@ -21808,11 +23326,16 @@
     "participle": "zugesehen",
     "auxiliary": "haben"
    },
+   "separable": "zu",
    "freq_rank": 2965,
    "source": {
     "de": "https://de.wiktionary.org/wiki/zusehen#1",
     "en": "https://en.wiktionary.org/wiki/zusehen#German",
     "en_def": "https://en-word.net/lemma/watch"
+   },
+   "example": {
+    "de": "Ich kann dir von hier aus zusehen.",
+    "en": "I can watch you from over here."
    }
   },
   {
@@ -21942,6 +23465,10 @@
     "de": "https://de.wiktionary.org/wiki/fähig#1",
     "en": "https://en.wiktionary.org/wiki/fähig#German",
     "en_def": "https://en-word.net/lemma/capable"
+   },
+   "example": {
+    "de": "Der Angeklagte wäre zu so einer grausamen Tat nicht fähig.",
+    "en": "The accused would not be capable of such a cruel act."
    }
   },
   {
@@ -22178,6 +23705,7 @@
     "participle": "losgelassen",
     "auxiliary": "haben"
    },
+   "separable": "los",
    "freq_rank": 3021,
    "source": {
     "de": "https://de.wiktionary.org/wiki/loslassen#2",
@@ -22207,6 +23735,10 @@
     "de": "https://de.wiktionary.org/wiki/berichten#1",
     "en": "https://en.wiktionary.org/wiki/berichten#German",
     "en_def": "https://en-word.net/lemma/report"
+   },
+   "example": {
+    "de": "Die Zeitungen berichteten der Welt gestern die ganze Geschichte.",
+    "en": "The newspapers reported the whole story to the world yesterday."
    }
   },
   {
@@ -22242,6 +23774,7 @@
    "definition_en": "Social deportment.",
    "definition_de": "Gesamtheit der Umgangsformen, des Verhaltens, der menschlichen Handlungsweisen",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 3027,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Benehmen#1",
@@ -22266,11 +23799,16 @@
     "participle": "benommen",
     "auxiliary": "haben"
    },
+   "reflexive": true,
    "freq_rank": 3027,
    "source": {
     "de": "https://de.wiktionary.org/wiki/benehmen#1",
     "en": "https://en.wiktionary.org/wiki/benehmen#German",
     "en_def": "https://en-word.net/lemma/behave"
+   },
+   "example": {
+    "de": "Manche Leute können sich einfach nicht benehmen.",
+    "en": "Some people simply cannot behave themselves."
    }
   },
   {
@@ -22292,6 +23830,10 @@
     "de": "https://de.wiktionary.org/wiki/Verdacht#1",
     "en": "https://en.wiktionary.org/wiki/Verdacht#German",
     "en_def": "https://en-word.net/lemma/suspicion"
+   },
+   "example": {
+    "de": "Es darf nicht der geringste Verdacht aufkommen.",
+    "en": "There mustn't be the slightest suspicion."
    }
   },
   {
@@ -22353,6 +23895,7 @@
     "participle": "vorbereitet",
     "auxiliary": "haben"
    },
+   "separable": "vor",
    "freq_rank": 3042,
    "source": {
     "de": "https://de.wiktionary.org/wiki/vorbereiten#1",
@@ -22401,6 +23944,10 @@
     "de": "https://de.wiktionary.org/wiki/heil#1",
     "en": "https://en.wiktionary.org/wiki/heil#German",
     "en_def": "https://en-word.net/lemma/unhurt"
+   },
+   "example": {
+    "de": "Gut, dass du heil wieder zurück bist.",
+    "en": "I’m glad you’re back safe."
    }
   },
   {
@@ -22485,6 +24032,10 @@
     "de": "https://de.wiktionary.org/wiki/Behandlung#1",
     "en": "https://en.wiktionary.org/wiki/Behandlung#German",
     "en_def": "https://en-word.net/lemma/treatment"
+   },
+   "example": {
+    "de": "Der Patient sprach auf die Behandlung an.",
+    "en": "The patient responded to the treatment."
    }
   },
   {
@@ -22613,6 +24164,7 @@
     "participle": "angegriffen",
     "auxiliary": "haben"
    },
+   "separable": "an",
    "freq_rank": 3081,
    "source": {
     "de": "https://de.wiktionary.org/wiki/angreifen#1",
@@ -22632,6 +24184,7 @@
    "definition_en": "The cardinal compass point that is at 90 degrees.",
    "definition_de": "Himmelsrichtung (Haupthimmelsrichtung), die Westen gegenüber und zwischen Norden und Süden liegt; Himmelsrichtung, die zur aufgehenden Sonne zeigt",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 3086,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Osten#1",
@@ -22695,6 +24248,7 @@
    "definition_en": "The emotion of intense dislike; a feeling of dislike so strong that it demands action.",
    "definition_de": "sehr starke Abneigung gegen jemanden oder etwas, welche meist Aggression induziert",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 3095,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Hass#1",
@@ -22714,6 +24268,7 @@
    "definition_en": "The act of gathering something together.",
    "definition_de": "Handlung, in der man eine bestimmte Art von Dingen aufbewahrt",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 3099,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Sammeln#1",
@@ -22868,6 +24423,10 @@
     "de": "https://de.wiktionary.org/wiki/Roman#1",
     "en": "https://en.wiktionary.org/wiki/Roman#German",
     "en_def": "https://en-word.net/lemma/novel"
+   },
+   "example": {
+    "de": "Letztes Jahr habe ich einen Roman gelesen.",
+    "en": "I read a novel last year."
    }
   },
   {
@@ -23023,6 +24582,10 @@
     "de": "https://de.wiktionary.org/wiki/sparen#1",
     "en": "https://en.wiktionary.org/wiki/sparen#German",
     "en_def": "https://en-word.net/lemma/save"
+   },
+   "example": {
+    "de": "Ich spare mein Geld für ein neues Auto.",
+    "en": "I'm saving my money for a new car."
    }
   },
   {
@@ -23045,6 +24608,10 @@
     "de": "https://de.wiktionary.org/wiki/erstaunlich#1",
     "en": "https://en.wiktionary.org/wiki/erstaunlich#German",
     "en_def": "https://en-word.net/lemma/amazing"
+   },
+   "example": {
+    "de": "Es ist wirklich erstaunlich, was man damit alles machen kann.",
+    "en": "It really is impressive just how many things you can do with it."
    }
   },
   {
@@ -23059,6 +24626,7 @@
    "definition_en": "A message that seems to convey no meaning.",
    "definition_de": "etwas Unsinniges",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 3142,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Schwachsinn#2",
@@ -23409,6 +24977,10 @@
     "de": "https://de.wiktionary.org/wiki/bestehen#1",
     "en": "https://en.wiktionary.org/wiki/bestehen#German",
     "en_def": "https://en-word.net/lemma/succeed"
+   },
+   "example": {
+    "de": "Er hat die Prüfung bestanden.",
+    "en": "He has passed the exam."
    }
   },
   {
@@ -23727,6 +25299,10 @@
     "de": "https://de.wiktionary.org/wiki/Fieber#1",
     "en": "https://en.wiktionary.org/wiki/Fieber#German",
     "en_def": "https://en-word.net/lemma/fever"
+   },
+   "example": {
+    "de": "Paul ist krank, er hat Fieber.",
+    "en": "Paul is sick, he's got a fever."
    }
   },
   {
@@ -23879,6 +25455,10 @@
     "de": "https://de.wiktionary.org/wiki/Sicht#1",
     "en": "https://en.wiktionary.org/wiki/Sicht#German",
     "en_def": "https://en-word.net/lemma/view"
+   },
+   "example": {
+    "de": "Aus der Sicht des Marketings war die Veranstaltung ein Erfolg.",
+    "en": "From a marketing point of view, the event was a success."
    }
   },
   {
@@ -23919,6 +25499,10 @@
     "de": "https://de.wiktionary.org/wiki/nebenan#1",
     "en": "https://en.wiktionary.org/wiki/nebenan#German",
     "en_def": "https://en-word.net/lemma/next%20door"
+   },
+   "example": {
+    "de": "Mein Lehrer wohnt gleich nebenan.",
+    "en": "My teacher lives right next door."
    }
   },
   {
@@ -23940,6 +25524,10 @@
     "de": "https://de.wiktionary.org/wiki/Lektion#1",
     "en": "https://en.wiktionary.org/wiki/Lektion#German",
     "en_def": "https://en-word.net/lemma/lesson"
+   },
+   "example": {
+    "de": "Unser Französischbuch hat zwölf Lektionen.",
+    "en": "There are twelve lessons in our French book."
    }
   },
   {
@@ -23975,6 +25563,7 @@
    "definition_en": "A deep awareness of and sympathy for another's suffering.",
    "definition_de": "Gefühl der Anteilnahme, des Bedauerns gegenüber Menschen, die sich in einer unglücklichen Situation oder Verfassung befinden",
    "forms": {},
+   "number": "singular_only",
    "freq_rank": 3269,
    "source": {
     "de": "https://de.wiktionary.org/wiki/Mitleid#1",
@@ -24001,6 +25590,10 @@
     "de": "https://de.wiktionary.org/wiki/Gegner#1",
     "en": "https://en.wiktionary.org/wiki/Gegner#German",
     "en_def": "https://en-word.net/lemma/adversary"
+   },
+   "example": {
+    "de": "Er hat viele Gegner.",
+    "en": "He has many enemies."
    }
   },
   {

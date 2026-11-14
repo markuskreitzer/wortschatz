@@ -3,7 +3,7 @@
 | What | Source | Licence |
 |---|---|---|
 | German headwords, gender, IPA, forms, German definitions, per-sense English translations | [German Wiktionary](https://de.wiktionary.org) via [kaikki.org / wiktextract](https://kaikki.org/dewiktionary/) | CC BY-SA 4.0 (and GFDL) |
-| English glosses of German words (cross-check), IPA fallback | [English Wiktionary](https://en.wiktionary.org) via [kaikki.org](https://kaikki.org/dictionary/German/) | CC BY-SA 4.0 (and GFDL) |
+| English glosses of German words (cross-check), IPA fallback, *no plural* / *plural only* marks, perfect auxiliaries, usage examples with translations | [English Wiktionary](https://en.wiktionary.org) via [kaikki.org](https://kaikki.org/dictionary/German/) | CC BY-SA 4.0 (and GFDL) |
 | Sense alignment (translation-table labels) | English Wiktionary, English entries, via [kaikki.org](https://kaikki.org/dictionary/English/) | CC BY-SA 4.0 (and GFDL) |
 | English definitions | [Open English WordNet 2024](https://en-word.net) | CC BY 4.0 |
 | Word frequency (selection of common words) | [hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords) (OpenSubtitles 2018) | CC BY-SA 4.0 |
@@ -15,6 +15,10 @@ The compiled lexicon (`core/data/lexicon.json`, `lexicon.js`) is a derivative of
 distributed under **CC BY-SA 4.0**. Each entry carries links to its Wiktionary pages and WordNet
 lemma in `source`. Definitions are reproduced verbatim except that WordNet definitions get an
 initial capital and a final full stop, and Wiktionary sense numbers / footnote markers are removed.
+Usage examples are reproduced verbatim from English Wiktionary, except that a trailing
+"(literally …)" / "(spatially)" note is dropped from the translation. Verb principal parts are
+assembled from the German-Wiktionary forms (present, past, participle, auxiliary) without
+inventing any form: the renderer only reorders "sich" and the separable particle.
 
 No CEFR level is shown: none of these sources provides one, and it is not inferred.
 
