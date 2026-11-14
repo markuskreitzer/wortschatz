@@ -223,7 +223,7 @@ Building the lexicon is reproducible; see [`data-build/README.md`](data-build/RE
    and the chosen sense. A verb whose chosen sense is transitive or reflexive shows *hat*
    (*hat geheilt*, not *ist geheilt*), and an example that uses the other auxiliary is left out.
 6. **Review.** Every remaining pairing where the English and German senses disagreed was reviewed
-   by hand. 188 were dropped and are listed in `data-build/exclude.tsv`; five example sentences
+   by hand. 188 were dropped and are listed in `data-build/exclude.tsv`; seven example sentences
    were dropped in `data-build/example_exclude.tsv`.
 
 No CEFR levels are shown, because none of the sources provides them and they are not guessed.
