@@ -7,7 +7,10 @@ Everything that matters is already portable:
   persisted progress, card formatting. Usable as an `rlib` from a Rust runner, or through the C ABI
   in `engine/wortschatz.h`.
 
-The macOS `.saver` is only ~200 lines of Swift around those two pieces. A Linux shell needs the same:
+On macOS the saver draws cards natively (WebKit gets suspended inside `legacyScreenSaver`), but on
+Linux a fullscreen WebView window is an ordinary foreground app, so the web renderer in `core/` is
+the natural fit. Watch for the same failure mode anyway: if the compositor reports the window as
+hidden or occluded, WebKitGTK may throttle it. A Linux shell needs:
 
 ## Plan for Omarchy (Hyprland + hypridle)
 

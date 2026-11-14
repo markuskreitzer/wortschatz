@@ -1,22 +1,49 @@
-// Wortschatz — macOS ScreenSaver.framework shell.
+// Wortschatz: macOS ScreenSaver.framework shell.
 //
-// Thin host: a ScreenSaverView with a WKWebView that renders the shared core (core/index.html,
-// bundled under Contents/Resources/core). Card selection comes from the Rust engine
-// (engine/, linked as a static library through the C ABI in wortschatz.h). Pacing is tied to
-// ScreenSaverView's animation callbacks so stopAnimation really stops everything.
+// The Rust engine (engine/, a static library behind the C ABI in wortschatz.h) chooses and
+// formats each card. CardRenderer draws it natively with AppKit and CoreText, using the bundled
+// fonts and mirroring core/style.css. Motion runs off ScreenSaverView's animateOneFrame on a
+// clock that only advances while animating, so stopAnimation really freezes it.
+//
+// An earlier version hosted core/index.html in a WKWebView. Inside legacyScreenSaver, WebKit
+// treats that page as hidden: the WebContent process is throttled to "background" within half a
+// second and suspended about three seconds later, so the first card appeared and then the
+// screen went blank. Drawing natively avoids that whole process model.
 import AppKit
 import ScreenSaver
-import WebKit
+import os
+
+private let log = Logger(subsystem: "local.markus.wortschatz", category: "saver")
 
 @objc(WortschatzView)
-final class WortschatzView: ScreenSaverView, WKNavigationDelegate {
-    private var webView: WKWebView?
+final class WortschatzView: ScreenSaverView {
+    // Timing (seconds), matching the browser renderer.
+    private let hold: Double = 32
+    private let fade: Double = 2.6
+    private var cycle: Double { hold + fade }                 // enter-to-enter
+    private var enterAfterOut: Double { fade * 0.85 }         // out starts this long before the next enter
+    private let opacityEase = CubicBezier.opacity, driftEase = CubicBezier.drift
+
     private var engine: OpaquePointer?
-    private var pageReady = false
-    private var lastAdvance: Date = .distantPast
+    private lazy var renderer = CardRenderer(fonts: Fonts(directory:
+        Bundle(for: WortschatzView.self).resourceURL?.appendingPathComponent("core/fonts", isDirectory: true)))
+
+    private struct Shown {
+        let card: Card
+        var layout: CardLayout
+        var layoutSize: CGSize
+        var image: CGImage? = nil           // the card rendered once, then faded/drifted as a bitmap
+        var imagePad: CGFloat = 0
+        let enteredAt: Double
+        let from: CGPoint      // start offset (in u) of the entrance drift
+        let to: CGPoint        // resting offset (in u)
+    }
+    private var current: Shown?
+    private var clock: Double = 0                 // advances only while animating
+    private var lastTick: CFTimeInterval?
     private var running = false
-    private let hold: TimeInterval = 32      // seconds a card stays up
-    private let fadeMs = 2600                // crossfade (handled in CSS)
+    /// Seconds of animation clock elapsed (diagnostics for tools/snapshot.swift).
+    @objc var wzClock: Double { clock }
 
     override init?(frame: NSRect, isPreview: Bool) {
         super.init(frame: frame, isPreview: isPreview)
@@ -28,16 +55,15 @@ final class WortschatzView: ScreenSaverView, WKNavigationDelegate {
         commonInit()
     }
 
-    private var bundle: Bundle { Bundle(for: WortschatzView.self) }
+    override var isFlipped: Bool { true }
+    override var isOpaque: Bool { true }
 
     private func commonInit() {
-        animationTimeInterval = 0.5
-        wantsLayer = true
-        layer?.backgroundColor = NSColor(calibratedRed: 0.051, green: 0.047, blue: 0.043, alpha: 1).cgColor
-
-        // Rust engine: lexicon from the bundle, deck state persisted in this process's
-        // (sandboxed) Application Support so each activation continues the round.
+        animationTimeInterval = 1.0 / 30.0
+        let bundle = Bundle(for: WortschatzView.self)
         if let lex = bundle.url(forResource: "lexicon", withExtension: "json", subdirectory: "core/data") {
+            // Deck state lives in this (sandboxed) process's Application Support, so each
+            // activation continues the round. The preview keeps its own deck.
             let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?
                 .appendingPathComponent("Wortschatz", isDirectory: true)
             let state = support?.appendingPathComponent(isPreview ? "deck-preview.json" : "deck.json").path
@@ -46,31 +72,9 @@ final class WortschatzView: ScreenSaverView, WKNavigationDelegate {
                 return wz_engine_new(lp, nil)
             }
         }
-
-        let config = WKWebViewConfiguration()
-        config.suppressesIncrementalRendering = true
-        config.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
-        config.mediaTypesRequiringUserActionForPlayback = .all
-        let hostScript = """
-        window.WORTSCHATZ_HOST = { platform: "macos", driven: \(engine != nil), preview: \(isPreview), hold: \(Int(hold)), fade: \(fadeMs) };
-        """
-        config.userContentController.addUserScript(
-            WKUserScript(source: hostScript, injectionTime: .atDocumentStart, forMainFrameOnly: true))
-
-        let wv = WKWebView(frame: bounds, configuration: config)
-        wv.autoresizingMask = [.width, .height]
-        wv.navigationDelegate = self
-        wv.setValue(false, forKey: "drawsBackground")   // no white flash before first paint
-        wv.allowsMagnification = false
-        addSubview(wv)
-        webView = wv
-
-        if let index = bundle.url(forResource: "index", withExtension: "html", subdirectory: "core") {
-            wv.loadFileURL(index, allowingReadAccessTo: index.deletingLastPathComponent())
-        }
-
-        // Sonoma+ keeps legacyScreenSaver alive after the saver is dismissed and does not always
-        // call stopAnimation; this notification is the reliable "we are done" signal.
+        advance()
+        // macOS 14+ keeps legacyScreenSaver alive after dismissal and does not always call
+        // stopAnimation; this notification is the reliable "we are done" signal.
         DistributedNotificationCenter.default().addObserver(
             self, selector: #selector(screensaverWillStop(_:)),
             name: NSNotification.Name("com.apple.screensaver.willstop"), object: nil)
@@ -81,65 +85,150 @@ final class WortschatzView: ScreenSaverView, WKNavigationDelegate {
         if let engine { wz_engine_free(engine) }
     }
 
-    // MARK: ScreenSaverView lifecycle
+    // MARK: Lifecycle
 
     override func startAnimation() {
         super.startAnimation()
+        log.notice("startAnimation preview=\(self.isPreview, privacy: .public) size=\(Int(self.bounds.width), privacy: .public)x\(Int(self.bounds.height), privacy: .public)")
         running = true
-        js("window.Wortschatz && Wortschatz.resume()")
-        if pageReady && lastAdvance == .distantPast { advance() }
+        lastTick = nil
+        needsDisplay = true
     }
 
     override func stopAnimation() {
         super.stopAnimation()
+        log.notice("stopAnimation preview=\(self.isPreview, privacy: .public)")
         running = false
-        js("window.Wortschatz && Wortschatz.pause()")
+        lastTick = nil
     }
 
     @objc private func screensaverWillStop(_ note: Notification) {
         stopAnimation()
         if !isPreview {
-            // Let the process wind down cleanly instead of rendering in the background.
+            // Let the host process wind down instead of drawing on in the background.
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { exit(0) }
         }
-    }
-
-    override func animateOneFrame() {
-        guard running, pageReady else { return }
-        if Date().timeIntervalSince(lastAdvance) >= hold + Double(fadeMs) / 1000 { advance() }
-    }
-
-    override func draw(_ rect: NSRect) {
-        NSColor(calibratedRed: 0.051, green: 0.047, blue: 0.043, alpha: 1).setFill()
-        rect.fill()
     }
 
     override var hasConfigureSheet: Bool { false }
     override var configureSheet: NSWindow? { nil }
 
-    // MARK: Engine -> WebView
+    // MARK: Timeline
+
+    private func nextCard() -> Card? {
+        guard let engine, let cstr = wz_engine_next_card_json(engine) else { return nil }
+        defer { wz_string_free(cstr) }
+        return try? JSONDecoder().decode(Card.self, from: Data(String(cString: cstr).utf8))
+    }
 
     private func advance() {
-        lastAdvance = Date()
-        guard let engine, let cstr = wz_engine_next_card_json(engine) else { return }
-        let json = String(cString: cstr)
-        wz_string_free(cstr)
-        js("window.Wortschatz && Wortschatz.show(\(json))")
+        guard let card = nextCard() else { log.error("engine returned no card"); return }
+        log.notice("card #\(card.serial, privacy: .public) \(card.id, privacy: .public) preview=\(self.isPreview, privacy: .public)")
+        let d = CardRenderer.drift[card.serial % CardRenderer.drift.count]
+        let to = CGPoint(x: d.0, y: d.1)
+        // Like the CSS transition: the card drifts in from where the previous one rested
+        // (plus 0.8u lower). The first card starts from its own resting place.
+        let prev = current?.to ?? to
+        current = Shown(card: card, layout: CardLayout(), layoutSize: .zero, enteredAt: clock,
+                        from: CGPoint(x: prev.x, y: prev.y + 0.8), to: to)
     }
 
-    private func js(_ source: String) {
-        webView?.evaluateJavaScript(source, completionHandler: nil)
+    override func animateOneFrame() {
+        guard running else { return }
+        let now = CACurrentMediaTime()
+        if let last = lastTick { clock += min(0.25, max(0, now - last)) }   // no jumps after a stall
+        lastTick = now
+        if let c = current, clock - c.enteredAt >= cycle { advance() }
+        scheduleRedraw()
     }
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        pageReady = true
-        if engine != nil { advance() }
-        if !running && !isPreview { js("window.Wortschatz && Wortschatz.pause()") }
+    private var lastProgressStep = -1
+    /// Full redraws only while the card moves; during the hold just the progress hairline,
+    /// a few times per second.
+    private func scheduleRedraw() {
+        guard let c = current else { return }
+        let t = clock - c.enteredAt
+        if t < fade * 1.6 + 0.1 || t >= cycle - enterAfterOut - 0.05 { needsDisplay = true; return }
+        guard !isPreview else { return }
+        let step = Int(t * 4)
+        if step != lastProgressStep { lastProgressStep = step; setNeedsDisplay(colophonRect()) }
     }
 
-    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        pageReady = false
-        lastAdvance = .distantPast
-        webView.reload()
+    private func colophonRect() -> NSRect {
+        let u = CardRenderer.unit(for: bounds.size, preview: isPreview)
+        return NSRect(x: 0, y: bounds.height - 6 * u, width: bounds.width, height: 6 * u)
+    }
+
+    private func progress(_ t: Double) -> CGFloat { CGFloat(min(1, max(0, t / hold))) }
+
+    // MARK: Drawing
+
+    override func draw(_ rect: NSRect) {
+        guard let ctx = NSGraphicsContext.current?.cgContext else { return }
+        let size = bounds.size
+        ctx.saveGState()
+        ctx.clip(to: rect)
+        renderer.drawBackground(in: ctx, size: size)
+        let u = CardRenderer.unit(for: size, preview: isPreview)
+        defer { ctx.restoreGState() }
+        guard var c = current else { return }
+        let t = clock - c.enteredAt
+
+        if !isPreview, rect.intersects(colophonRect()) {
+            renderer.drawColophon(in: ctx, size: size, u: u, progress: progress(t))
+        }
+
+        let cardW = min(82 * u, size.width - 16 * u)
+        let scale = window?.backingScaleFactor ?? NSScreen.main?.backingScaleFactor ?? 2
+        if c.layoutSize != size || c.image == nil {
+            c.layout = renderer.layout(c.card, width: cardW, u: u)
+            c.layoutSize = size
+            c.imagePad = ceil(3 * u)
+            c.image = renderCard(c.layout, width: cardW, pad: c.imagePad, scale: scale)
+            current = c
+        }
+
+        // Opacity and drift, as the CSS transitions: in over `fade` and `fade * 1.6`,
+        // out over `fade * 0.8`, starting `fade * 0.85` before the next card enters.
+        var opacity = opacityEase(t / fade)
+        let k = CGFloat(driftEase(t / (fade * 1.6)))
+        var off = CGPoint(x: c.from.x + (c.to.x - c.from.x) * k, y: c.from.y + (c.to.y - c.from.y) * k)
+        let outStart = cycle - enterAfterOut
+        if t > outStart {
+            let o = (t - outStart) / (fade * 0.8)
+            opacity *= 1 - opacityEase(o)
+            off.y += 0.8 * CGFloat(driftEase(o))
+        }
+        guard opacity > 0.001, let image = c.image else { return }
+
+        let x = (size.width - cardW) / 2 + off.x * u
+        let y = max(6 * u, (size.height - c.layout.height) / 2) + off.y * u
+        let dst = CGRect(x: x - c.imagePad, y: y - c.imagePad,
+                         width: cardW + 2 * c.imagePad, height: c.layout.height + 2 * c.imagePad)
+        guard rect.intersects(dst) else { return }
+        ctx.setAlpha(CGFloat(opacity))
+        ctx.interpolationQuality = .high
+        // The view is flipped; CGContext.draw(image) assumes y-up, so flip locally.
+        ctx.translateBy(x: dst.minX, y: dst.maxY)
+        ctx.scaleBy(x: 1, y: -1)
+        ctx.draw(image, in: CGRect(origin: .zero, size: dst.size))
+    }
+
+    /// Render the card once into a bitmap at the display scale (transparent background).
+    private func renderCard(_ layout: CardLayout, width: CGFloat, pad: CGFloat, scale: CGFloat) -> CGImage? {
+        let w = width + 2 * pad, h = layout.height + 2 * pad
+        guard let space = CGColorSpace(name: CGColorSpace.sRGB),
+              let bm = CGContext(data: nil, width: Int(ceil(w * scale)), height: Int(ceil(h * scale)), bitsPerComponent: 8,
+                                 bytesPerRow: 0, space: space, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+        else { return nil }
+        bm.scaleBy(x: scale, y: scale)
+        bm.translateBy(x: 0, y: h)
+        bm.scaleBy(x: 1, y: -1)                 // flipped, like the view
+        bm.translateBy(x: pad, y: pad)
+        NSGraphicsContext.saveGraphicsState()
+        NSGraphicsContext.current = NSGraphicsContext(cgContext: bm, flipped: true)
+        renderer.draw(layout, in: bm)
+        NSGraphicsContext.restoreGraphicsState()
+        return bm.makeImage()
     }
 }

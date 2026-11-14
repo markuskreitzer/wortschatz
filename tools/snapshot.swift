@@ -1,14 +1,16 @@
-// Dev tool: load the built Wortschatz.saver exactly like the screen saver host does
-// (NSBundle principal class -> ScreenSaverView(frame:isPreview:)), run it for a few seconds and
-// write a PNG of what it renders. Usage: snapshot <path.saver> <out.png> [preview 0|1] [w] [h] [finish]
+// Dev tool: load a built Wortschatz.saver exactly like the screen saver host does (NSBundle
+// principal class -> ScreenSaverView(frame:isPreview:)), let it animate in a real (off-screen)
+// window on its own timer, and write PNGs at the requested times.
+//   snapshot <path.saver> <out-prefix> <preview 0|1> <w> <h> <t1> [t2 ...]
+// writes <out-prefix>-<t>s.png for every t (seconds after startAnimation).
 import AppKit
 import ScreenSaver
-import WebKit
 
-let args = CommandLine.arguments
-let saverPath = args[1], outPath = args[2]
-let preview = args.count > 3 ? args[3] == "1" : false
-let w = args.count > 4 ? Double(args[4])! : 1512, h = args.count > 5 ? Double(args[5])! : 982
+let a = CommandLine.arguments
+guard a.count >= 7 else { print("usage: snapshot <saver> <prefix> <preview> <w> <h> <t...>"); exit(2) }
+let (saverPath, prefix, preview) = (a[1], a[2], a[3] == "1")
+let (w, h) = (Double(a[4])!, Double(a[5])!)
+let times = a[6...].compactMap(Double.init).sorted()
 
 let app = NSApplication.shared
 app.setActivationPolicy(.prohibited)
@@ -17,36 +19,25 @@ guard let bundle = Bundle(path: saverPath), bundle.load(), let cls = bundle.prin
 }
 let frame = NSRect(x: 0, y: 0, width: w, height: h)
 let window = NSWindow(contentRect: frame, styleMask: [.borderless], backing: .buffered, defer: false)
-window.setFrameOrigin(NSPoint(x: -20000, y: -20000))   // off-screen
+window.setFrameOrigin(NSPoint(x: -30000, y: -30000))
 guard let view = cls.init(frame: frame, isPreview: preview) else { print("FAIL: init returned nil"); exit(1) }
 window.contentView = view
 window.orderFrontRegardless()
 view.startAnimation()
-print("loaded \(cls) preview=\(preview) animating=\(view.isAnimating)")
+print("loaded \(cls) preview=\(preview) animating=\(view.isAnimating) interval=\(view.animationTimeInterval)")
 
-
-let finish = args.count > 6 && args[6] == "finish"
-// Off-screen windows are visibilityState=hidden to WebKit, which freezes CSS transitions; with
-// "finish" the snapshot disables transitions (dev only; the real saver window is on screen).
-func web() -> WKWebView {
-    guard let w = view.subviews.compactMap({ $0 as? WKWebView }).first else { print("FAIL: no WKWebView"); exit(1) }
-    return w
-}
-DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-    if finish {
-        web().evaluateJavaScript("(()=>{const s=document.createElement('style');s.textContent='*{transition:none!important}';document.head.appendChild(s);return 1})()") { _, _ in }
-    }
-}
-DispatchQueue.main.asyncAfter(deadline: .now() + 6.5) {
-    let probe = "document.title + ' | ' + document.getElementById('card').className + ' | fonts:' + document.fonts.status + ' | vis:' + document.visibilityState + ' | opacity:' + getComputedStyle(document.getElementById('card')).opacity"
-    web().evaluateJavaScript(probe) { r, e in
-        print("page:", r ?? "nil", e.map { "\($0)" } ?? "")
-        web().takeSnapshot(with: nil) { img, err in
-            guard let img, let tiff = img.tiffRepresentation, let rep = NSBitmapImageRep(data: tiff),
-                  let png = rep.representation(using: .png, properties: [:]) else { print("FAIL: snapshot \(String(describing: err))"); exit(1) }
-            try! png.write(to: URL(fileURLWithPath: outPath))
+let start = Date()
+for t in times {
+    DispatchQueue.main.asyncAfter(deadline: .now() + t) {
+        guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { print("FAIL: rep"); exit(1) }
+        view.cacheDisplay(in: view.bounds, to: rep)
+        let path = "\(prefix)-\(String(format: "%g", t))s.png"
+        try! rep.representation(using: .png, properties: [:])!.write(to: URL(fileURLWithPath: path))
+        let clock = (view.value(forKey: "wzClock") as? Double) ?? -1
+        print(String(format: "t=%.1fs clock=%.2fs wrote %@", Date().timeIntervalSince(start), clock, path))
+        if t == times.last {
             view.stopAnimation()
-            print("OK wrote \(outPath) animating-after-stop=\(view.isAnimating)")
+            print("animating-after-stop=\(view.isAnimating)")
             exit(0)
         }
     }

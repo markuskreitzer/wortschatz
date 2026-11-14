@@ -37,8 +37,9 @@ That is lovely if you already speak German and not much help if you are still le
   soon. Progress is remembered between sessions.
 - **Offline and silent.** Fonts and data are bundled. There are no network requests, no telemetry
   and no sound.
-- **Portable core.** A Rust engine plus an HTML/CSS renderer, wrapped by a thin native shell.
-  macOS is done; Linux (Omarchy/Hyprland) is planned.
+- **Portable core.** One Rust engine picks and formats the cards everywhere. On macOS the saver
+  draws them natively with CoreText; in a browser (and on the planned Linux port) the HTML/CSS
+  renderer shows the same design.
 
 ## What a card shows
 
@@ -129,10 +130,10 @@ or allow it under **System Settings → Privacy & Security → Open Anyway**.
 ## How it works
 
 ```
-core/        renderer: index.html + style.css + app.js, bundled fonts, data/lexicon.{json,js}
+core/        web renderer (index.html + style.css + app.js), bundled fonts, data/lexicon.{json,js}
 engine/      Rust crate wortschatz-core: lexicon, fair shuffle with saved progress, card formatting
              C ABI (wortschatz.h) + CLI: wortschatz validate | next | stats
-macos/       Swift ScreenSaverView hosting core/ in a WKWebView, driven by the Rust engine
+macos/       Swift ScreenSaverView + native CoreText card renderer, driven by the Rust engine
 linux/       Omarchy / Hyprland plan + stub
 data-build/  reproducible lexicon build (Wiktionary + Open English WordNet + frequency list)
 scripts/     build-macos.sh, install-macos.sh, select-macos.sh
@@ -140,23 +141,31 @@ tools/       snapshot.swift (renders the built .saver to PNG), README media capt
 ```
 
 ```
- ┌────────────── Rust engine ──────────────┐      ┌──────── core/ (HTML/CSS/JS) ────────┐
- │ lexicon · shuffle deck · card formatting│ JSON │ typography, layout, fades           │
- └───────────────────┬─────────────────────┘ ───▶ └─────────────────────────────────────┘
-                     │ C ABI                                 ▲
-             ┌───────┴────────┐                              │ WKWebView
-             │ Swift .saver   │──────────────────────────────┘
-             └────────────────┘
+                 ┌────────────── Rust engine ──────────────┐
+                 │ lexicon · shuffle deck · card formatting│
+                 └──────┬───────────────────────────┬──────┘
+                  C ABI │ card JSON                 │ (Linux: as a Rust crate, planned)
+          ┌─────────────┴─────────────┐   ┌─────────┴──────────────────────────┐
+          │ macOS .saver (Swift)      │   │ core/ web renderer (HTML/CSS/JS)   │
+          │ CoreText drawing, fades   │   │ browser preview · Linux WebView    │
+          └───────────────────────────┘   └────────────────────────────────────┘
+                 same fonts, palette, spacing and motion on both sides
 ```
 
-- **Engine.** The Rust engine decides what comes next and formats the card. The page only renders it.
-- **macOS shell.** The Swift `ScreenSaverView` calls the engine through the C ABI and pushes each
-  card into the page (`Wortschatz.show(card)`).
-  - Pacing runs on `animateOneFrame`, so `stopAnimation` really pauses.
-  - The saver exits cleanly when the screen saver stops.
-- **Standalone mode.** In a plain browser, `app.js` uses a small JavaScript mirror of the same deck logic.
-- **Hidden pages.** WebKit freezes CSS transitions in pages it considers hidden, such as an off-screen
-  thumbnail. In that case cards appear without the fade instead of staying invisible.
+- **Engine.** The Rust engine decides what comes next and formats the card. Renderers only draw it.
+- **macOS saver.** The Swift `ScreenSaverView` calls the engine through the C ABI and draws each
+  card with AppKit/CoreText (`macos/Sources/CardRenderer.swift`), mirroring `core/style.css`:
+  same unit system, bundled fonts, colours, spacing, fades and drift.
+  - Each card is laid out and rendered once into a bitmap; the fades and drift only move that
+    bitmap, so the saver idles at a few percent CPU.
+  - Pacing runs on `animateOneFrame` with a clock that only advances while animating, so
+    `stopAnimation` really pauses. The saver exits cleanly when the screen saver stops.
+  - Why not a WebView? Inside macOS's `legacyScreenSaver` host, WebKit treats the page as
+    hidden: its WebContent process is throttled within half a second and suspended a few seconds
+    later, so the first card showed and then the screen went blank. Native drawing has no such
+    out-of-process renderer.
+- **Browser.** `core/index.html` renders the same design; `app.js` uses a small JavaScript mirror of
+  the deck logic.
 
 Engine checks:
 

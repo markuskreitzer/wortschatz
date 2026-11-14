@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build Wortschatz.saver (Rust engine + Swift ScreenSaverView + shared core), ad-hoc signed.
+# Build Wortschatz.saver (Rust engine + native Swift/CoreText ScreenSaverView), ad-hoc signed.
 # Needs: Xcode or Command Line Tools (swiftc, codesign), Rust (cargo).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -32,7 +32,7 @@ for arch in "${ARCHS[@]}"; do
     -target "$arch-apple-macos$MIN_MACOS" \
     -import-objc-header "$ROOT/macos/Sources/Bridging.h" \
     "$ROOT"/macos/Sources/*.swift "$LIB" \
-    -framework ScreenSaver -framework WebKit -framework AppKit \
+    -framework ScreenSaver -framework AppKit -framework CoreText \
     -Xlinker -bundle -o "$BUILD/obj/Wortschatz-$arch"
   BINS+=("$BUILD/obj/Wortschatz-$arch")
 done
@@ -40,9 +40,9 @@ lipo -create "${BINS[@]}" -output "$SAVER/Contents/MacOS/Wortschatz"
 
 echo "==> Resources"
 cp "$ROOT/macos/Resources/Info.plist" "$SAVER/Contents/Info.plist"
+# The native renderer needs only the lexicon and the fonts from core/.
 mkdir -p "$SAVER/Contents/Resources/core/data" "$SAVER/Contents/Resources/core/fonts"
-cp "$ROOT"/core/index.html "$ROOT"/core/style.css "$ROOT"/core/app.js "$SAVER/Contents/Resources/core/"
-cp "$ROOT"/core/data/lexicon.json "$ROOT"/core/data/lexicon.js "$SAVER/Contents/Resources/core/data/"
+cp "$ROOT"/core/data/lexicon.json "$SAVER/Contents/Resources/core/data/"
 cp "$ROOT"/core/fonts/*.woff2 "$ROOT"/core/fonts/OFL-*.txt "$SAVER/Contents/Resources/core/fonts/"
 cp "$ROOT/DATA_SOURCES.md" "$ROOT/LICENSE" "$SAVER/Contents/Resources/"
 [ -f "$ROOT/macos/Resources/thumbnail.png" ] && cp "$ROOT/macos/Resources/thumbnail.png" "$ROOT/macos/Resources/thumbnail@2x.png" "$SAVER/Contents/Resources/" 2>/dev/null || true
