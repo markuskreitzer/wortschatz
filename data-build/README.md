@@ -30,12 +30,20 @@ cargo run --release --manifest-path ../engine/Cargo.toml -- validate ../core/dat
    it has no plural and English Wiktionary marks the noun *no plural*/*uncountable* (or German
    Wiktionary gives "—"), and `plural_only` for pluralia tantum (*die Daten*, article "die", no
    gender). Verbs: `separable` is the particle split off in the present (*ruft an*), `reflexive`
-   is set when the present reads *… sich* or the chosen German sense is tagged reflexive only.
-   A second perfect auxiliary is kept only when English Wiktionary lists both, unqualified, in
-   the same order (so *anfangen* is *hat angefangen*, not the regional *ist angefangen*).
+   is set when the present reads *… sich*, the chosen German sense is tagged reflexive only, or
+   (untagged sense) most of its examples use *sich*. When German Wiktionary gives two perfect
+   auxiliaries, a transitive or reflexive chosen sense (tags from German Wiktionary, else from
+   the matching English senses) keeps only *haben* (*hat geheilt*). Otherwise the second
+   auxiliary is kept only when English Wiktionary lists both, unqualified, in the same order (so
+   *anfangen* is *hat angefangen*, not the regional *ist angefangen*); what remains are true
+   doubles such as *stehen* (*hat* in the north, *ist* in the south).
 7. **Example.** The first English-Wiktionary usage example (not a quotation) of the sense whose
-   gloss contains the card's English equivalent: a full sentence of at most 90 characters, with
-   a modern English translation (no "literally" notes, no fragments like *to accept an apology*).
+   own head gloss names the card's displayed English equivalent (form-of senses skipped). For
+   verbs the sense must also agree with the chosen German sense's valency (transitive,
+   intransitive, reflexive), and an example built with an auxiliary the card does not show is
+   skipped; better no example than one for another sense. It must be a full sentence of at most
+   90 characters, with a modern English translation (no "literally" notes, no fragments like
+   *to accept an apology*).
    `example_exclude.tsv` drops individual examples found wrong in review.
 8. **Manual review**: every built entry was read; entries whose English and German senses
    disagree (or are too specialised, e.g. card-game senses) are listed in `exclude.tsv` and

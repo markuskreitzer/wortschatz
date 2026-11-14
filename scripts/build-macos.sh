@@ -40,9 +40,10 @@ lipo -create "${BINS[@]}" -output "$SAVER/Contents/MacOS/Wortschatz"
 
 echo "==> Resources"
 cp "$ROOT/macos/Resources/Info.plist" "$SAVER/Contents/Info.plist"
-# The native renderer needs only the lexicon and the fonts from core/.
+# The native renderer needs only the lexicon, the timing spec and the fonts from core/.
 mkdir -p "$SAVER/Contents/Resources/core/data" "$SAVER/Contents/Resources/core/fonts"
 cp "$ROOT"/core/data/lexicon.json "$SAVER/Contents/Resources/core/data/"
+cp "$ROOT"/core/timing.js "$SAVER/Contents/Resources/core/"
 cp "$ROOT"/core/fonts/*.woff2 "$ROOT"/core/fonts/OFL-*.txt "$SAVER/Contents/Resources/core/fonts/"
 cp "$ROOT/DATA_SOURCES.md" "$ROOT/LICENSE" "$SAVER/Contents/Resources/"
 [ -f "$ROOT/macos/Resources/thumbnail.png" ] && cp "$ROOT/macos/Resources/thumbnail.png" "$ROOT/macos/Resources/thumbnail@2x.png" "$SAVER/Contents/Resources/" 2>/dev/null || true

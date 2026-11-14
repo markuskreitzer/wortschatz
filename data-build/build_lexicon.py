@@ -296,16 +296,41 @@ def main():
     if os.path.exists(bx):
         bad_examples = {l.split("\t")[0].strip() for l in open(bx, encoding="utf-8") if l.strip() and not l.startswith("#")}
 
-    def example_for(key, equivalents):
-        """One short usage example with an English translation, from the English Wiktionary
-        sense that glosses the German word with one of `equivalents` (so the example illustrates
-        the meaning shown on the card). Quotations are skipped: they are long and often archaic."""
-        pats = [re.compile(r"(^|[^a-z])" + re.escape(x.lower()) + r"($|[^a-z])") for x in equivalents]
+    VALENCY = {"transitive", "intransitive", "reflexive"}
+    AUX_FORMS = {"haben": {"habe", "hast", "hat", "haben", "habt", "hatte", "hattest", "hatten", "hattet", "gehabt"},
+                 "sein": {"bin", "bist", "ist", "sind", "seid", "war", "warst", "waren", "wart", "gewesen"}}
+
+    def head_equivalents(s):
+        """The English equivalents a sense gives in its most specific gloss, e.g.
+        "causative of stehen: to put, place, position (someone ...)" -> {"put", "place", "position"};
+        "wife (married woman, ...)" -> {"wife"}."""
+        gl = ((s.get("glosses") or [""])[-1]).lower()
+        gl = re.sub(r"^[^:]{0,40}\bof \w+:\s*", "", gl)          # "causative of stehen: ..."
+        gl = re.sub(r"\([^)]*\)|\[[^\]]*\]", "", gl)
+        out = set()
+        for item in re.split(r"[,;]| or ", gl):
+            item = re.sub(r"^\s*(to|a|an|the)\s+", "", item.strip()).strip(" .")
+            if item: out.add(item)
+        return out
+
+    def example_for(key, equivalents, valency=frozenset(), aux=(), participle=None):
+        """One short usage example with an English translation, from an English Wiktionary
+        sense whose own gloss names one of the card's `equivalents` (so "Maria ist meine Frau."
+        under "wife" is not shown on a "woman" card). For verbs the sense must also have the
+        card's valency (transitive / intransitive / reflexive), and a perfect in the example must
+        use the auxiliary the card shows. Quotations are skipped: they are long and often archaic.
+        No example is better than a mismatched one."""
+        eqs = {x.lower() for x in equivalents}
         for x in en.get(key, []):
             for s in x.get("senses", []):
-                if {"form-of", "alt-of"} & tagset(s) or tagset(s) & BAD_TAGS: continue
-                gl = " ; ".join(s.get("glosses") or []).lower()
-                if not any(p.search(gl) for p in pats): continue
+                if {"form-of", "alt-of"} & tagset(s) or tagset(s) & BAD_TAGS:
+                    if "causative" not in tagset(s): continue       # stellen: "causative of stehen"
+                if tagset(s) & BAD_TAGS: continue
+                if not (head_equivalents(s) & eqs): continue
+                sv = tagset(s) & VALENCY
+                if valency and sv and not (sv & valency): continue
+                if "reflexive" in valency and "reflexive" not in sv: continue
+                if "reflexive" not in valency and sv == {"reflexive"}: continue
                 for ex in s.get("examples") or []:
                     if ex.get("type") != "example": continue
                     de_t = clean(ex.get("text") or "")
@@ -321,6 +346,11 @@ def main():
                     if ex.get("ref"): continue
                     en_t = re.sub(r"\s*\((?:spatially|temporally|figuratively|colloquially|informal)\)\s*$", "", en_t)
                     if not re.match(r"[\"“'A-Z0-9]", en_t): continue      # "to soothe (sb's) anger."
+                    if participle and aux:
+                        toks = set(re.findall(r"\w+", de_t.lower()))
+                        if participle.lower() in toks and any(
+                                toks & AUX_FORMS[a] for a in ("haben", "sein") if a not in aux):
+                            continue                                     # "ist gestartet" on a "hat" card
                     return {"de": de_t, "en": en_t}
         return None
 
@@ -431,17 +461,49 @@ def main():
             # German Wiktionary lists secondary/regional auxiliaries too (anfangen: haben, sein*).
             # Keep the second one only when English Wiktionary gives both, unqualified, in the
             # same order; otherwise show the primary auxiliary alone.
-            aux = [x.strip() for x in (fm.get("auxiliary") or "").split("/") if x.strip()]
-            if len(aux) > 1 and en_aux(key) != aux:
-                fm["auxiliary"] = aux[0]
             p3 = (fm.get("present3") or "").split()
             core = [t for t in p3 if t != "sich"]
             if len(core) == 2 and w.startswith(core[1]) and len(core[1]) < len(w) - 2:
                 extra["separable"] = core[1]
             stags = set(s.get("tags") or []) | set(s.get("raw_tags") or [])
-            if "sich" in p3 or ("reflexive" in stags and not stags & {"transitive", "intransitive"}):
+            # Reflexive in the chosen sense: "benimmt sich"; a sense tagged only reflexive; or a
+            # sense with no transitive/intransitive tag whose own examples mostly use "sich"
+            # (entspannen: "Bei einer Massage kann man sich entspannen."). Senses that also list
+            # transitive/intransitive use (irren, verstecken, waschen) stay unmarked.
+            exs = [x.get("text") or "" for x in s.get("examples") or []]
+            # Only "sich" counts: mich/dich/uns/euch are just as often plain objects.
+            refl_ex = sum(1 for t in exs if re.search(r"\bsich\b", t, re.I))
+            if "sich" in p3 or ("reflexive" in stags and not stags & {"transitive", "intransitive"}) \
+                    or (not stags & {"transitive", "intransitive"}
+                        and len(exs) >= 2 and refl_ex >= 2 and refl_ex * 2 > len(exs)):
                 extra["reflexive"] = True
-        ex = None if f"{w}#{pos}" in bad_examples else example_for(key, [x for x in agreed])
+            valency = {"reflexive"} if extra.get("reflexive") else stags & VALENCY
+            if not valency:
+                # German sense untagged: use the English-Wiktionary senses that give the card's
+                # equivalent (ziehen "to draw": only transitive senses -> transitive).
+                ev = set()
+                for x in en.get(key, []):
+                    for es in x.get("senses", []):
+                        if head_equivalents(es) & {q.lower() for q in eq}:
+                            ev |= tagset(es) & VALENCY
+                if ev == {"transitive"}: valency = ev
+            # Perfect auxiliary for the chosen sense. German Wiktionary lists every auxiliary of
+            # the verb (heilen: haben, sein), including secondary/regional ones (anfangen: sein*).
+            # Transitive and reflexive senses take haben; otherwise a second auxiliary is kept
+            # only when English Wiktionary gives both, unqualified, in the same order.
+            aux = [x.strip() for x in (fm.get("auxiliary") or "").split("/") if x.strip()]
+            if len(aux) > 1:
+                if valency and valency <= {"transitive", "reflexive"} and "haben" in aux:
+                    aux = ["haben"]
+                elif en_aux(key) != aux:
+                    aux = aux[:1]
+                fm["auxiliary"] = " / ".join(aux)
+        if pos == "verb":
+            aux_now = [x.strip() for x in (fm.get("auxiliary") or "").split("/") if x.strip()]
+            ex = None if f"{w}#{pos}" in bad_examples else example_for(
+                key, eq, frozenset(valency), aux_now, fm.get("participle"))
+        else:
+            ex = None if f"{w}#{pos}" in bad_examples else example_for(key, eq)
         if ex: extra["example"] = ex
         entry = {
             "id": f"{w}#{pos}",

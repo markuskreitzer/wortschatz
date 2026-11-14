@@ -22,7 +22,7 @@
   /* One unit scales the whole composition, so the System Settings thumbnail and a 6K display
      show the same layout. */
   --u: min(1vw, 1.65vh);
-  --fade: 2600ms;
+  --fade-in: 2600ms; --drift-in: 4160ms; --fade-out: 2080ms;   /* set from core/timing.js by app.js */
 }
 .g-masculine { --accent: var(--masc); }
 .g-feminine  { --accent: var(--fem); }
@@ -55,11 +55,11 @@ body::before {
   width: min(calc(var(--u) * 82), 100%);
   opacity: 0;
   transform: translate3d(var(--dx, 0), calc(var(--dy, 0px) + var(--u) * 0.8), 0);
-  transition: opacity var(--fade) cubic-bezier(.4,0,.2,1), transform calc(var(--fade) * 1.6) cubic-bezier(.2,.7,.2,1);
+  transition: opacity var(--fade-in) cubic-bezier(.4,0,.2,1), transform var(--drift-in) cubic-bezier(.2,.7,.2,1);
   will-change: opacity, transform;
 }
 .card.in { opacity: 1; transform: translate3d(var(--dx, 0), var(--dy, 0px), 0); }
-.card.out { opacity: 0; transition-duration: calc(var(--fade) * 0.8), calc(var(--fade) * 0.8); }
+.card.out { opacity: 0; transition-duration: var(--fade-out), var(--fade-out); }
 
 .meta {
   display: flex; align-items: center; gap: calc(var(--u) * 1.6);
@@ -162,4 +162,4 @@ body::before {
 .preview .colophon { display: none; }
 .instant .card, .instant .card *, .instant .progress, .instant .progress * { transition: none !important; }
 
-@media (prefers-reduced-motion: reduce) { .card { transition: opacity var(--fade) linear; transform: none !important; } }
+@media (prefers-reduced-motion: reduce) { .card { transition: opacity var(--fade-in) linear; transform: none !important; } }

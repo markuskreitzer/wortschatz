@@ -134,8 +134,11 @@ impl Lexicon {
             if e.pos == "noun" {
                 let ok = matches!(
                     (e.gender.as_deref(), e.article.as_deref(), e.number.as_deref()),
-                    (Some("masculine"), Some("der"), _) | (Some("feminine"), Some("die"), _) | (Some("neuter"), Some("das"), _)
-                        | (None, Some("die"), Some("plural_only"))
+                    (Some("masculine"), Some("der"), n) | (Some("feminine"), Some("die"), n) | (Some("neuter"), Some("das"), n)
+                        if n != Some("plural_only")
+                ) || matches!(
+                    (e.gender.as_deref(), e.article.as_deref(), e.number.as_deref()),
+                    (None, Some("die"), Some("plural_only"))
                 );
                 if !ok {
                     problems.push(format!("{at}: noun without consistent gender/article"));
@@ -426,6 +429,23 @@ impl Deck {
     pub fn is_empty(&self) -> bool {
         self.len == 0
     }
+
+    /// True when a deck restored from disk can be used for a lexicon of `n` entries: `order`
+    /// is a permutation of `0..n`, the cursor is in range, recent ids are valid and the RNG is
+    /// live. Anything else (a truncated file, a lexicon of a different size, hand edits) means
+    /// the caller should start a fresh shuffle instead.
+    pub fn is_consistent_with(&self, n: usize) -> bool {
+        if n == 0 || self.len != n || self.order.len() != n || self.pos > n || self.rng.0 == 0 {
+            return false;
+        }
+        let mut seen = vec![false; n];
+        for &i in &self.order {
+            if i >= n || std::mem::replace(&mut seen[i], true) {
+                return false;
+            }
+        }
+        self.recent.len() <= RECENT && self.recent.iter().all(|&i| i < n)
+    }
 }
 
 /// Lexicon + deck, optionally persisted so each screensaver activation continues the round
@@ -443,7 +463,7 @@ impl Engine {
             .as_ref()
             .and_then(|p| std::fs::read_to_string(p).ok())
             .and_then(|s| serde_json::from_str::<Deck>(&s).ok())
-            .filter(|d| d.len == n && d.order.len() == n)
+            .filter(|d| d.is_consistent_with(n))
             .unwrap_or_else(|| Deck::new(n, Rng::from_time()));
         Engine { lexicon, deck, state_path }
     }
@@ -589,6 +609,88 @@ mod tests {
         assert!(problems[0].contains("example longer"));
         let lex = Lexicon { meta: serde_json::Value::Null, entries: vec![e.clone(), e] };
         assert!(lex.validate().iter().any(|p| p.contains("duplicate")));
+    }
+
+    #[test]
+    fn plural_only_with_gender_is_rejected() {
+        let mut daten = entry("Daten", "noun");
+        daten.gender = None;
+        daten.article = Some("die".into());
+        daten.number = Some("plural_only".into());
+        let ok = Lexicon { meta: serde_json::Value::Null, entries: vec![daten.clone()] };
+        assert!(ok.validate().is_empty(), "{:?}", ok.validate());
+        for (g, a) in [("masculine", "der"), ("feminine", "die"), ("neuter", "das")] {
+            let mut bad = daten.clone();
+            bad.gender = Some(g.into());
+            bad.article = Some(a.into());
+            let lex = Lexicon { meta: serde_json::Value::Null, entries: vec![bad] };
+            assert!(lex.validate().iter().any(|p| p.contains("gender/article")), "{g}/{a} accepted");
+        }
+        let mut no_article = daten;
+        no_article.article = None;
+        let lex = Lexicon { meta: serde_json::Value::Null, entries: vec![no_article] };
+        assert!(!lex.validate().is_empty());
+    }
+
+    fn lexicon(n: usize) -> Lexicon {
+        Lexicon { meta: serde_json::Value::Null, entries: (0..n).map(|i| entry(&format!("W{i}"), "noun")).collect() }
+    }
+
+    #[test]
+    fn corrupted_deck_state_falls_back_to_a_fresh_shuffle() {
+        let dir = std::env::temp_dir().join(format!("wz-corrupt-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let state = dir.join("deck.json");
+        let n = 10;
+        let good = serde_json::to_value(Deck::new(n, Rng::new(7))).unwrap();
+        let mut cases: Vec<String> = vec![
+            "".into(),
+            "{".into(),
+            "null".into(),
+            "{\"order\":[0,1,2],\"pos\":0,\"rng\":5,\"serial\":0}".into(),
+        ];
+        let mutate = |f: &dyn Fn(&mut serde_json::Value)| {
+            let mut v = good.clone();
+            f(&mut v);
+            v.to_string()
+        };
+        cases.push(mutate(&|v| v["order"][3] = 999.into()));                 // out of range
+        cases.push(mutate(&|v| v["order"][3] = v["order"][4].clone()));      // duplicate
+        cases.push(mutate(&|v| v["pos"] = 11.into()));                       // cursor past end
+        cases.push(mutate(&|v| v["pos"] = (-1).into()));                     // wrong type
+        cases.push(mutate(&|v| v["recent"] = serde_json::json!([3, 42]))); // bad recent id
+        cases.push(mutate(&|v| v["rng"] = 0.into()));                        // dead RNG
+        cases.push(mutate(&|v| v["len"] = 11.into()));                       // other lexicon size
+        cases.push(mutate(&|v| v["order"].as_array_mut().unwrap().pop().map(|_| ()).unwrap()));
+        for (k, c) in cases.iter().enumerate() {
+            std::fs::write(&state, c).unwrap();
+            let mut eng = Engine::new(lexicon(n), Some(state.clone()));
+            let mut seen = std::collections::HashSet::new();
+            for _ in 0..n {
+                seen.insert(eng.next_card().id);
+            }
+            assert_eq!(seen.len(), n, "case {k}: deck not a fresh full round: {c}");
+        }
+        // A consistent state is still resumed.
+        std::fs::write(&state, good.to_string()).unwrap();
+        let restored: Deck = serde_json::from_value(good).unwrap();
+        assert!(restored.is_consistent_with(n));
+        let _ = std::fs::remove_dir_all(dir);
+    }
+
+    #[test]
+    fn ffi_survives_null_and_bad_input() {
+        use std::ffi::CString;
+        unsafe {
+            assert!(ffi::wz_engine_new(std::ptr::null(), std::ptr::null()).is_null());
+            let missing = CString::new("/nonexistent/lexicon.json").unwrap();
+            assert!(ffi::wz_engine_new(missing.as_ptr(), std::ptr::null()).is_null());
+            assert!(ffi::wz_engine_next_card_json(std::ptr::null_mut()).is_null());
+            assert_eq!(ffi::wz_engine_count(std::ptr::null()), 0);
+            ffi::wz_string_free(std::ptr::null_mut());
+            ffi::wz_engine_free(std::ptr::null_mut());
+            assert!(ffi::guard(std::ptr::null_mut::<u8>(), || panic!("boom")).is_null());
+        }
     }
 
     #[test]

@@ -37,12 +37,14 @@ That is lovely if you already speak German and not much help if you are still le
   irregular, then the simple past and the perfect with *ist* or *hat*. Separable verbs show their
   particle (*an·fangen · fängt an · fing an · hat angefangen*) and reflexive verbs their *sich*
   (*sich benehmen · benimmt sich · benahm sich · hat sich benommen*).
-- **Example sentences.** About a third of the cards add one short German sentence (90 characters
-  at most) with its English translation, taken from English Wiktionary's usage examples for that
-  sense. Cards without a good example simply leave the line out.
+- **Example sentences.** Just under a third of the cards add one short German sentence (90
+  characters at most) with its English translation, taken from English Wiktionary's usage
+  examples for that sense. Cards without an example that clearly fits the shown meaning simply
+  leave the line out.
 - **Real data, nothing invented.** Everything comes from Wiktionary and Open English WordNet.
   There is no machine translation, and mismatched senses were reviewed by hand and dropped.
-- **Calm by design.** Each card holds for about 32 seconds and cross-fades slowly with a gentle drift.
+- **Calm by design.** Each card fades in over 2.6 seconds, holds for about 32 seconds and fades out
+  over 2.08 seconds with a gentle drift. Both renderers read these numbers from `core/timing.js`.
   The design is dark and editorial, with open-licensed type.
 - **Fair shuffle.** Every word appears once before any repeats, and none of the last 8 comes back
   soon. Progress is remembered between sessions.
@@ -142,14 +144,14 @@ or allow it under **System Settings → Privacy & Security → Open Anyway**.
 ## How it works
 
 ```
-core/        web renderer (index.html + style.css + app.js), bundled fonts, data/lexicon.{json,js}
+core/        web renderer (index.html + style.css + app.js), timing.js, fonts, data/lexicon.{json,js}
 engine/      Rust crate wortschatz-core: lexicon, fair shuffle with saved progress, card formatting
              C ABI (wortschatz.h) + CLI: wortschatz validate | next | stats | card
 macos/       Swift ScreenSaverView + native CoreText card renderer, driven by the Rust engine
 linux/       Omarchy / Hyprland plan + stub
 data-build/  reproducible lexicon build (Wiktionary + Open English WordNet + frequency list)
 scripts/     build-macos.sh, install-macos.sh, select-macos.sh
-tools/       snapshot.swift (renders the built .saver to PNG), render-card (one card, native, to PNG), README media capture
+tools/       snapshot.swift (renders the built .saver to PNG), README media capture
 ```
 
 ```
@@ -176,8 +178,14 @@ tools/       snapshot.swift (renders the built .saver to PNG), render-card (one 
     hidden: its WebContent process is throttled within half a second and suspended a few seconds
     later, so the first card showed and then the screen went blank. Native drawing has no such
     out-of-process renderer.
+  - The saved deck position is checked in full (sizes, bounds, a true permutation) before it is
+    used; anything inconsistent starts a fresh shuffle. The C entry points never let a Rust panic
+    cross into Swift.
 - **Browser.** `core/index.html` renders the same design; `app.js` uses a small JavaScript mirror of
   the deck logic.
+- **Timing.** `core/timing.js` is the one timing spec for both renderers (the saver bundles it):
+  fade in 2.6 s (drift 4.16 s), progress hairline 32 s, fade out 2.08 s starting at 32.39 s, next
+  card at 34.6 s.
 
 Engine checks:
 
@@ -211,9 +219,11 @@ Building the lexicon is reproducible; see [`data-build/README.md`](data-build/RE
 4. **English definition.** The English definition comes from Open English WordNet, matched by sense.
 5. **Grammar and examples.** English Wiktionary adds the *no plural* / *plural only* marks, confirms
    a second perfect auxiliary (*ist / hat gestanden*), and supplies the usage example for the
-   card's sense. Separable particles and *sich* come from the German forms (*ruft an*, *benimmt sich*).
+   card's sense. Separable particles and *sich* come from the German forms (*ruft an*, *benimmt sich*)
+   and the chosen sense. A verb whose chosen sense is transitive or reflexive shows *hat*
+   (*hat geheilt*, not *ist geheilt*), and an example that uses the other auxiliary is left out.
 6. **Review.** Every remaining pairing where the English and German senses disagreed was reviewed
-   by hand. 188 were dropped and are listed in `data-build/exclude.tsv`; four example sentences
+   by hand. 188 were dropped and are listed in `data-build/exclude.tsv`; five example sentences
    were dropped in `data-build/example_exclude.tsv`.
 
 No CEFR levels are shown, because none of the sources provides them and they are not guessed.

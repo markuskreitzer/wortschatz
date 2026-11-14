@@ -12,10 +12,20 @@
   "use strict";
   const host = window.WORTSCHATZ_HOST || {};
   const params = new URLSearchParams(location.search);
-  const HOLD = Math.max(5, Number(params.get("hold") || host.hold || 32)) * 1000;
-  const FADE = Number(params.get("fade") || host.fade || 2600);
+  // Timing comes from core/timing.js (shared with the macOS saver). ?hold= (seconds) and ?fade=
+  // (ms) still override it for quick previews; ?fade scales every transition proportionally.
+  const T = Object.assign({ fade_in_ms: 2600, drift_in_ms: 4160, progress_ms: 32000, cycle_ms: 34600,
+    exit_lead_ms: 2210, fade_out_ms: 2080 }, window.WORTSCHATZ_TIMING || {});
+  const FADE = Number(params.get("fade") || host.fade || T.fade_in_ms);
+  const kT = FADE / T.fade_in_ms;
+  const HOLD = params.get("hold") || host.hold ? Math.max(5, Number(params.get("hold") || host.hold)) * 1000 : T.progress_ms;
+  const CYCLE = HOLD + (T.cycle_ms - T.progress_ms) * kT;     // enter to next enter
+  const EXIT_LEAD = T.exit_lead_ms * kT;                      // exit starts this long before the next enter
+  const EXIT_AT = CYCLE - EXIT_LEAD;
   const root = document.documentElement;
-  root.style.setProperty("--fade", FADE + "ms");
+  root.style.setProperty("--fade-in", FADE + "ms");
+  root.style.setProperty("--drift-in", T.drift_in_ms * kT + "ms");
+  root.style.setProperty("--fade-out", T.fade_out_ms * kT + "ms");
   if (host.preview || params.has("preview")) document.body.classList.add("preview");
 
   const cardEl = document.getElementById("card");
@@ -209,7 +219,7 @@
       if (!paused) startProgress(HOLD);
       document.title = "Wortschatz — " + (card.article ? card.article + " " : "") + card.word;
     };
-    if (current) { cardEl.classList.remove("in"); cardEl.classList.add("out"); swapTimer = setTimeout(enter, FADE * 0.85); }
+    if (current) { cardEl.classList.remove("in"); cardEl.classList.add("out"); swapTimer = setTimeout(enter, EXIT_LEAD); }
     else enter();
   }
 
@@ -227,23 +237,24 @@
   function schedule(ms) {
     clearTimeout(timer);
     if (host.driven || params.has("still")) return;
-    timer = setTimeout(() => { nextStandalone(); schedule(HOLD + FADE); }, ms);
+    timer = setTimeout(() => { nextStandalone(); schedule(CYCLE); }, ms);
   }
 
   const api = {
     show,
     cardFor,
-    next: () => { if (!host.driven) { nextStandalone(); schedule(HOLD + FADE); } },
+    next: () => { if (!host.driven) { nextStandalone(); schedule(CYCLE); } },
     pause() { if (paused) return; paused = true; clearTimeout(timer); remaining = Math.max(0, remaining - (performance.now() - shownAt)); freezeProgress(); document.body.classList.add("paused"); },
-    resume() { if (!paused) return; paused = false; shownAt = performance.now(); startProgress(remaining); schedule(remaining); document.body.classList.remove("paused"); },
+    resume() { if (!paused) return; paused = false; shownAt = performance.now(); startProgress(remaining); schedule(remaining + EXIT_AT - HOLD); document.body.classList.remove("paused"); },
     count: () => (lex && lex.entries ? lex.entries.length : 0),
     holdMs: HOLD,
+    timing: { fadeIn: FADE, cycle: CYCLE, exitAt: EXIT_AT, exitLead: EXIT_LEAD },
   };
   window.Wortschatz = api;
 
   document.fonts && document.fonts.ready.then(() => document.body.classList.add("fonts-ready"));
   if (!host.driven) {
-    nextStandalone(); schedule(HOLD + FADE);
+    nextStandalone(); schedule(EXIT_AT);
     window.addEventListener("keydown", (ev) => { if (ev.key === "ArrowRight" || ev.key === " ") { ev.preventDefault(); api.next(); } });
     document.addEventListener("visibilitychange", () => (document.hidden ? api.pause() : api.resume()));
   }

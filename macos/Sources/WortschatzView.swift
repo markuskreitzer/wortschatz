@@ -15,13 +15,34 @@ import os
 
 private let log = Logger(subsystem: "local.markus.wortschatz", category: "saver")
 
+/// Card timing, read from the bundled core/timing.js: the same file the browser renderer uses,
+/// so both follow one spec. The defaults below are that file's values, used only if it is missing
+/// or unreadable.
+struct Timing: Decodable {
+    var fade_in_ms = 2600.0, drift_in_ms = 4160.0, progress_ms = 32000.0
+    var cycle_ms = 34600.0, exit_lead_ms = 2210.0, fade_out_ms = 2080.0
+
+    static func load(_ url: URL?) -> Timing {
+        guard let url, let js = try? String(contentsOf: url, encoding: .utf8),
+              let a = js.range(of: "WORTSCHATZ_TIMING"), let open = js[a.upperBound...].firstIndex(of: "{"),
+              let close = js[open...].firstIndex(of: "}"),
+              let t = try? JSONDecoder().decode(Timing.self, from: Data(js[open...close].utf8))
+        else { log.error("core/timing.js missing or unreadable; using built-in timing"); return Timing() }
+        return t
+    }
+}
+
 @objc(WortschatzView)
 final class WortschatzView: ScreenSaverView {
-    // Timing (seconds), matching the browser renderer.
-    private let hold: Double = 32
-    private let fade: Double = 2.6
-    private var cycle: Double { hold + fade }                 // enter-to-enter
-    private var enterAfterOut: Double { fade * 0.85 }         // out starts this long before the next enter
+    // Timing (seconds) from core/timing.js, shared with the browser renderer.
+    private static let timing = Timing.load(Bundle(for: WortschatzView.self)
+        .url(forResource: "timing", withExtension: "js", subdirectory: "core"))
+    private let hold = WortschatzView.timing.progress_ms / 1000  // the progress hairline fills over this
+    private let fade = WortschatzView.timing.fade_in_ms / 1000  // opacity in
+    private let driftIn = WortschatzView.timing.drift_in_ms / 1000  // drift into place
+    private let fadeOut = WortschatzView.timing.fade_out_ms / 1000  // opacity out (and drift down)
+    private let cycle = WortschatzView.timing.cycle_ms / 1000  // enter-to-enter
+    private let enterAfterOut = WortschatzView.timing.exit_lead_ms / 1000  // out starts this long before the next enter
     private let opacityEase = CubicBezier.opacity, driftEase = CubicBezier.drift
 
     private var engine: OpaquePointer?
@@ -33,6 +54,7 @@ final class WortschatzView: ScreenSaverView {
         var layout: CardLayout
         var layoutSize: CGSize
         var image: CGImage? = nil           // the card rendered once, then faded/drifted as a bitmap
+        var imageScale: CGFloat = 0         // backing scale `image` was rendered at
         var imagePad: CGFloat = 0
         var cardW: CGFloat = 0
         var unit: CGFloat = 0               // u for this card (smaller when it had to be fitted)
@@ -112,6 +134,12 @@ final class WortschatzView: ScreenSaverView {
         }
     }
 
+    override func viewDidChangeBackingProperties() {
+        super.viewDidChangeBackingProperties()
+        current?.image = nil            // re-render the card bitmap at the new backing scale
+        needsDisplay = true
+    }
+
     override var hasConfigureSheet: Bool { false }
     override var configureSheet: NSWindow? { nil }
 
@@ -150,7 +178,7 @@ final class WortschatzView: ScreenSaverView {
     private func scheduleRedraw() {
         guard let c = current else { return }
         let t = clock - c.enteredAt
-        if t < fade * 1.6 + 0.1 || t >= cycle - enterAfterOut - 0.05 { needsDisplay = true; return }
+        if t < max(fade, driftIn) + 0.1 || t >= cycle - enterAfterOut - 0.05 { needsDisplay = true; return }
         guard !isPreview else { return }
         let step = Int(t * 4)
         if step != lastProgressStep { lastProgressStep = step; setNeedsDisplay(colophonRect()) }
@@ -180,8 +208,10 @@ final class WortschatzView: ScreenSaverView {
             renderer.drawColophon(in: ctx, size: size, u: u, progress: progress(t))
         }
 
+        // The bitmap is rendered at the backing scale, so a move between Retina and non-Retina
+        // displays (or a scale change) re-renders it; see viewDidChangeBackingProperties.
         let scale = window?.backingScaleFactor ?? NSScreen.main?.backingScaleFactor ?? 2
-        if c.layoutSize != size || c.image == nil {
+        if c.layoutSize != size || c.imageScale != scale || c.image == nil {
             // Same as core/app.js fit(): a card taller than the stage gets a smaller unit.
             var uc = u
             var cw = min(82 * uc, size.width - 16 * u)
@@ -196,18 +226,19 @@ final class WortschatzView: ScreenSaverView {
             c.unit = uc
             c.layoutSize = size
             c.imagePad = ceil(3 * u)
+            c.imageScale = scale
             c.image = renderCard(c.layout, width: c.cardW, pad: c.imagePad, scale: scale)
             current = c
         }
 
-        // Opacity and drift, as the CSS transitions: in over `fade` and `fade * 1.6`,
-        // out over `fade * 0.8`, starting `fade * 0.85` before the next card enters.
+        // Opacity and drift, as the CSS transitions: in over `fade` and `driftIn`, out over
+        // `fadeOut`, starting `enterAfterOut` before the next card enters (core/timing.js).
         var opacity = opacityEase(t / fade)
-        let k = CGFloat(driftEase(t / (fade * 1.6)))
+        let k = CGFloat(driftEase(t / driftIn))
         var off = CGPoint(x: c.from.x + (c.to.x - c.from.x) * k, y: c.from.y + (c.to.y - c.from.y) * k)
         let outStart = cycle - enterAfterOut
         if t > outStart {
-            let o = (t - outStart) / (fade * 0.8)
+            let o = (t - outStart) / fadeOut
             opacity *= 1 - opacityEase(o)
             off.y += 0.8 * CGFloat(driftEase(o))
         }
