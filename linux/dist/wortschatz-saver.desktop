@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Wortschatz
+GenericName=Screen saver
+Comment=Show the German vocabulary screen saver now (any input ends it)
+Exec=@BIN@ run
+Icon=preferences-desktop-screensaver
+Terminal=false
+Categories=Education;Languages;
+Keywords=German;vocabulary;screensaver;Deutsch;

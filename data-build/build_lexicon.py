@@ -13,9 +13,11 @@ Sources (see DATA_SOURCES.md):
         "no-plural" / "plural-only" noun tags and usage examples with English translations.
   3. English Wiktionary, English entries, via kaikki.org
        https://kaikki.org/dictionary/English/kaikki.org-dictionary-English.jsonl
-     -> English definition of the English equivalent, choosing the sense whose
-        translation table lists the German word.
-  4. hermitdave/FrequencyWords, de_50k (OpenSubtitles 2018), CC BY-SA 4.0
+     -> sense alignment only: the translation-table labels say which English sense the
+        German word translates, which picks the WordNet sense below.
+  4. Open English WordNet 2024 (CC BY 4.0), via the `wn` package
+     -> the English definition of the English equivalent.
+  5. hermitdave/FrequencyWords, de_50k (OpenSubtitles 2018), CC BY-SA 4.0
      -> ranks everyday words so the lexicon favours common A1–B2 vocabulary.
 
 Nothing is written by hand: an entry is only kept when every field comes from a source
@@ -23,10 +25,12 @@ and the English equivalent from German Wiktionary also appears in English Wiktio
 glosses for the same German word (two independent sources agree).
 
 Usage:
-  python3 build_lexicon.py --raw DIR --out ../core/data [--limit 1200] [--top 25000]
+  uv run --with wn build_lexicon.py --raw DIR --out ../core/data [--limit 1300] [--top 40000]
   where DIR contains: dewikt_de.jsonl (German-language entries of the de extract),
-  en_german.jsonl, en_english_de2.jsonl (filtered English extract), de_50k.txt.
-  See fetch_sources.sh for how DIR is produced.
+  en_german.jsonl, en_english_de2.jsonl (filtered English extract), de_50k.txt, wn_data/,
+  and sources.json (what was downloaded, when, with SHA-256; copied into the lexicon's meta).
+  See fetch_sources.sh for how DIR is produced. The defaults are the values the shipped
+  lexicon was built with.
 """
 import argparse, json, os, re, sys, collections
 
@@ -85,8 +89,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--raw", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--limit", type=int, default=1200)
-    ap.add_argument("--top", type=int, default=25000)
+    ap.add_argument("--limit", type=int, default=1300)
+    ap.add_argument("--top", type=int, default=40000)
     ap.add_argument("--why", default="", help="comma-separated words: print why each was kept or dropped")
     a = ap.parse_args()
     raw = a.raw.rstrip("/")
@@ -549,8 +553,13 @@ def main():
         "review": "first 1300 candidates manually reviewed; mismatches listed in data-build/exclude.tsv",
         "license": "CC BY-SA 4.0 (derived from Wiktionary, CC BY-SA 4.0 / GFDL; frequency ranks from hermitdave/FrequencyWords, CC BY-SA 4.0)",
         "sources": ["https://de.wiktionary.org", "https://en.wiktionary.org", "https://kaikki.org",
-                    "https://github.com/hermitdave/FrequencyWords"],
+                    "https://github.com/hermitdave/FrequencyWords", "https://en-word.net"],
     }
+    # The exact downloads this build used (fetch_sources.sh writes sources.json), so a later
+    # rebuild can tell whether it starts from the same data.
+    if os.path.exists(f"{raw}/sources.json"):
+        with open(f"{raw}/sources.json", encoding="utf-8") as f:
+            meta["source_snapshot"] = json.load(f)
     doc = {"meta": meta, "entries": entries}
     with open(f"{a.out}/lexicon.json", "w", encoding="utf-8") as f:
         json.dump(doc, f, ensure_ascii=False, indent=1)

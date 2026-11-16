@@ -1,8 +1,10 @@
 /* Wortschatz card timing: the one source for both renderers.
  *
  * core/app.js reads window.WORTSCHATZ_TIMING. The macOS saver (macos/Sources/WortschatzView.swift)
- * reads this same file from its bundle and parses the object literal below as JSON, so keep it
- * strict JSON (double-quoted keys, numbers only, no comments or trailing commas inside the braces).
+ * and the Rust engine (Timing::from_js, used by the Linux saver) find the last assignment to
+ * WORTSCHATZ_TIMING below and parse its object literal as JSON. Keep that assignment as is and
+ * keep the object strict JSON (double-quoted keys, numbers only, no comments or trailing commas
+ * inside the braces). `cargo test` checks that this file parses.
  *
  * Timeline of one card, from the moment it starts to fade in (t = 0):
  *   0 .................. fade in (opacity, fade_in_ms) and drift into place (drift_in_ms)

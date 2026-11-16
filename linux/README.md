@@ -1,49 +1,95 @@
-# Linux / Omarchy port (not implemented yet — plan + stub)
+# Wortschatz on Linux
 
-Everything that matters is already portable:
+`wortschatz-saver` is one binary with two jobs:
 
-- `core/` — the renderer (HTML/CSS/JS, bundled fonts, `data/lexicon.js`). No platform APIs.
-- `engine/` — the Rust crate (`wortschatz-core`): lexicon model, validation, fair shuffle with
-  persisted progress, card formatting. Usable as an `rlib` from a Rust runner, or through the C ABI
-  in `engine/wortschatz.h`.
+- **`wortschatz-saver`**: the saver. It shows `core/index.html` (embedded in the binary,
+  served from `wortschatz://localhost/`) in a WebKitGTK view on every monitor. The page runs
+  host-driven: this process picks each card with `wortschatz-core` (the same engine the macOS
+  saver links) and calls `Wortschatz.show(card)` on the schedule in `core/timing.js`. The deck
+  position persists in `$XDG_STATE_HOME/wortschatz/deck.json`. Any key, click, scroll or real
+  mouse movement ends it, and a second copy started while one runs exits at once.
+- **`wortschatz-saver idle`**: the idle watcher, run by `wortschatz-idle.service` (a systemd user
+  unit). It starts the saver when the session goes idle and stops it on activity.
 
-On macOS the saver draws cards natively (WebKit gets suspended inside `legacyScreenSaver`), but on
-Linux a fullscreen WebView window is an ordinary foreground app, so the web renderer in `core/` is
-the natural fit. Watch for the same failure mode anyway: if the compositor reports the window as
-hidden or occluded, WebKitGTK may throttle it. A Linux shell needs:
+`wortschatz-saver window` shows the saver in an ordinary window that input does not close, for
+working on the renderer. To install, see `AGENTS.md`; the installer is `scripts/install-linux.sh`.
 
-## Plan for Omarchy (Hyprland + hypridle)
+## Surfaces
 
-Omarchy has no XScreenSaver-style module API; "screensaver" = a fullscreen window launched on idle
-and closed on input.
+| Compositor supports | What the saver draws |
+|---|---|
+| wlr-layer-shell (Hyprland, Sway, KDE, niri) and built with the `layer-shell` feature | an *overlay* layer surface per monitor: above the bar and every window, with exclusive keyboard focus, no window rules needed |
+| otherwise (GNOME, X11, or built without the feature) | an undecorated full-screen window per monitor (`fullscreen_on_monitor`), app id / class `wortschatz` |
 
-1. **`linux/wortschatz-linux` (Rust binary, to write):** a `tao` window + `wry` WebView
-   (WebKitGTK 4.1 under the hood) that
-   - loads `core/index.html` through a custom protocol (`wortschatz://`) serving the bundled
-     files (avoids file-URL restrictions),
-   - injects `window.WORTSCHATZ_HOST = { platform: "linux", driven: true, hold: 32 }`,
-   - links `wortschatz-core` directly and calls `Wortschatz.show(<card json>)` every hold period,
-     state in `$XDG_STATE_HOME/wortschatz/deck.json`,
-   - goes fullscreen on every output (one window per monitor), hides the cursor, and exits on
-     any key / mouse movement.
-   Alternative to a normal fullscreen window: a layer-shell surface on the `overlay` layer
-   (`gtk-layer-shell`) so it sits above everything like a real screensaver.
-2. **Window rules** (`~/.config/hypr/hyprland.conf`):
-   `windowrulev2 = fullscreen, class:^(wortschatz)$` and `windowrulev2 = noanim, class:^(wortschatz)$`.
-3. **hypridle** (`~/.config/hypr/hypridle.conf`) — run it before the lock:
-   ```
-   listener {
-       timeout = 300
-       on-timeout = wortschatz-linux
-       on-resume  = pkill -x wortschatz-linux
-   }
-   ```
-   Omarchy ships its own screensaver listener (`omarchy-launch-screensaver`); replacing the command
-   it launches is the least invasive hook.
+The choice is made at run time (`gtk_layer_shell::is_supported()`), so the same binary works on
+both Omarchy and Ubuntu.
 
-Packages on Arch: `webkit2gtk-4.1`, `gtk3`, `gtk-layer-shell` (if layer-shell), Rust toolchain.
+## Idle integration
 
-## Stub available now
+### Omarchy (Hyprland), current releases
 
-`linux/wortschatz-preview.sh` opens the shared core fullscreen in a kiosk browser window. It is a
-preview/test aid only (the browser drives the shuffle itself; no idle hook, no multi-monitor).
+Omarchy has no hypridle any more. The **Omarchy shell's idle service**
+(`/usr/share/omarchy/shell/plugins/services/idle/Service.qml`) does three things:
+
+- runs `omarchy-launch-screensaver` after `idle.screensaver` seconds;
+- locks after `idle.lock` seconds (both are set in `~/.config/omarchy/shell.json`);
+- skips the screensaver when the flag file `~/.local/state/omarchy/toggles/screensaver-off`
+  exists.
+
+The launch command can't be replaced: `/usr/share/omarchy/bin` comes first in `PATH`. So the
+installer:
+
+1. turns Omarchy's screensaver off through that toggle (it records that it did, and
+   `--uninstall` restores it);
+2. runs its own watcher with the same timeout (`WZ_IDLE_TIMEOUT` in
+   `~/.config/wortschatz/idle.env`, copied from `shell.json` on first install);
+3. skips launching while the Omarchy lock screen is up
+   (`WZ_SKIP_WHEN='[ "$(omarchy-shell lock isLocked)" = true ]'`).
+
+The lock screen (ext-session-lock) still appears on schedule, above the saver.
+
+The watcher uses **ext-idle-notify-v1**, the same protocol Omarchy's shell uses, so idle
+inhibitors (a playing video, Omarchy's "stay awake") hold off both of them.
+
+**Hyprland quirk:** Hyprland sends `resumed` about 0.25 s after the saver's surface appears
+(the focus change counts as activity). The watcher ignores `resumed` for 3 s after each launch;
+otherwise it would kill the saver at once. The saver still quits on input by itself.
+
+Hyprland's config is Lua now (`~/.config/hypr/*.lua`, `o.window(...)` rules). The overlay layer
+needs no rules. If you run the full-screen fallback on Hyprland and want rules, match class
+`wortschatz`.
+
+### Other wlroots / KDE sessions
+
+The watcher works as is: the protocol is the same. Without a systemd user session, start
+`wortschatz-saver idle --timeout 300` from the session's autostart.
+
+### GNOME (Ubuntu's default session): next step
+
+Status today: the **saver** builds and runs on Ubuntu 22.04+ and falls back to full-screen
+windows (GNOME has no layer-shell). The **watcher** does not run on GNOME: Mutter does not
+offer ext-idle-notify-v1. `idle` exits with status 3, which the unit does not restart on, and
+the installer skips the unit on GNOME.
+
+Plan:
+
+1. Add a GNOME backend to `idle.rs`. Watch idle time over D-Bus with
+   `org.gnome.Mutter.IdleMonitor` (`/org/gnome/Mutter/IdleMonitor/Core`, `AddIdleWatch(ms)` and
+   `AddUserActiveWatch`, signal `WatchFired`), using `zbus`. Pick the backend at run time:
+   ext-idle-notify-v1 if present, otherwise the Mutter D-Bus service.
+2. Skip launching while locked: `org.gnome.ScreenSaver.GetActive` on the session bus.
+3. Remind users to keep GNOME's *Settings → Power → Screen Blank* delay longer than
+   `WZ_IDLE_TIMEOUT`, or the screen blanks before the saver appears.
+4. Then remove the GNOME early exit from `scripts/install-linux.sh`.
+
+Until then, Ubuntu users can bind `wortschatz-saver` to a key or start it from the launcher
+entry.
+
+## Known issues
+
+- **NVIDIA:** WebKitGTK on the NVIDIA driver under Wayland sometimes shows a blank window. If
+  that happens, try `WEBKIT_DISABLE_DMABUF_RENDERER=1 wortschatz-saver`. If that fixes it, add
+  `Environment=WEBKIT_DISABLE_DMABUF_RENDERER=1` to the unit, or put the variable in `idle.env`.
+  Not observed on the Intel + NVIDIA hybrid laptop this was developed on, where Hyprland renders
+  on the Intel GPU.
+- **Monitor hot-plug:** monitors are counted once, when the saver starts.

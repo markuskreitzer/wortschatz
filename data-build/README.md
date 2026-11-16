@@ -3,12 +3,22 @@
 `core/data/lexicon.json` (and the identical `lexicon.js` used by the browser preview) is
 generated, never hand-edited.
 
+Needs python3, curl and [uv](https://docs.astral.sh/uv/) (uv supplies the `wn` WordNet
+reader; Arch and Ubuntu 24.04 block `pip install` into the system Python).
+
 ```sh
-python3 -m pip install wn            # Open English WordNet reader
-./fetch_sources.sh /tmp/wz-raw       # ~10 min, several GB
-python3 build_lexicon.py --raw /tmp/wz-raw --out ../core/data --limit 1300 --top 40000
-cargo run --release --manifest-path ../engine/Cargo.toml -- validate ../core/data/lexicon.json
+./fetch_sources.sh ~/wz-raw          # ~10 min, several GB; writes ~/wz-raw/sources.json
+uv run --no-project --with wn build_lexicon.py --raw ~/wz-raw --out ../core/data   # defaults: --limit 1300 --top 40000
+cargo run --release -p wortschatz-core --bin wortschatz -- validate ../core/data/lexicon.json
+node ../tools/check-parity.mjs       # the browser's JS card formatting still matches the engine
 ```
+
+**Reproducibility.** FrequencyWords is pinned to a commit. The kaikki.org Wiktionary dumps are
+replaced in place as Wiktionary changes and cannot be pinned, so `fetch_sources.sh` records each
+download's URL, `Last-Modified` date and SHA-256 in `sources.json`, and `build_lexicon.py` copies
+that into the lexicon's `meta.source_snapshot`. A rebuild from newer dumps produces a different
+candidate list: review the changed entries and update `exclude.tsv` before shipping it. (The
+lexicon shipped today was built on 2026-11-14, before the snapshot was recorded.)
 
 ## How an entry is made
 

@@ -51,7 +51,7 @@ That is lovely if you already speak German and not much help if you are still le
 - **Offline and silent.** Fonts and data are bundled. There are no network requests, no telemetry
   and no sound.
 - **Portable core.** One Rust engine picks and formats the cards everywhere. On macOS the saver
-  draws them natively with CoreText; in a browser (and on the planned Linux port) the HTML/CSS
+  draws them natively with CoreText; in a browser and on Linux the HTML/CSS
   renderer shows the same design.
 
 ## What a card shows
@@ -148,20 +148,20 @@ core/        web renderer (index.html + style.css + app.js), timing.js, fonts, d
 engine/      Rust crate wortschatz-core: lexicon, fair shuffle with saved progress, card formatting
              C ABI (wortschatz.h) + CLI: wortschatz validate | next | stats | card
 macos/       Swift ScreenSaverView + native CoreText card renderer, driven by the Rust engine
-linux/       Omarchy / Hyprland plan + stub
+linux/       Linux saver (Rust, GTK 3 + WebKitGTK) and its Wayland idle watcher
 data-build/  reproducible lexicon build (Wiktionary + Open English WordNet + frequency list)
-scripts/     build-macos.sh, install-macos.sh, select-macos.sh
-tools/       snapshot.swift (renders the built .saver to PNG), README media capture
+scripts/     build-macos.sh, install-macos.sh, select-macos.sh, install-linux.sh
+tools/       check-parity.mjs (JS vs engine card formatting), snapshot.swift, README media capture
 ```
 
 ```
                  ┌────────────── Rust engine ──────────────┐
                  │ lexicon · shuffle deck · card formatting│
                  └──────┬───────────────────────────┬──────┘
-                  C ABI │ card JSON                 │ (Linux: as a Rust crate, planned)
+                  C ABI │ card JSON                 │ Rust crate │ card JSON
           ┌─────────────┴─────────────┐   ┌─────────┴──────────────────────────┐
           │ macOS .saver (Swift)      │   │ core/ web renderer (HTML/CSS/JS)   │
-          │ CoreText drawing, fades   │   │ browser preview · Linux WebView    │
+          │ CoreText drawing, fades   │   │ browser preview · Linux WebKitGTK  │
           └───────────────────────────┘   └────────────────────────────────────┘
                  same fonts, palette, spacing and motion on both sides
 ```
@@ -190,22 +190,40 @@ tools/       snapshot.swift (renders the built .saver to PNG), README media capt
 Engine checks:
 
 ```sh
+cargo test --workspace   # from the repo root; add --no-default-features without gtk-layer-shell
+node tools/check-parity.mjs   # browser JS formats every card like the engine
 cd engine
-cargo test
 cargo run --release --bin wortschatz -- validate ../core/data/lexicon.json   # 1114 entries, 0 problems
 cargo run --release --bin wortschatz -- stats ../core/data/lexicon.json      # grammar/example coverage
 cargo run --release --bin wortschatz -- card ../core/data/lexicon.json einladen   # one card's JSON
 ```
 
-## Linux (Omarchy / Hyprland)
+## Install on Linux
 
-The port is **documented but not built yet**. [`linux/README.md`](linux/README.md) describes the plan:
+Works on Omarchy (Hyprland) today, and should work on other Wayland desktops with
+ext-idle-notify (Sway, KDE). Ubuntu's GNOME session runs the saver, but it can't yet start it
+on idle; see [`linux/README.md`](linux/README.md).
 
-- a small Rust `tao` + `wry` (WebKitGTK) runner that reuses `engine/` and `core/` unchanged;
-- shown fullscreen, or as a layer-shell overlay, on every output;
-- started by `hypridle` and closed on input.
+**Requirements:** Rust 1.89+ ([rustup](https://rustup.rs)), plus these system packages. This is
+the only step that needs root; `gtk-layer-shell` is optional and draws the saver as an overlay
+above the bar. [`AGENTS.md`](AGENTS.md#linux-system-packages) explains what each one is for.
 
-`linux/wortschatz-preview.sh` is a kiosk-browser stopgap in the meantime.
+```sh
+sudo pacman -S --needed base-devel pkgconf webkit2gtk-4.1 gtk3 gtk-layer-shell                        # Arch / Omarchy
+sudo apt install build-essential pkg-config libwebkit2gtk-4.1-dev libgtk-3-dev libgtk-layer-shell-dev  # Ubuntu 22.04+
+```
+
+```sh
+scripts/install-linux.sh              # build, install to ~/.local/bin, start the idle watcher
+wortschatz-saver                      # show it now; any input ends it
+scripts/install-linux.sh --uninstall
+```
+
+- The saver starts after the idle timeout in `~/.config/wortschatz/idle.env`. On Omarchy this is
+  copied from `~/.config/omarchy/shell.json`, and Omarchy's own terminal screensaver is switched
+  off so the two don't overlap.
+- The lock screen still comes on schedule.
+- The saver is one self-contained binary: the fonts, data and renderer are embedded.
 
 ## The word list
 

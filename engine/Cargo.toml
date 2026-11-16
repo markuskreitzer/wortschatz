@@ -2,6 +2,7 @@
 name = "wortschatz-core"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.89"
 description = "Platform-agnostic engine for the Wortschatz German vocabulary screensaver: lexicon model, validation, fair shuffle, card formatting, C ABI for native shells."
 license = "MIT"
 publish = false
@@ -17,14 +18,3 @@ path = "src/bin/wortschatz.rs"
 [dependencies]
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-
-[profile.release]
-opt-level = "s"
-lto = true
-codegen-units = 1
-# Unwind (not abort) so the C ABI can catch any panic and return NULL/0 instead of taking down
-# the screen-saver host process (see src/ffi.rs).
-panic = "unwind"
-# strip = "none": on macOS 27, cargo's default debuginfo-stripping of proc-macro dylibs makes them
-# unloadable ("mis-aligned LINKEDIT string pool"). Keep it off.
-strip = "none"

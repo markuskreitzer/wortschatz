@@ -4,12 +4,13 @@
 //!   wortschatz next core/data/lexicon.json [count]
 //!   wortschatz stats core/data/lexicon.json
 //!   wortschatz card core/data/lexicon.json <id|word>...
+//!   wortschatz cards core/data/lexicon.json        (every card, one JSON per line)
 use std::path::Path;
 use wortschatz_core::{card_for, Engine, Lexicon};
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
-    let usage = "usage: wortschatz <validate|next|stats|card> <lexicon.json> [count|id...]";
+    let usage = "usage: wortschatz <validate|next|stats|card|cards> <lexicon.json> [count|id...]";
     if args.len() < 3 {
         eprintln!("{usage}");
         std::process::exit(2);
@@ -61,6 +62,13 @@ fn main() {
             println!("verbs: {full}/{} with principal parts ({:.1}%), {sep} separable, {refl} reflexive", verbs.len(), pct(full, verbs.len()));
             let ex = lex.entries.iter().filter(|e| e.example.is_some()).count();
             println!("examples: {ex}/{} ({:.1}%)", lex.entries.len(), pct(ex, lex.entries.len()));
+        }
+        "cards" => {
+            // Every entry's card (serial 1), one JSON object per line: tools/check-parity.mjs
+            // compares these with the JavaScript mirror in core/app.js.
+            for e in &lex.entries {
+                println!("{}", serde_json::to_string(&card_for(e, 1)).unwrap());
+            }
         }
         "card" => {
             for q in &args[3..] {

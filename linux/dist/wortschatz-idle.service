@@ -1,0 +1,20 @@
+# Installed by scripts/install-linux.sh (which fills in @BIN@) to ~/.config/systemd/user/.
+# Starts the Wortschatz screen saver when the Wayland session goes idle.
+[Unit]
+Description=Wortschatz screen saver (idle watcher)
+Documentation=file://@DOC@
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+# WZ_IDLE_TIMEOUT (seconds) and WZ_SKIP_WHEN (shell command; skip when it succeeds).
+EnvironmentFile=-%h/.config/wortschatz/idle.env
+ExecStart=@BIN@ idle
+Restart=on-failure
+RestartSec=5
+# Exit status 3: this session has no idle protocol the watcher can use (e.g. GNOME). Retrying
+# would not help.
+RestartPreventExitStatus=3
+
+[Install]
+WantedBy=graphical-session.target

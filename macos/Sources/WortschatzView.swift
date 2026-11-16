@@ -24,7 +24,9 @@ struct Timing: Decodable {
 
     static func load(_ url: URL?) -> Timing {
         guard let url, let js = try? String(contentsOf: url, encoding: .utf8),
-              let a = js.range(of: "WORTSCHATZ_TIMING"), let open = js[a.upperBound...].firstIndex(of: "{"),
+              // Same marker as Timing::MARKER in engine/src/lib.rs, searched from the end so the
+              // file's doc comment (which mentions WORTSCHATZ_TIMING) never matches.
+              let a = js.range(of: "WORTSCHATZ_TIMING = {", options: .backwards), let open = js[js.index(before: a.upperBound)...].firstIndex(of: "{"),
               let close = js[open...].firstIndex(of: "}"),
               let t = try? JSONDecoder().decode(Timing.self, from: Data(js[open...close].utf8))
         else { log.error("core/timing.js missing or unreadable; using built-in timing"); return Timing() }

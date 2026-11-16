@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+# engine/: platform-agnostic core (also linked by the macOS saver as a static library).
+# linux/:  the Linux screen saver; its dependencies are Linux-only, so the whole workspace
+#          still builds and tests on macOS.
+members = ["engine", "linux"]
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+# Unwind (not abort) so the C ABI can catch any panic and return NULL/0 instead of taking down
+# the screen-saver host process (see src/ffi.rs).
+panic = "unwind"
+# strip = "none": on macOS 27, cargo's default debuginfo-stripping of proc-macro dylibs makes them
+# unloadable ("mis-aligned LINKEDIT string pool"). Keep it off.
+strip = "none"

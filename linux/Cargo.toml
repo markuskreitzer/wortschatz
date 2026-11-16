@@ -1,0 +1,31 @@
+[package]
+name = "wortschatz-saver"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.89"
+description = "Wortschatz screen saver for Linux: full-screen WebKitGTK cards driven by wortschatz-core, plus a Wayland idle watcher."
+license = "MIT"
+publish = false
+
+[[bin]]
+name = "wortschatz-saver"
+path = "src/main.rs"
+
+[features]
+# Draw on the wlr-layer-shell "overlay" layer where the compositor supports it (Hyprland, Sway,
+# KDE); falls back to full-screen windows at run time elsewhere (GNOME). Needs gtk-layer-shell
+# (GTK 3, library 0.6 or newer) at build time; build with --no-default-features to drop it.
+default = ["layer-shell"]
+layer-shell = ["dep:gtk-layer-shell"]
+
+# Everything is Linux-only so the workspace still builds on macOS (main.rs has a stub there).
+[target.'cfg(target_os = "linux")'.dependencies]
+wortschatz-core = { path = "../engine" }
+wry = { version = "0.57", default-features = false, features = ["os-webview"] }
+gtk = "0.18"
+# v0_6: is_supported() and keyboard modes need libgtk-layer-shell >= 0.6 (Ubuntu 22.04 has 0.7).
+gtk-layer-shell = { version = "0.8", optional = true, features = ["v0_6"] }
+include_dir = "0.7"
+serde_json = "1"
+wayland-client = "0.31"
+wayland-protocols = { version = "0.32", features = ["client", "staging"] }

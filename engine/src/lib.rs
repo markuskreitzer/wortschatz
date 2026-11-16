@@ -156,7 +156,7 @@ impl Lexicon {
             }
             if e.pos == "verb" {
                 for k in ["present3", "past", "participle", "auxiliary"] {
-                    if e.forms.get(k).map_or(true, |v| v.trim().is_empty()) {
+                    if e.forms.get(k).is_none_or(|v| v.trim().is_empty()) {
                         problems.push(format!("{at}: verb missing {k}"));
                     }
                 }
@@ -190,6 +190,45 @@ impl Lexicon {
             }
         }
         problems
+    }
+}
+
+/// Card timing from `core/timing.js`, the one timing spec for every renderer (milliseconds).
+#[derive(Debug, Clone, Copy, PartialEq, Deserialize, Serialize)]
+pub struct Timing {
+    pub fade_in_ms: f64,
+    pub drift_in_ms: f64,
+    pub progress_ms: f64,
+    pub cycle_ms: f64,
+    pub exit_lead_ms: f64,
+    pub fade_out_ms: f64,
+}
+
+impl Default for Timing {
+    /// The values in `core/timing.js`, used only if that file cannot be read.
+    fn default() -> Self {
+        Timing { fade_in_ms: 2600.0, drift_in_ms: 4160.0, progress_ms: 32000.0, cycle_ms: 34600.0, exit_lead_ms: 2210.0, fade_out_ms: 2080.0 }
+    }
+}
+
+impl Timing {
+    /// Marker that starts the object literal in `core/timing.js`, searched from the end of the
+    /// file so comments that mention it do not match. The macOS saver does the same
+    /// (macos/Sources/WortschatzView.swift).
+    pub const MARKER: &'static str = "WORTSCHATZ_TIMING = {";
+
+    /// Parses the strict-JSON object literal after [`Timing::MARKER`] in `core/timing.js`.
+    pub fn from_js(js: &str) -> Result<Self, String> {
+        let start = js.rfind(Self::MARKER).ok_or("timing.js: WORTSCHATZ_TIMING = { not found")? + Self::MARKER.len() - 1;
+        let len = js[start..].find('}').ok_or("timing.js: unterminated object")? + 1;
+        serde_json::from_str(&js[start..start + len]).map_err(|e| format!("timing.js: {e}"))
+    }
+
+    /// When a host that calls `Wortschatz.show()` should send the next card, counted from the
+    /// moment the current card started to enter: the web renderer fades the old card out for
+    /// `exit_lead_ms` before the new one enters, so the call comes that much before `cycle_ms`.
+    pub fn host_show_after_ms(&self) -> f64 {
+        self.cycle_ms - self.exit_lead_ms
     }
 }
 
@@ -534,6 +573,17 @@ mod tests {
                 assert!(seen.iter().all(|s| *s));
             }
         }
+    }
+
+    #[test]
+    fn bundled_timing_js_parses() {
+        let t = Timing::from_js(include_str!("../../core/timing.js")).unwrap();
+        assert_eq!(t, Timing::default(), "update Timing::default() to match core/timing.js");
+        assert!(t.exit_lead_ms < t.cycle_ms && t.progress_ms <= t.cycle_ms);
+        // A brace in a comment before the object must not confuse the parser.
+        let js = "/* WORTSCHATZ_TIMING = {x} */\nwindow.WORTSCHATZ_TIMING = {\"fade_in_ms\": 1, \"drift_in_ms\": 2, \"progress_ms\": 3, \"cycle_ms\": 4, \"exit_lead_ms\": 1, \"fade_out_ms\": 1};";
+        assert_eq!(Timing::from_js(js).unwrap().cycle_ms, 4.0);
+        assert!(Timing::from_js("nothing here").is_err());
     }
 
     #[test]

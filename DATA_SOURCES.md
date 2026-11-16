@@ -33,5 +33,10 @@ No CEFR level is shown: none of these sources provides one, and it is not inferr
 
 Fonts were subset to Latin, Latin Extended, IPA and punctuation and converted to WOFF2 for
 embedding, and are referenced in CSS under neutral family aliases ("Wz Display", "Wz Text", …).
-The original OFL texts are shipped next to them. If you prefer to avoid any question about
-modified versions under the OFL, replace the `.woff2` files with the unmodified upstream files.
+The original OFL texts are shipped next to them.
+
+A subset is a "Modified Version" under the OFL, and a Modified Version may not use a Reserved
+Font Name. Of the four fonts, only Gentium Plus declares any ("Gentium" and "SIL"). Its subset
+is therefore renamed inside the font: family "Wz IPA", PostScript name "WzIPA-Regular". The file
+name `GentiumPlus-Regular.woff2` only says where it came from. Cormorant Garamond, Source
+Serif 4 and Inter declare no Reserved Font Name and keep their names.
